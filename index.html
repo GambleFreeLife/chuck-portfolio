@@ -56,6 +56,14 @@ section{padding:100px 0}
 .svc-card:hover .svc-icon{transform:scale(1.15) rotate(-3deg)}
 .svc-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
 .svc-card p{font-size:13px;color:var(--t2);line-height:1.7}
+.leak-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:36px}
+.leak-item{background:rgba(20,27,36,.72);border:1px solid var(--t4);border-radius:var(--rs);padding:18px;text-align:left}
+.leak-item h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--t1)}
+.leak-item p{font-size:13px;color:var(--t2);line-height:1.6}
+.case-details{display:grid;grid-template-columns:1fr;gap:8px;margin:16px 0}
+.case-detail{padding:10px 12px;background:rgba(8,11,16,.55);border:1px solid var(--t4);border-radius:var(--rs)}
+.case-detail strong{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--acc);margin-bottom:3px}
+.case-detail span{display:block;font-size:12px;color:var(--t2);line-height:1.5}
 .vid-section{text-align:center}
 .vid-grid{display:flex;justify-content:center;gap:18px;margin-top:44px;flex-wrap:wrap}
 .vid-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--t4);background:var(--bg3);transition:all .4s}
@@ -140,7 +148,7 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
     <div class="hero-name fa d1">CHUCK BARYAMES</div>
     <h1 class="fa d2">I fix websites that are<br><em>leaking leads</em></h1>
     <p class="hero-sub fa d3">Fast website cleanup, landing pages, and redesigns for service businesses that need more calls, bookings, quote requests, and form submissions.</p>
-    <a href="#contact" class="hero-cta fa d4">Get a Site Review</a>
+    <a href="#contact" class="hero-cta fa d4">Get a Free 3-Point Teardown</a>
     <div class="hero-stats fa d5">
       <div class="hero-stat"><div class="val">Lead</div><div class="lbl">Leak Fixes</div></div>
       <div class="hero-stat"><div class="val">48hr</div><div class="lbl">Quick Wins</div></div>
@@ -170,7 +178,12 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
         <div style="padding:20px 24px 24px">
           <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:6px">Local Business · Dry Cleaning</div>
           <div style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:8px">Baryames Cleaners Landing Page</div>
-          <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:14px">Redesigned a 100-year-old dry cleaning business's web presence. Replaced a cluttered template with a focused pickup-and-delivery page featuring online booking, trust signals above the fold, and clear service hierarchy.</p>
+          <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:14px">A focused local-service landing page built around one high-value action: getting more pickup and delivery requests.</p>
+          <div class="case-details">
+            <div class="case-detail"><strong>Problem</strong><span>Too many services and locations can make the next step feel scattered.</span></div>
+            <div class="case-detail"><strong>Fix</strong><span>Lead with pickup/delivery, trust proof, simple steps, and a direct request form.</span></div>
+            <div class="case-detail"><strong>Conversion Path</strong><span>Trust the business, understand the offer, schedule a free pickup.</span></div>
+          </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
             <span style="padding:4px 10px;background:var(--bg);border-radius:60px;font-size:10px;color:var(--t3)">Pickup Booking Form</span>
             <span style="padding:4px 10px;background:var(--bg);border-radius:60px;font-size:10px;color:var(--t3)">Trust Architecture</span>
@@ -181,16 +194,21 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
       <a href="https://eby-dental-landing.vercel.app" target="_blank" class="tilt-card" style="background:var(--bg3);border:1px solid var(--t4);border-radius:var(--r);overflow:hidden;text-decoration:none;display:block;transition:all .4s">
         <div style="padding:24px 24px 0;position:relative">
           <div style="background:linear-gradient(135deg,#1A2332,#0D1520);border-radius:10px;padding:32px 24px;text-align:center;position:relative;overflow:hidden">
-            <div style="position:absolute;top:12px;right:12px;padding:4px 10px;background:rgba(42,168,154,.15);border-radius:60px;font-size:9px;color:#2AA89A;font-weight:600;letter-spacing:1px">VIEW PROJECT</div>
+            <div style="position:absolute;top:12px;right:12px;padding:4px 10px;background:rgba(42,168,154,.15);border-radius:60px;font-size:9px;color:#2AA89A;font-weight:600;letter-spacing:1px">CONCEPT</div>
             <div style="font-size:28px;margin-bottom:4px">🦷</div>
             <div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;margin-bottom:2px">Eby Dental Care</div>
             <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px">Okemos, Michigan · Since 2003</div>
           </div>
         </div>
         <div style="padding:20px 24px 24px">
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:6px">Healthcare · Dental Practice</div>
-          <div style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:8px">Eby Dental Care Landing Page</div>
-          <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:14px">Rebuilt a broken dental practice website concept from scratch. Designed a patient-focused experience with appointment booking, credential highlights, review placement, and clear service cards after identifying unfinished placeholder content.</p>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:6px">Concept Redesign · Dental Practice</div>
+          <div style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:8px">Eby Dental Care Concept Redesign</div>
+          <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:14px">A concept redesign showing how a healthcare service page can build trust and make appointment requests feel easier.</p>
+          <div class="case-details">
+            <div class="case-detail"><strong>Problem</strong><span>Healthcare visitors need reassurance before they book, especially if the site feels unfinished.</span></div>
+            <div class="case-detail"><strong>Fix</strong><span>Use credentials, patient-centered copy, reviews, services, and appointment CTA above the fold.</span></div>
+            <div class="case-detail"><strong>Conversion Path</strong><span>Feel understood, trust the provider, request an appointment.</span></div>
+          </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
             <span style="padding:4px 10px;background:var(--bg);border-radius:60px;font-size:10px;color:var(--t3)">Appointment Booking</span>
             <span style="padding:4px 10px;background:var(--bg);border-radius:60px;font-size:10px;color:var(--t3)">Google Maps</span>
@@ -198,6 +216,24 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
           </div>
         </div>
       </a>
+    </div>
+  </div>
+</section>
+
+<section id="leaks">
+  <div class="wrap">
+    <div style="text-align:center">
+      <div class="sec-label">Website Leak Checklist</div>
+      <div class="sec-title">What I look for first.</div>
+      <p class="sec-sub" style="margin:0 auto">Most websites do not need a giant redesign to start performing better. They need the obvious friction removed.</p>
+    </div>
+    <div class="leak-grid">
+      <div class="leak-item"><h3>Unclear first screen</h3><p>Visitors should know what you do, who it is for, and what to do next within a few seconds.</p></div>
+      <div class="leak-item"><h3>Weak or hidden CTA</h3><p>Calls, quote requests, booking links, and forms need to be obvious before someone scrolls.</p></div>
+      <div class="leak-item"><h3>Missing trust proof</h3><p>Reviews, years in business, credentials, guarantees, and local proof should support the decision.</p></div>
+      <div class="leak-item"><h3>Form friction</h3><p>If the first step asks too much too soon, people delay, hesitate, or leave.</p></div>
+      <div class="leak-item"><h3>Unfinished content</h3><p>Placeholder copy, stale pages, and vague service descriptions quietly damage credibility.</p></div>
+      <div class="leak-item"><h3>Poor mobile flow</h3><p>Many buyers check from a phone. The page has to be fast, readable, and easy to act on.</p></div>
     </div>
   </div>
 </section>
@@ -329,8 +365,8 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
   <div class="wrap">
     <div class="cta-box">
       <h2>Want to know where your<br>website is leaking leads?</h2>
-      <p>Send me your website and the main action you want visitors to take. I will reply with the first few fixes I would look at.</p>
-      <a href="mailto:cbaryames24@gmail.com?subject=Website%20review%20request" class="cta-main-btn">Email Me Your Site</a>
+      <p>Send me your website and the main action you want visitors to take. I will reply with 3 specific fixes I would look at first.</p>
+      <a href="mailto:cbaryames24@gmail.com?subject=Free%203-point%20website%20teardown" class="cta-main-btn">Get a Free 3-Point Teardown</a>
       <p style="margin-top:18px;font-size:13px;color:var(--t3);position:relative">Prefer a form? <span id="openModal" style="color:var(--acc);cursor:pointer;font-weight:500;text-decoration:underline;text-underline-offset:3px">Tell me about your project</span></p>
       <p style="margin-top:12px;font-size:12px;color:var(--t4);position:relative">Chuck Baryames · <a href="mailto:cbaryames24@gmail.com" style="color:var(--acc);text-decoration:none;font-weight:500">cbaryames24@gmail.com</a></p>
     </div>
@@ -340,21 +376,23 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
 <div id="contactModal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px">
   <div style="background:var(--bg3);border:1px solid var(--t4);border-radius:20px;padding:40px 32px;max-width:460px;width:100%;position:relative;max-height:90vh;overflow-y:auto">
     <div id="closeModal" style="position:absolute;top:16px;right:20px;font-size:24px;color:var(--t3);cursor:pointer;line-height:1">&times;</div>
-    <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:12px">Tell Me About Your Project</div>
-    <div style="font-family:'Instrument Serif',serif;font-size:24px;margin-bottom:24px">I'll get back to you within 24 hours.</div>
+    <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);font-weight:600;margin-bottom:12px">Free 3-Point Website Teardown</div>
+    <div style="font-family:'Instrument Serif',serif;font-size:24px;margin-bottom:24px">Tell me where to look.</div>
     <div style="display:flex;flex-direction:column;gap:14px">
       <input id="cf-name" type="text" placeholder="Your name" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t1);font-size:14px;font-family:'Outfit',sans-serif;outline:none">
       <input id="cf-email" type="email" placeholder="Your email" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t1);font-size:14px;font-family:'Outfit',sans-serif;outline:none">
+      <input id="cf-website" type="url" placeholder="Website URL" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t1);font-size:14px;font-family:'Outfit',sans-serif;outline:none">
       <select id="cf-service" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t2);font-size:14px;font-family:'Outfit',sans-serif;outline:none">
-        <option value="">What are you looking for?</option>
-        <option value="web">Website Design and Development</option>
-        <option value="video">Short-Form Video Production</option>
-        <option value="content">Content Strategy</option>
-        <option value="bundle">Multiple Services</option>
-        <option value="other">Something Else</option>
+        <option value="">What do you want more of?</option>
+        <option value="calls">More phone calls</option>
+        <option value="forms">More form submissions</option>
+        <option value="bookings">More bookings or appointments</option>
+        <option value="quotes">More quote requests</option>
+        <option value="trust">A more trustworthy website</option>
+        <option value="other">Something else</option>
       </select>
-      <textarea id="cf-message" placeholder="Tell me a bit about your project, goals, and timeline..." rows="4" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t1);font-size:14px;font-family:'Outfit',sans-serif;outline:none;resize:vertical"></textarea>
-      <button id="cf-submit" style="padding:15px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--bg);font-size:14px;font-weight:700;border-radius:var(--rs);border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s">Send Message</button>
+      <textarea id="cf-message" placeholder="Anything I should know about the business, current problem, or goal?" rows="4" style="padding:14px 16px;background:var(--bg);border:1px solid var(--t4);border-radius:var(--rs);color:var(--t1);font-size:14px;font-family:'Outfit',sans-serif;outline:none;resize:vertical"></textarea>
+      <button id="cf-submit" style="padding:15px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--bg);font-size:14px;font-weight:700;border-radius:var(--rs);border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s">Request Teardown</button>
       <div id="cf-status" style="text-align:center;font-size:13px;color:var(--acc);display:none"></div>
     </div>
   </div>
@@ -510,19 +548,20 @@ modal.addEventListener('click', function(e) {
 document.getElementById('cf-submit').addEventListener('click', function() {
   var name = document.getElementById('cf-name').value.trim();
   var email = document.getElementById('cf-email').value.trim();
+  var website = document.getElementById('cf-website').value.trim();
   var service = document.getElementById('cf-service').value;
   var message = document.getElementById('cf-message').value.trim();
   var status = document.getElementById('cf-status');
 
-  if (!name || !email || !message) {
+  if (!name || !email || !website) {
     status.style.display = 'block';
     status.style.color = '#e07850';
-    status.textContent = 'Please fill in all fields.';
+    status.textContent = 'Please add your name, email, and website URL.';
     return;
   }
 
-  var subject = encodeURIComponent('Project Inquiry: ' + (service || 'General'));
-  var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nService: ' + service + '\n\nMessage:\n' + message);
+  var subject = encodeURIComponent('Free 3-point website teardown: ' + website);
+  var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nWebsite: ' + website + '\nGoal: ' + (service || 'Not specified') + '\n\nContext:\n' + (message || 'No extra context provided.'));
   window.location.href = 'mailto:cbaryames24@gmail.com?subject=' + subject + '&body=' + body;
 
   status.style.display = 'block';
@@ -530,7 +569,7 @@ document.getElementById('cf-submit').addEventListener('click', function() {
   status.textContent = 'Opening your email client...';
 
   var leads = JSON.parse(localStorage.getItem('cb_leads') || '[]');
-  leads.push({ name: name, email: email, service: service, message: message, date: new Date().toISOString() });
+  leads.push({ name: name, email: email, website: website, service: service, message: message, date: new Date().toISOString() });
   localStorage.setItem('cb_leads', JSON.stringify(leads));
 });
 </script>
