@@ -24,8 +24,8 @@ export function Hero() {
         </p>
         <ul className="hero-proof-list fa d4" aria-label="Build-first offer details">
           <li>
-            <strong>No payment to start.</strong> $50 holds your build slot, refundable if I miss
-            the deadline.
+            <strong>No full payment upfront.</strong> $50 holds your build slot, refundable if I
+            miss the deadline.
           </li>
           <li>
             <strong>Preview in 48 hours.</strong> I send a real URL, you judge the actual page.

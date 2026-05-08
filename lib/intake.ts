@@ -40,6 +40,18 @@ export type IntakeValidationResult =
   | { ok: true; data: IntakeSubmission }
   | { ok: false; errors: Record<string, string> };
 
+const fieldLimits: Partial<Record<keyof IntakeSubmission, number>> = {
+  fullName: 120,
+  email: 254,
+  businessName: 160,
+  businessDescription: 1200,
+  targetCustomer: 800,
+  offerDescription: 300,
+  benefits: 800,
+  brandNotes: 1000,
+  additionalNotes: 1200,
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -60,6 +72,19 @@ function isOneOf<T extends readonly string[]>(value: string, options: T): value 
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function checkMaxLength(
+  errors: Record<string, string>,
+  key: keyof IntakeSubmission,
+  value: string | null,
+  label: string,
+) {
+  const maxLength = fieldLimits[key];
+
+  if (maxLength && value && value.length > maxLength) {
+    errors[key] = `${label} is too long. Keep it under ${maxLength} characters.`;
+  }
 }
 
 export function validateIntakePayload(payload: unknown): IntakeValidationResult {
@@ -96,6 +121,16 @@ export function validateIntakePayload(payload: unknown): IntakeValidationResult 
   if (!deadlinePreferenceIsValid) {
     errors.deadlinePreference = "Choose a deadline preference.";
   }
+
+  checkMaxLength(errors, "fullName", fullName, "Full name");
+  checkMaxLength(errors, "email", email, "Email");
+  checkMaxLength(errors, "businessName", businessName, "Business name");
+  checkMaxLength(errors, "businessDescription", businessDescription, "Business description");
+  checkMaxLength(errors, "targetCustomer", targetCustomer, "Target customer");
+  checkMaxLength(errors, "offerDescription", offerDescription, "Offer description");
+  checkMaxLength(errors, "benefits", benefits, "Benefits");
+  checkMaxLength(errors, "brandNotes", brandNotes, "Brand notes");
+  checkMaxLength(errors, "additionalNotes", additionalNotes, "Additional notes");
 
   if (Object.keys(errors).length > 0) {
     return { ok: false, errors };

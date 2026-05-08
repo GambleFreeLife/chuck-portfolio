@@ -108,6 +108,7 @@ export function HomeInteractions() {
       return undefined;
     }
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let width = window.innerWidth;
     let height = window.innerHeight;
     let mouseX = -1000;
@@ -120,6 +121,10 @@ export function HomeInteractions() {
         ".process-step, .deliverable-card, .fit-card, .faq-item, .case-card, .price-card, .about-stat",
       ),
     );
+
+    if (prefersReducedMotion) {
+      return undefined;
+    }
 
     const resizeCanvas = () => {
       width = window.innerWidth;

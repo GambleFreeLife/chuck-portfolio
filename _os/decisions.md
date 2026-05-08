@@ -33,3 +33,4 @@
 2026-05-08 - Added a social share image - LinkedIn and other previews now have a branded Open Graph image.
 2026-05-08 - Added subtle depth to Other Offerings - The secondary pricing section now feels intentional without competing with the cards.
 2026-05-08 - Softened productized-scope rejection copy - Bigger projects are routed to the higher-scope tiers instead of being turned away.
+2026-05-08 - Hardened the portfolio and checkout path - The app now has clearer intake validation, safer checkout setup, baseline security headers, patched dependencies, self-hosted fonts, reduced-motion handling, and regression tests.

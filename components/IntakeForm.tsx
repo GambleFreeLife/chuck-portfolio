@@ -56,10 +56,18 @@ export function IntakeForm() {
   const [form, setForm] = useState<IntakeFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [showValidationErrors, setShowValidationErrors] = useState(false);
 
   const validation = useMemo(() => validateIntakePayload(form), [form]);
-  const canSubmit = validation.ok && !isSubmitting;
   const completedRequiredCount = requiredFieldNames.filter((name) => form[name].trim().length > 0).length;
+  const missingRequiredCount = requiredFieldNames.length - completedRequiredCount;
+  const fieldErrors = showValidationErrors && !validation.ok ? validation.errors : {};
+  const progressMessage =
+    validation.ok
+      ? "Ready for checkout."
+      : missingRequiredCount > 0
+        ? `${missingRequiredCount} required ${missingRequiredCount === 1 ? "detail" : "details"} left.`
+        : "One answer needs a quick fix.";
 
   function updateField(name: FieldName, value: string) {
     setForm((current) => ({
@@ -76,10 +84,12 @@ export function IntakeForm() {
     const clientValidation = validateIntakePayload(form);
 
     if (!clientValidation.ok) {
-      setError("Add the required details, then you can pay and start.");
+      setShowValidationErrors(true);
+      setError("Fix the highlighted details, then you can pay and start.");
       return;
     }
 
+    setShowValidationErrors(false);
     setIsSubmitting(true);
 
     try {
@@ -119,6 +129,7 @@ export function IntakeForm() {
           <div className="intake-progress" aria-label="Required details completed">
             <span>
               About 4 minutes to complete. {completedRequiredCount} of {requiredFieldNames.length} done.
+              {" "}{progressMessage}
             </span>
             <div>
               <i style={{ width: `${(completedRequiredCount / requiredFieldNames.length) * 100}%` }} />
@@ -142,7 +153,7 @@ export function IntakeForm() {
         </div>
       </aside>
 
-      <form className="intake-card" onSubmit={handleSubmit}>
+      <form className="intake-card" onSubmit={handleSubmit} noValidate>
         <FormSection title="Contact details" note="Use the email where you want build updates sent." />
         <Field
           label="Full name"
@@ -151,6 +162,7 @@ export function IntakeForm() {
           onChange={updateField}
           autoComplete="name"
           placeholder="Jane Smith"
+          error={fieldErrors.fullName}
         />
         <Field
           label="Email"
@@ -160,6 +172,7 @@ export function IntakeForm() {
           onChange={updateField}
           autoComplete="email"
           placeholder="jane@example.com"
+          error={fieldErrors.email}
         />
         <Field
           label="Business name"
@@ -168,6 +181,7 @@ export function IntakeForm() {
           onChange={updateField}
           autoComplete="organization"
           placeholder="Your business or project name"
+          error={fieldErrors.businessName}
         />
 
         <FormSection title="Offer and customer" note="These answers drive the copy and page structure." />
@@ -178,6 +192,7 @@ export function IntakeForm() {
           value={form.businessDescription}
           onChange={updateField}
           placeholder="We help busy parents plan healthy meals without spending Sundays in the kitchen."
+          error={fieldErrors.businessDescription}
         />
         <TextareaField
           label="Target customer"
@@ -186,6 +201,7 @@ export function IntakeForm() {
           value={form.targetCustomer}
           onChange={updateField}
           placeholder="Coaches, consultants, course buyers, local customers, or another specific group."
+          error={fieldErrors.targetCustomer}
         />
         <SelectField
           label="Primary goal of the page"
@@ -194,6 +210,7 @@ export function IntakeForm() {
           value={form.primaryGoal}
           onChange={updateField}
           options={primaryGoals}
+          error={fieldErrors.primaryGoal}
         />
         <Field
           label="One-line description of the offer"
@@ -201,6 +218,7 @@ export function IntakeForm() {
           value={form.offerDescription}
           onChange={updateField}
           placeholder="A 6-week coaching program for new managers."
+          error={fieldErrors.offerDescription}
         />
         <TextareaField
           label="Three benefits or outcomes for the customer"
@@ -209,6 +227,7 @@ export function IntakeForm() {
           value={form.benefits}
           onChange={updateField}
           placeholder={"1. Save time each week.\n2. Feel confident before the first call.\n3. Know exactly what to do next."}
+          error={fieldErrors.benefits}
         />
 
         <FormSection title="Launch details" note="These answers help me avoid preventable launch delays." />
@@ -218,6 +237,7 @@ export function IntakeForm() {
           value={form.domainStatus}
           options={domainStatuses}
           onChange={updateField}
+          error={fieldErrors.domainStatus}
         />
         <TextareaField
           label="Brand colors or vibe"
@@ -244,13 +264,14 @@ export function IntakeForm() {
           value={form.deadlinePreference}
           onChange={updateField}
           options={deadlinePreferences}
+          error={fieldErrors.deadlinePreference}
         />
         {error ? (
           <div className="form-error" role="alert">
             {error}
           </div>
         ) : null}
-        <button className="flow-primary-button" type="submit" disabled={!canSubmit}>
+        <button className="flow-primary-button" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Opening checkout" : "Pay the $50 deposit and start the build"}
         </button>
         <p className="form-submit-note">
@@ -279,6 +300,7 @@ function Field({
   type = "text",
   autoComplete,
   placeholder,
+  error,
 }: {
   label: string;
   name: FieldName;
@@ -287,7 +309,10 @@ function Field({
   type?: "text" | "email";
   autoComplete?: string;
   placeholder?: string;
+  error?: string;
 }) {
+  const errorId = error ? `${name}-error` : undefined;
+
   return (
     <label className="form-field">
       <span>{label}</span>
@@ -298,8 +323,15 @@ function Field({
         autoComplete={autoComplete}
         placeholder={placeholder}
         required
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
         onChange={(event) => onChange(name, event.target.value)}
       />
+      {error ? (
+        <small className="field-error" id={errorId}>
+          {error}
+        </small>
+      ) : null}
     </label>
   );
 }
@@ -312,6 +344,7 @@ function TextareaField({
   onChange,
   required = true,
   placeholder,
+  error,
 }: {
   label: string;
   help?: string;
@@ -320,7 +353,10 @@ function TextareaField({
   onChange: (name: FieldName, value: string) => void;
   required?: boolean;
   placeholder?: string;
+  error?: string;
 }) {
+  const errorId = error ? `${name}-error` : undefined;
+
   return (
     <label className="form-field">
       <span>{label}</span>
@@ -331,8 +367,15 @@ function TextareaField({
         rows={4}
         required={required}
         placeholder={placeholder}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
         onChange={(event) => onChange(name, event.target.value)}
       />
+      {error ? (
+        <small className="field-error" id={errorId}>
+          {error}
+        </small>
+      ) : null}
     </label>
   );
 }
@@ -344,6 +387,7 @@ function SelectField({
   options,
   onChange,
   help,
+  error,
 }: {
   label: string;
   name: FieldName;
@@ -351,12 +395,22 @@ function SelectField({
   options: readonly string[];
   onChange: (name: FieldName, value: string) => void;
   help?: string;
+  error?: string;
 }) {
+  const errorId = error ? `${name}-error` : undefined;
+
   return (
     <label className="form-field">
       <span>{label}</span>
       {help ? <small>{help}</small> : null}
-      <select name={name} value={value} required onChange={(event) => onChange(name, event.target.value)}>
+      <select
+        name={name}
+        value={value}
+        required
+        aria-invalid={error ? true : undefined}
+        aria-describedby={errorId}
+        onChange={(event) => onChange(name, event.target.value)}
+      >
         <option value="">Choose one</option>
         {options.map((option) => (
           <option key={option} value={option}>
@@ -364,6 +418,11 @@ function SelectField({
           </option>
         ))}
       </select>
+      {error ? (
+        <small className="field-error" id={errorId}>
+          {error}
+        </small>
+      ) : null}
     </label>
   );
 }
@@ -374,15 +433,19 @@ function RadioFieldset({
   value,
   options,
   onChange,
+  error,
 }: {
   label: string;
   name: FieldName;
   value: string;
   options: readonly string[];
   onChange: (name: FieldName, value: string) => void;
+  error?: string;
 }) {
+  const errorId = error ? `${name}-error` : undefined;
+
   return (
-    <fieldset className="form-field radio-field">
+    <fieldset className="form-field radio-field" aria-invalid={error ? true : undefined} aria-describedby={errorId}>
       <legend>{label}</legend>
       <div className="radio-options">
         {options.map((option) => (
@@ -399,6 +462,11 @@ function RadioFieldset({
           </label>
         ))}
       </div>
+      {error ? (
+        <small className="field-error" id={errorId}>
+          {error}
+        </small>
+      ) : null}
     </fieldset>
   );
 }

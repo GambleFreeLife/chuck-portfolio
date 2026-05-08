@@ -13,8 +13,8 @@ import { Portfolio } from "@/components/Portfolio";
 export default function HomePage() {
   return (
     <>
-      <div className="cursor-glow" id="cursorGlow" />
-      <canvas id="shapes-canvas" />
+      <div className="cursor-glow" id="cursorGlow" aria-hidden="true" />
+      <canvas id="shapes-canvas" aria-hidden="true" />
       <Nav />
       <main>
         <Hero />
