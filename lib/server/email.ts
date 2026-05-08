@@ -6,6 +6,22 @@ import { getResend } from "./resend";
 
 type IntakeRow = Database["public"]["Tables"]["intake_submissions"]["Row"];
 
+function getEmailErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (error && typeof error === "object" && "message" in error) {
+    const message = (error as { message?: unknown }).message;
+
+    if (typeof message === "string") {
+      return message;
+    }
+  }
+
+  return "Unknown Resend error.";
+}
+
 function getProjectRefFromSupabaseUrl() {
   const url = new URL(getRequiredEnv("SUPABASE_URL"));
   return url.hostname.split(".")[0] ?? "";
@@ -58,7 +74,7 @@ export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
   );
 
   if (adminEmailResult.error) {
-    throw new Error("Admin notification email failed.");
+    throw new Error(`Admin notification email failed: ${getEmailErrorMessage(adminEmailResult.error)}`);
   }
 
   const clientEmailResult = await resend.emails.send(
@@ -79,6 +95,6 @@ export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
   );
 
   if (clientEmailResult.error) {
-    throw new Error("Client confirmation email failed.");
+    throw new Error(`Client confirmation email failed: ${getEmailErrorMessage(clientEmailResult.error)}`);
   }
 }

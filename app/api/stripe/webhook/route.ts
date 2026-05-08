@@ -27,6 +27,8 @@ export async function POST(request: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const intakeId = session.metadata?.intake_id;
+    const isSmokeTest =
+      event.id.startsWith("evt_live_webhook_smoke_") || session.id?.startsWith("cs_live_webhook_smoke_");
 
     if (!intakeId) {
       console.error("Stripe checkout session completed without intake_id metadata.", session.id);
@@ -48,10 +50,19 @@ export async function POST(request: Request) {
       try {
         await sendLandingPagePaymentEmails(data);
       } catch (error) {
+        const emailError = error instanceof Error ? error.message : "Unknown email error";
         console.error(
           "Payment emails failed",
-          error instanceof Error ? error.message : "Unknown email error",
+          emailError,
         );
+
+        if (isSmokeTest) {
+          return NextResponse.json({ received: true, emailSent: false, emailError });
+        }
+      }
+
+      if (isSmokeTest) {
+        return NextResponse.json({ received: true, emailSent: true });
       }
     }
   }
