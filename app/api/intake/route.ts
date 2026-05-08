@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateIntakePayload } from "@/lib/intake";
-import { getRequiredEnv } from "@/lib/server/env";
+import { getOptionalEnv } from "@/lib/server/env";
 import { getStripe } from "@/lib/server/stripe";
 import { getSupabaseAdmin } from "@/lib/server/supabase";
 
@@ -10,8 +10,14 @@ type InsertedIntake = {
   id: string;
 };
 
+const liveDepositPriceId = "price_1TUdFHLVDWlcf7W7vOYWogME";
+
 function jsonError(message: string, status: number, errors?: Record<string, string>) {
   return NextResponse.json({ error: message, errors }, { status });
+}
+
+function getDepositPriceId() {
+  return getOptionalEnv("STRIPE_DEPOSIT_PRICE_ID") ?? liveDepositPriceId;
 }
 
 function getSameOrigin(request: Request) {
@@ -80,7 +86,7 @@ export async function POST(request: Request) {
       mode: "payment",
       line_items: [
         {
-          price: getRequiredEnv("STRIPE_DEPOSIT_PRICE_ID"),
+          price: getDepositPriceId(),
           quantity: 1,
         },
       ],

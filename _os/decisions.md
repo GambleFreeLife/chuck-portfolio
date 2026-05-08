@@ -21,3 +21,4 @@
 2026-05-08 - Upgraded the intake brief UI - The form now has guided sections, progress feedback, stronger helper text, and a sidebar that reduces buyer uncertainty.
 2026-05-08 - Switched intake checkout to a $50 deposit - The productized landing page flow now collects only the upfront commitment while the $447 balance is billed manually after approval.
 2026-05-08 - Added production env guard for Stripe setup - The Vercel env helper now stops before pushing test Stripe keys to production.
+2026-05-08 - Added a production deposit price fallback - The checkout route uses the live $50 price if STRIPE_DEPOSIT_PRICE_ID is missing, while still allowing the env var to override it.
