@@ -1,1 +1,12 @@
 .vercel
+.next
+node_modules
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+out
+stripe-listen.*.log
+.stripe-listen.pid
+codebase-audit-for-claude.md
+supabase/.temp

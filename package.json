@@ -1,0 +1,38 @@
+{
+  "name": "chuck-portfolio",
+  "version": "1.0.0",
+  "description": "Chuck Baryames portfolio and productized landing page service.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GambleFreeLife/chuck-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GambleFreeLife/chuck-portfolio/issues"
+  },
+  "homepage": "https://github.com/GambleFreeLife/chuck-portfolio#readme",
+  "dependencies": {
+    "@react-email/components": "^1.0.12",
+    "@supabase/supabase-js": "^2.105.3",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "resend": "^6.12.3",
+    "stripe": "^22.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}
