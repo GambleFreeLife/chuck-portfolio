@@ -4,13 +4,12 @@ const cases = [
     badge: "View project",
     badgeTone: "gold",
     previewClass: "case-preview-baryames",
+    imageSrc: "/portfolio/baryames-cleaners-thumbnail.jpg",
+    imageAlt: "Baryames Cleaners landing page hero screenshot",
     eyebrow: "Local business, dry cleaning",
     title: "Baryames Cleaners Landing Page",
     description:
       "A focused local-service landing page built around one high-value action: getting more pickup and delivery requests.",
-    previewTitle: "Baryames",
-    previewSubtitle: "Cleaners",
-    previewMeta: "Est. 1922, Greater Lansing",
     details: [
       {
         label: "Problem",
@@ -32,13 +31,12 @@ const cases = [
     badge: "Concept",
     badgeTone: "teal",
     previewClass: "case-preview-eby",
+    imageSrc: "/portfolio/eby-dental-thumbnail.jpg",
+    imageAlt: "Eby Dental Care landing page hero screenshot",
     eyebrow: "Concept redesign, dental practice",
     title: "Eby Dental Care Concept Redesign",
     description:
       "A concept redesign showing how a healthcare service page can build trust and make appointment requests feel easier.",
-    previewTitle: "Eby Dental Care",
-    previewSubtitle: "Healthcare landing page",
-    previewMeta: "Okemos, Michigan, since 2003",
     details: [
       {
         label: "Problem",
@@ -81,9 +79,7 @@ export function Portfolio() {
               <div className="case-preview-wrap">
                 <div className={`case-preview ${project.previewClass}`}>
                   <div className={`case-badge ${project.badgeTone}`}>{project.badge}</div>
-                  <div className="case-preview-title">{project.previewTitle}</div>
-                  <div className="case-preview-subtitle">{project.previewSubtitle}</div>
-                  <div className="case-preview-meta">{project.previewMeta}</div>
+                  <img src={project.imageSrc} alt={project.imageAlt} loading="lazy" />
                 </div>
               </div>
               <div className="case-body">

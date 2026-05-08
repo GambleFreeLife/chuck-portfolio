@@ -82,9 +82,11 @@ section{padding:100px 0}
 .case-card{background:var(--bg3);border:1px solid var(--t4);border-radius:var(--r);overflow:hidden;text-decoration:none;display:block;color:inherit;transition:all .4s}
 .case-card:hover{border-color:rgba(78,205,196,.2);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .case-preview-wrap{padding:24px 24px 0;position:relative}
-.case-preview{border-radius:10px;padding:32px 24px;text-align:center;position:relative;overflow:hidden;min-height:155px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.case-preview{border-radius:10px;padding:0;text-align:center;position:relative;overflow:hidden;aspect-ratio:16/10;min-height:155px;display:block;background:var(--bg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
 .case-preview-baryames{background:linear-gradient(135deg,#1B3A5C,#0F1A2E)}
 .case-preview-eby{background:linear-gradient(135deg,#1A2332,#0D1520)}
+.case-preview img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.case-card:hover .case-preview img{transform:scale(1.025)}
 .case-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:60px;font-size:9px;font-weight:600;letter-spacing:0;text-transform:uppercase}
 .case-badge.gold{background:rgba(201,165,78,.2);color:#C9A54E}
 .case-badge.teal{background:rgba(42,168,154,.15);color:#2AA89A}
