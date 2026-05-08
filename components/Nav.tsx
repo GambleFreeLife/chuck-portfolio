@@ -13,7 +13,7 @@ export function Nav() {
           <a href="#about">About</a>
           <a href="#pricing">Pricing</a>
           <Link href="/get-started" className="nav-cta">
-            Start the build
+            Start the build for $50
           </Link>
         </div>
       </div>

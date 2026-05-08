@@ -7,30 +7,32 @@ export function Hero() {
       <div className="wrap">
         <Image
           src="/mypic.jpg"
-          width={160}
-          height={160}
+          width={120}
+          height={120}
           priority
           alt="Chuck Baryames"
           className="hero-photo tilt-card fa"
         />
         <div className="hero-name fa d1">CHUCK BARYAMES</div>
-        <h1 className="fa d2">I build conversion-focused landing pages in 48 hours.</h1>
+        <h1 className="fa d2">
+          <span>Agencies want $5k upfront.</span>
+          <span>This page starts at $50.</span>
+        </h1>
         <p className="hero-sub hero-sub-wide fa d3">
           Start with a refundable $50 deposit, review the finished preview, and pay the rest only
           when it is approved.
         </p>
         <ul className="hero-proof-list fa d4" aria-label="Build-first offer details">
           <li>
-            First you send the brief with no payment, then a refundable $50 deposit holds the build
-            slot.
+            <strong>No payment to start.</strong> $50 holds your build slot, refundable if I miss
+            the deadline.
           </li>
           <li>
-            Within 48 hours, I send a finished preview on a temporary URL, so you can judge the real
-            page.
+            <strong>Preview in 48 hours.</strong> I send a real URL, you judge the actual page.
           </li>
           <li>
-            After you approve it, you pay the balance, and I put the page on your domain within 24
-            hours.
+            <strong>Pay the balance only when you love it.</strong> Then your page goes live within
+            24 hours.
           </li>
         </ul>
         <div className="hero-action fa d5">

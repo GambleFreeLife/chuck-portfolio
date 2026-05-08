@@ -1,11 +1,14 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+
 const cases = [
   {
     href: "https://baryames-landing.vercel.app",
     badge: "View project",
     badgeTone: "gold",
-    previewClass: "case-preview-baryames",
-    imageSrc: "/portfolio/baryames-cleaners-thumbnail.jpg",
-    imageAlt: "Baryames Cleaners landing page hero screenshot",
+    imageSrc: "/portfolio/baryames.jpg",
+    imageAlt: "Baryames Cleaners landing page",
     eyebrow: "Local business, dry cleaning",
     title: "Baryames Cleaners Landing Page",
     description:
@@ -30,9 +33,8 @@ const cases = [
     href: "https://eby-dental-landing.vercel.app",
     badge: "Concept",
     badgeTone: "teal",
-    previewClass: "case-preview-eby",
-    imageSrc: "/portfolio/eby-dental-thumbnail.jpg",
-    imageAlt: "Eby Dental Care landing page hero screenshot",
+    imageSrc: "/portfolio/eby-dental.jpg",
+    imageAlt: "Eby Dental Care concept landing page",
     eyebrow: "Concept redesign, dental practice",
     title: "Eby Dental Care Concept Redesign",
     description:
@@ -54,6 +56,10 @@ const cases = [
     tags: ["Appointment booking", "Google Maps", "Social proof"],
   },
 ] as const;
+
+function publicImageExists(src: string) {
+  return existsSync(path.join(process.cwd(), "public", src.replace(/^\//, "")));
+}
 
 export function Portfolio() {
   return (
@@ -77,9 +83,19 @@ export function Portfolio() {
               key={project.href}
             >
               <div className="case-preview-wrap">
-                <div className={`case-preview ${project.previewClass}`}>
+                <div className="case-preview">
                   <div className={`case-badge ${project.badgeTone}`}>{project.badge}</div>
-                  <img src={project.imageSrc} alt={project.imageAlt} loading="lazy" />
+                  {publicImageExists(project.imageSrc) ? (
+                    <Image
+                      src={project.imageSrc}
+                      alt={project.imageAlt}
+                      width={1280}
+                      height={800}
+                      className="case-preview-image"
+                    />
+                  ) : (
+                    <div className="case-preview-pending">Screenshot pending</div>
+                  )}
                 </div>
               </div>
               <div className="case-body">

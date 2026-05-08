@@ -11,7 +11,7 @@ export function FinalCTA() {
             after approval.
           </p>
           <Link href="/get-started" className="cta-main-btn">
-            Hold my build slot for $50
+            Start the build for $50
           </Link>
           <p className="cta-trust">
             If I miss the 48-hour deadline, your $50 comes back automatically. If the page misses

@@ -31,6 +31,12 @@ const faqs = [
   },
 ] as const;
 
+const openByDefault = new Set([
+  "What if you miss the 48-hour deadline?",
+  "Why a deposit at all if I haven't seen the page?",
+  "Have you done this before?",
+]);
+
 export function AntiObjectionFAQ() {
   return (
     <section id="faq" className="faq-section">
@@ -41,7 +47,7 @@ export function AntiObjectionFAQ() {
         </div>
         <div className="faq-grid">
           {faqs.map((faq) => (
-            <details className="faq-item" key={faq.question}>
+            <details className="faq-item" key={faq.question} open={openByDefault.has(faq.question)}>
               <summary>{faq.question}</summary>
               <p>{faq.answer}</p>
             </details>

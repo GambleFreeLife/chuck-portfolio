@@ -32,8 +32,8 @@ const goodFit = [
 ] as const;
 
 const notFit = [
-  "You need a full brand identity, multi-page website, app, or custom dashboard.",
-  "You want open-ended strategy calls or revisions without a defined finish line.",
+  "You need more than one focused landing page in this build, since a multi-page site or full brand identity is a different scope.",
+  "You want open-ended strategy calls or unlimited revisions without a defined finish line.",
   "You cannot give feedback within 7 days after the preview is ready.",
 ] as const;
 
@@ -69,12 +69,17 @@ export function OfferDetails() {
             </ul>
           </div>
           <div className="fit-card muted-fit">
-            <h3>This is not a good fit when:</h3>
+            <h3>This is not the right fit when:</h3>
             <ul>
               {notFit.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            <p className="fit-bridge">
+              If your project is bigger than one focused landing page, the audit, sprint, and full
+              website tiers below are sized for it. Or email{" "}
+              <a href="mailto:cbaryames24@gmail.com">cbaryames24@gmail.com</a> and we&apos;ll talk.
+            </p>
           </div>
         </div>
       </div>

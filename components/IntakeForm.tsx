@@ -118,7 +118,7 @@ export function IntakeForm() {
           </p>
           <div className="intake-progress" aria-label="Required details completed">
             <span>
-              {completedRequiredCount} of {requiredFieldNames.length} required details complete.
+              About 4 minutes to complete. {completedRequiredCount} of {requiredFieldNames.length} done.
             </span>
             <div>
               <i style={{ width: `${(completedRequiredCount / requiredFieldNames.length) * 100}%` }} />

@@ -22,21 +22,21 @@ export function About() {
             <div className="sec-label">About</div>
             <h2 className="sec-title">Chuck Baryames</h2>
             <p>
-              I'm a <strong>web developer and conversion designer</strong> focused on one
-              practical question: where is your current website losing people who were close to
-              contacting you?
+              I grew up around a family business, so I know what it feels like when the work is
+              good but the website does not make that obvious fast enough. Before I started
+              building pages, I worked in insurance and learned how quickly people lose trust when
+              the next step feels confusing.
             </p>
             <p>
-              Every page I build starts with the visitor's next step:{" "}
-              <strong>
-                call, book, request a quote, submit a form, or trust you enough to keep reading.
-              </strong>{" "}
-              Then I design the page around that action.
+              I am a self-taught builder, which means I learned by shipping real pages, breaking
+              things, fixing them, and getting faster each time. That is also why this offer is
+              built around a 48-hour preview instead of a long agency process.
             </p>
             <p>
-              I combine <strong>strategy, copywriting, design, and development</strong> into one
-              workflow. That means fewer handoffs, faster fixes, and a page that reflects the
-              quality of the work your business already does.
+              I do the copy, design, and Next.js build myself, so there is no handoff between the
+              person thinking through the offer and the person building the page. You send the
+              brief, I build the first version, and then we use the three revision rounds to make it
+              match what you actually need.
             </p>
             <div className="skill-tags">
               {skills.map((skill) => (
