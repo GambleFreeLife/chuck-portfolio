@@ -1,10 +1,13 @@
 import AdminNewClientEmail from "@/emails/AdminNewClientEmail";
 import ClientConfirmationEmail from "@/emails/ClientConfirmationEmail";
+import VideoOrderAdminEmail from "@/emails/VideoOrderAdminEmail";
+import VideoOrderClientEmail from "@/emails/VideoOrderClientEmail";
 import type { Database } from "./database.types";
 import { getRequiredEnv } from "./env";
 import { getResend } from "./resend";
 
 type IntakeRow = Database["public"]["Tables"]["intake_submissions"]["Row"];
+type VideoOrderRow = Database["public"]["Tables"]["video_orders"]["Row"];
 
 function getEmailErrorMessage(error: unknown) {
   if (error instanceof Error) {
@@ -27,18 +30,38 @@ function getProjectRefFromSupabaseUrl() {
   return url.hostname.split(".")[0] ?? "";
 }
 
-function getSupabaseRowUrl(intakeId: string) {
+function getSupabaseRowUrl(table: "intake_submissions" | "video_orders", rowId: string) {
   const projectRef = getProjectRefFromSupabaseUrl();
-  const filter = encodeURIComponent(`id=eq.${intakeId}`);
+  const filter = encodeURIComponent(`id=eq.${rowId}`);
 
-  return `https://supabase.com/dashboard/project/${projectRef}/editor?schema=public&table=intake_submissions&filter=${filter}`;
+  return `https://supabase.com/dashboard/project/${projectRef}/editor?schema=public&table=${table}&filter=${filter}`;
+}
+
+function getVideoPlanName(productType: string) {
+  return productType === "retainer" ? "Video Retainer" : "Single Video";
+}
+
+function getVideoAmountPaid(productType: string) {
+  return productType === "retainer" ? "$297/month" : "$97";
+}
+
+function getVideoStyleLabel(stylePreference: string) {
+  if (stylePreference === "service_explainer") {
+    return "Service explainer";
+  }
+
+  if (stylePreference === "testimonial_cinematic") {
+    return "Testimonial cinematic";
+  }
+
+  return "Brand intro";
 }
 
 export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
   const resend = getResend();
   const from = getRequiredEnv("FROM_EMAIL");
   const adminEmail = getRequiredEnv("ADMIN_EMAIL");
-  const supabaseRowUrl = getSupabaseRowUrl(intake.id);
+  const supabaseRowUrl = getSupabaseRowUrl("intake_submissions", intake.id);
 
   const adminEmailResult = await resend.emails.send(
     {
@@ -97,4 +120,84 @@ export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
   if (clientEmailResult.error) {
     throw new Error(`Client confirmation email failed: ${getEmailErrorMessage(clientEmailResult.error)}`);
   }
+}
+
+export async function sendVideoOrderAdminEmail(order: VideoOrderRow) {
+  const resend = getResend();
+  const from = getRequiredEnv("FROM_EMAIL");
+  const adminEmail = getRequiredEnv("ADMIN_EMAIL");
+  const supabaseRowUrl = getSupabaseRowUrl("video_orders", order.id);
+  const planName = getVideoPlanName(order.product_type);
+  const amountPaid = getVideoAmountPaid(order.product_type);
+  const stylePreference = getVideoStyleLabel(order.style_preference);
+
+  const adminEmailResult = await resend.emails.send(
+    {
+      from,
+      to: adminEmail,
+      subject: `New video order: ${order.business_name}`,
+      react: VideoOrderAdminEmail({
+        videoOrderId: order.id,
+        createdAt: order.created_at,
+        fullName: order.full_name,
+        email: order.email,
+        businessName: order.business_name,
+        brandOffer: order.brand_offer,
+        targetAudience: order.target_audience,
+        stylePreference,
+        productType: order.product_type,
+        planName,
+        amountPaid,
+        stripeSessionId: order.stripe_session_id,
+        stripeSubscriptionId: order.stripe_subscription_id,
+        stripePaymentStatus: order.stripe_payment_status,
+        paidAt: order.paid_at,
+        supabaseRowUrl,
+      }),
+    },
+    {
+      headers: {
+        "Idempotency-Key": `video-order-admin-${order.id}`,
+      },
+    },
+  );
+
+  if (adminEmailResult.error) {
+    throw new Error(`Video admin notification email failed: ${getEmailErrorMessage(adminEmailResult.error)}`);
+  }
+}
+
+export async function sendVideoOrderClientEmail(order: VideoOrderRow) {
+  const resend = getResend();
+  const from = getRequiredEnv("FROM_EMAIL");
+  const planName = getVideoPlanName(order.product_type);
+  const amountPaid = getVideoAmountPaid(order.product_type);
+
+  const clientEmailResult = await resend.emails.send(
+    {
+      from,
+      to: order.email,
+      subject: "Your video order is confirmed, preview in 48 hours",
+      react: VideoOrderClientEmail({
+        fullName: order.full_name,
+        businessName: order.business_name,
+        planName,
+        amountPaid,
+      }),
+    },
+    {
+      headers: {
+        "Idempotency-Key": `video-order-client-${order.id}`,
+      },
+    },
+  );
+
+  if (clientEmailResult.error) {
+    throw new Error(`Video client confirmation email failed: ${getEmailErrorMessage(clientEmailResult.error)}`);
+  }
+}
+
+export async function sendVideoOrderPaymentEmails(order: VideoOrderRow) {
+  await sendVideoOrderAdminEmail(order);
+  await sendVideoOrderClientEmail(order);
 }

@@ -6,9 +6,11 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Nav } from "@/components/Nav";
-import { OfferDetails } from "@/components/OfferDetails";
-import { OtherOfferings } from "@/components/OtherOfferings";
 import { Portfolio } from "@/components/Portfolio";
+import { Pricing } from "@/components/Pricing";
+import { StickyMobileCTA } from "@/components/StickyMobileCTA";
+import { TheStack } from "@/components/TheStack";
+import { VideoShowcase } from "@/components/VideoShowcase";
 
 export default function HomePage() {
   return (
@@ -18,14 +20,16 @@ export default function HomePage() {
       <Nav />
       <main>
         <Hero />
+        <VideoShowcase />
         <HowItWorks />
-        <OfferDetails />
+        <Pricing />
+        <TheStack />
         <AntiObjectionFAQ />
         <Portfolio />
         <About />
-        <OtherOfferings />
         <FinalCTA />
       </main>
+      <StickyMobileCTA />
       <Footer />
       <HomeInteractions />
     </>

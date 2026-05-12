@@ -1,5 +1,20 @@
 const faqs = [
   {
+    question: "Can't I just use Canva or HeyGen for free?",
+    answer:
+      "Canva makes templates. HeyGen makes AI avatars. Neither is purpose-built for the kinetic type, frame-perfect timing, and 48-hour iteration cycle that makes a video stop the LinkedIn scroll. The $97 is what your time is worth doing it yourself.",
+  },
+  {
+    question: "What if I do not have a script?",
+    answer:
+      "The brief takes 3 minutes. I write the script from your answers and send it for approval before I render anything. You never have to write copy.",
+  },
+  {
+    question: "Does this work for service businesses, not just products?",
+    answer:
+      "Yes. Most of the showcase examples are service businesses. The video frames the transformation you offer, not the product specs.",
+  },
+  {
     question: "What happens if I don't love the page?",
     answer:
       "First, I use the three revision rounds to get it closer to the brief, because the goal is to make the page work. If it still genuinely does not fit what you asked for and you give clear reasons, I refund the $50 deposit and you have no obligation to pay the balance. If you stop responding for more than 7 days without feedback, the deposit stays non-refundable because the build slot and work were already spent. Otherwise, three revision rounds and an honest look at the page give us plenty of room to land it.",

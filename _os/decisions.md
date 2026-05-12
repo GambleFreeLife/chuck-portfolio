@@ -34,3 +34,12 @@
 2026-05-08 - Added subtle depth to Other Offerings - The secondary pricing section now feels intentional without competing with the cards.
 2026-05-08 - Softened productized-scope rejection copy - Bigger projects are routed to the higher-scope tiers instead of being turned away.
 2026-05-08 - Hardened the portfolio and checkout path - The app now has clearer intake validation, safer checkout setup, baseline security headers, patched dependencies, self-hosted fonts, reduced-motion handling, and regression tests.
+2026-05-08 - Added LinkedIn Remotion video project - The repo now has a self-contained 4:5 proof-of-work video package for marketing the landing page service.
+2026-05-08 - Tightened the LinkedIn video script and captions - The marketing video now uses fewer lines, longer centered text holds, and calls out the $50 down and 48-hour delivery offer.
+2026-05-08 - Revised the LinkedIn video hierarchy - The video now uses scene-specific motion text and a diagnosis rail so captions do not compete with webpage mockups.
+2026-05-11 - Rendered three showcase variants - VideoShowcase section now has brand intro, service explainer, and testimonial cinematic examples covering the three most common video use cases.
+2026-05-11 - Built video-first component suite - HeroVideo, VideoShowcase, TheStack, Pricing, StickyMobileCTA, and VideoOrderForm are now available for the page restructure, replacing OtherOfferings with the new four-tier Pricing component.
+2026-05-11 - Wired video-first homepage layout - Hero, Nav, HowItWorks, AntiObjectionFAQ, Portfolio, About, FinalCTA, and HomeInteractions updated to reflect video-as-hero positioning. OtherOfferings replaced by four-tier Pricing component. StickyMobileCTA enabled on mobile after hero scroll-past.
+2026-05-11 - Created remotion-branded-video-system skill - The Remotion video production patterns are now captured in linkedin-landing-page-video/SKILL.md so future client work and showcase variants can reference the standard without re-spec'ing.
+2026-05-11 - Rendered conversion-focused hero video - HeroConverter composition addresses the three primary buyer objections (price, speed, suspicion) through structure and demonstrates the mechanism that makes the offer real. Output at public/demo/hero-converter.*
+2026-05-11 - Wired the video order flow - /order-video page, /api/video-order route, /video-thank-you page, Stripe webhook handling for video orders, and two new email templates are live. The video CTAs no longer 404.

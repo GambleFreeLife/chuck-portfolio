@@ -8,12 +8,13 @@ export function Nav() {
           CB
         </Link>
         <div className="nav-links">
+          <a href="#showcase">Videos</a>
           <a href="#work">Work</a>
           <a href="#faq">FAQ</a>
           <a href="#about">About</a>
           <a href="#pricing">Pricing</a>
-          <Link href="/get-started" className="nav-cta">
-            Start the build for $50
+          <Link href="/order-video?plan=single" className="nav-cta">
+            Order a video, $97
           </Link>
         </div>
       </div>

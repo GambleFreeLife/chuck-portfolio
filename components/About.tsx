@@ -38,6 +38,12 @@ export function About() {
               brief, I build the first version, and then we use the three revision rounds to make it
               match what you actually need.
             </p>
+            <p>
+              I started building these videos because Codex made high-quality motion design 50
+              times cheaper than hiring an editor. That is why these prices are real and not bait.
+              The same shift that lets me deliver a $97 video in 48 hours is the reason agencies
+              can no longer justify $2,000 for the same output.
+            </p>
             <div className="skill-tags">
               {skills.map((skill) => (
                 <span className="skill-tag" key={skill}>

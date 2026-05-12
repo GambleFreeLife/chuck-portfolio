@@ -118,11 +118,12 @@ export function HomeInteractions() {
     const tiltCards = Array.from(document.querySelectorAll<HTMLElement>(".tilt-card"));
     const revealEls = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".process-step, .deliverable-card, .fit-card, .faq-item, .case-card, .price-card, .about-stat",
+        ".process-step, .showcase-card, .stack-column, .deliverable-card, .fit-card, .faq-item, .case-card, .price-card, .about-stat",
       ),
     );
 
     if (prefersReducedMotion) {
+      document.body.classList.remove("show-sticky-cta");
       return undefined;
     }
 
@@ -194,6 +195,20 @@ export function HomeInteractions() {
       observer.observe(element);
     }
 
+    const heroSection = document.querySelector<HTMLElement>("section.hero");
+    const stickyCtaObserver = heroSection
+      ? new IntersectionObserver(
+          ([entry]) => {
+            document.body.classList.toggle("show-sticky-cta", !entry?.isIntersecting);
+          },
+          { threshold: 0 },
+        )
+      : null;
+
+    if (heroSection && stickyCtaObserver) {
+      stickyCtaObserver.observe(heroSection);
+    }
+
     resizeCanvas();
     animateShapes();
     window.addEventListener("resize", resizeCanvas);
@@ -204,6 +219,8 @@ export function HomeInteractions() {
       window.removeEventListener("resize", resizeCanvas);
       document.removeEventListener("mousemove", handleMouseMove);
       observer.disconnect();
+      stickyCtaObserver?.disconnect();
+      document.body.classList.remove("show-sticky-cta");
       for (const cleanup of tiltCleanups) {
         cleanup();
       }

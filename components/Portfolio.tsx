@@ -55,6 +55,32 @@ const cases = [
     ],
     tags: ["Appointment booking", "Google Maps", "Social proof"],
   },
+  {
+    href: "/order-video?plan=single",
+    badge: "Meta example",
+    badgeTone: "coral",
+    imageSrc: "/demo/poster-hero.jpg",
+    imageAlt: "The LinkedIn video that brought you here",
+    eyebrow: "Self-referential, video production",
+    title: "The Video That Brought You Here",
+    description:
+      "The exact production system, render pipeline, and conversion structure you would pay for if you bought a retainer.",
+    details: [
+      {
+        label: "Problem",
+        text: "Most freelancer ads on LinkedIn look like every other freelancer ad on LinkedIn.",
+      },
+      {
+        label: "Fix",
+        text: "Build the video so the product demonstrates itself before the pitch arrives.",
+      },
+      {
+        label: "Conversion path",
+        text: "Watch, recognize the quality, click through, order one.",
+      },
+    ],
+    tags: ["Remotion render", "Codex-built", "48-hour turn"],
+  },
 ] as const;
 
 function publicImageExists(src: string) {
@@ -77,8 +103,8 @@ export function Portfolio() {
           {cases.map((project) => (
             <a
               href={project.href}
-              target="_blank"
-              rel="noreferrer"
+              target={project.href.startsWith("http") ? "_blank" : undefined}
+              rel={project.href.startsWith("http") ? "noreferrer" : undefined}
               className="case-card tilt-card"
               key={project.href}
             >

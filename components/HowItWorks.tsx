@@ -1,23 +1,16 @@
 const steps = [
   {
-    label: "Intake",
-    description:
-      "You fill out the 12-question intake first, and you do not pay anything before the brief is clear.",
+    label: "Brief in 3 minutes",
+    description: "Tell me your offer, your audience, and pick a style from the showcase.",
   },
   {
-    label: "$50 to start",
-    description:
-      "Then a refundable $50 deposit holds your slot, so I can build without a sales call or meeting.",
+    label: "Preview in 48 hours",
+    description: "Watch the actual rendered video and request changes within 7 days.",
   },
   {
-    label: "Preview build",
+    label: "Final delivery",
     description:
-      "Within 48 hours, I build the page on a temporary preview URL, and you review the real work.",
-  },
-  {
-    label: "Balance and domain",
-    description:
-      "After you approve, you pay the $447 balance, and within 24 hours your page is live on your domain.",
+      "Approved video lands in your inbox as MP4 plus captioned versions for LinkedIn, X, and Instagram.",
   },
 ] as const;
 
@@ -27,7 +20,7 @@ export function HowItWorks() {
       <div className="wrap">
         <div className="section-center">
           <div className="sec-label">How it works</div>
-          <h2 className="sec-title">You see the page before you pay the balance.</h2>
+          <h2 className="sec-title">You see the rendered video before you approve.</h2>
         </div>
         <ol className="process-grid">
           {steps.map((step, index) => (
@@ -38,7 +31,10 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <p className="process-note">Total cost is $497, and you only commit $50 to start.</p>
+        <p className="process-note">
+          $97 for one video. $297 a month for four. Landing pages start at $497 when the video
+          needs somewhere to send clicks.
+        </p>
       </div>
     </section>
   );

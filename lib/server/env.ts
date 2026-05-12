@@ -11,3 +11,11 @@ export function getRequiredEnv(name: string) {
 export function getOptionalEnv(name: string) {
   return process.env[name] || null;
 }
+
+export function getVideoSinglePriceId() {
+  return getRequiredEnv("STRIPE_VIDEO_SINGLE_PRICE_ID");
+}
+
+export function getVideoRetainerPriceId() {
+  return getRequiredEnv("STRIPE_VIDEO_RETAINER_PRICE_ID");
+}

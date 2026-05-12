@@ -5,17 +5,20 @@ export function FinalCTA() {
     <section className="cta-section" id="start">
       <div className="wrap">
         <div className="cta-box">
-          <h2>See the finished preview before you pay the balance.</h2>
+          <h2>Order a video this week, see the rendered preview in 48 hours.</h2>
           <p>
-            Start with the $50 deposit, review the page within 48 hours, and pay the rest only
-            after approval.
+            Start with one at $97, or go straight to the retainer at $297 a month for four.
           </p>
-          <Link href="/get-started" className="cta-main-btn">
-            Start the build for $50
-          </Link>
+          <div className="cta-actions">
+            <Link href="/order-video?plan=single" className="cta-main-btn">
+              Order a video, $97
+            </Link>
+            <a href="mailto:cbaryames24@gmail.com?subject=Video%20retainer" className="cta-ghost-btn">
+              Talk about the retainer
+            </a>
+          </div>
           <p className="cta-trust">
-            If I miss the 48-hour deadline, your $50 comes back automatically. If the page misses
-            your brief after three revision rounds and you can tell me why, your $50 comes back too.
+            Pay once at checkout. Preview in 48 hours. Full refund if I miss the deadline.
           </p>
         </div>
       </div>
