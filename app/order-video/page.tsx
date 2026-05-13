@@ -24,11 +24,11 @@ export default async function OrderVideoPage({ searchParams }: OrderVideoPagePro
 
   return (
     <main className="flow-page">
-      <div className="flow-shell">
+      <div className="flow-shell video-order-shell">
         <a href="/" className="flow-back">
           CB
         </a>
-        <section className="flow-hero" aria-labelledby="order-video-title">
+        <section className="flow-hero video-order-hero" aria-labelledby="order-video-title">
           <div className="sec-label">Order your video</div>
           <h1 id="order-video-title">Start your video order.</h1>
           <p>
