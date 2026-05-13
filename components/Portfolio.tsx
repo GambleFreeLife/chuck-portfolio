@@ -2,7 +2,26 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 
-const cases = [
+type PortfolioCase = {
+  category: "video" | "landing";
+  href: string;
+  badge: string;
+  badgeTone: "gold" | "teal" | "coral";
+  imageSrc?: string;
+  imageAlt: string;
+  videoSrc?: string;
+  posterSrc?: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  details: Array<{
+    label: string;
+    text: string;
+  }>;
+  tags: string[];
+};
+
+const cases: PortfolioCase[] = [
   {
     category: "landing",
     href: "https://baryames-landing.vercel.app",
@@ -60,9 +79,10 @@ const cases = [
   {
     category: "video",
     href: "/order-video?plan=single",
-    badge: "Meta example",
+    badge: "Live example",
     badgeTone: "coral",
-    imageSrc: "/demo/poster-hero.jpg",
+    videoSrc: "/demo/linkedin-ad",
+    posterSrc: "/demo/poster-hero.jpg",
     imageAlt: "The LinkedIn video that brought you here",
     eyebrow: "Self-referential, video production",
     title: "The Video That Brought You Here",
@@ -84,7 +104,63 @@ const cases = [
     ],
     tags: ["Remotion render", "Codex-built", "48-hour turn"],
   },
-] as const;
+  {
+    category: "video",
+    href: "/order-video?plan=single",
+    badge: "Brand intro",
+    badgeTone: "coral",
+    videoSrc: "/demo/showcase-brand-intro",
+    posterSrc: "/demo/poster-brand-intro.jpg",
+    imageAlt: "Brand intro video for a coffee roaster launch",
+    eyebrow: "Product launch, brand video",
+    title: "Brand Intro Launch Video",
+    description:
+      "A punchy product-launch video that uses contrast, pricing, and a clear URL to turn attention into action.",
+    details: [
+      {
+        label: "Problem",
+        text: "A product launch needs to feel specific fast, or people keep scrolling.",
+      },
+      {
+        label: "Fix",
+        text: "Lead with a bold claim, show the offer details, then land on one memorable next step.",
+      },
+      {
+        label: "Conversion path",
+        text: "Notice the brand, understand the product, visit the page.",
+      },
+    ],
+    tags: ["Launch opener", "Kinetic type", "Offer reveal"],
+  },
+  {
+    category: "video",
+    href: "/order-video?plan=single",
+    badge: "Explainer",
+    badgeTone: "teal",
+    videoSrc: "/demo/showcase-service-explainer",
+    posterSrc: "/demo/poster-service-explainer.jpg",
+    imageAlt: "Service explainer video for a dental practice",
+    eyebrow: "Service business, explainer video",
+    title: "Service Explainer Video",
+    description:
+      "A calm service-business video that makes the problem, process, and next action easy to understand.",
+    details: [
+      {
+        label: "Problem",
+        text: "Professional services need trust before a buyer is ready to click.",
+      },
+      {
+        label: "Fix",
+        text: "Use a simple problem, a clear promise, and a three-step process that feels easy.",
+      },
+      {
+        label: "Conversion path",
+        text: "Recognize the problem, trust the process, make contact.",
+      },
+    ],
+    tags: ["Service explainer", "Process visual", "Trust builder"],
+  },
+];
 
 type PortfolioFocus = "video" | "landing";
 
@@ -101,7 +177,7 @@ const sectionCopy = {
   },
 } as const;
 
-function publicImageExists(src: string) {
+function publicAssetExists(src: string) {
   return existsSync(path.join(process.cwd(), "public", src.replace(/^\//, "")));
 }
 
@@ -129,7 +205,21 @@ export function Portfolio({ focus = "video" }: { focus?: PortfolioFocus }) {
               <div className="case-preview-wrap">
                 <div className="case-preview">
                   <div className={`case-badge ${project.badgeTone}`}>{project.badge}</div>
-                  {publicImageExists(project.imageSrc) ? (
+                  {project.videoSrc && publicAssetExists(`${project.videoSrc}.mp4`) ? (
+                    <video
+                      className="case-preview-video"
+                      aria-label={project.imageAlt}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster={project.posterSrc}
+                      preload="metadata"
+                    >
+                      <source src={`${project.videoSrc}.webm`} type="video/webm" />
+                      <source src={`${project.videoSrc}.mp4`} type="video/mp4" />
+                    </video>
+                  ) : project.imageSrc && publicAssetExists(project.imageSrc) ? (
                     <Image
                       src={project.imageSrc}
                       alt={project.imageAlt}

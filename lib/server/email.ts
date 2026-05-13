@@ -38,11 +38,27 @@ function getSupabaseRowUrl(table: "intake_submissions" | "video_orders", rowId: 
 }
 
 function getVideoPlanName(productType: string) {
-  return productType === "retainer" ? "Video Retainer" : "Single Video";
+  if (productType === "retainer") {
+    return "Video Retainer";
+  }
+
+  if (productType === "pack") {
+    return "3-Video Pack";
+  }
+
+  return "Single Video";
 }
 
 function getVideoAmountPaid(productType: string) {
-  return productType === "retainer" ? "$297/month" : "$97";
+  if (productType === "retainer") {
+    return "$297/month";
+  }
+
+  if (productType === "pack") {
+    return "$247";
+  }
+
+  return "$97";
 }
 
 function getVideoStyleLabel(stylePreference: string) {

@@ -20,8 +20,8 @@ export function Hero() {
             <Link href="/order-video?plan=single" className="hero-cta">
               Order one video, $97
             </Link>
-            <Link href="/order-video?plan=retainer" className="hero-cta-ghost">
-              Get 4 a month, $297
+            <Link href="/order-video?plan=retainer" className="hero-cta-retainer">
+              Start the retainer, $297/mo
             </Link>
           </div>
           <p className="hero-trust fa d4">

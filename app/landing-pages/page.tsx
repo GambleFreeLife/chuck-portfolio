@@ -15,7 +15,7 @@ export default function LandingPagesPage() {
     <>
       <div className="cursor-glow" id="cursorGlow" aria-hidden="true" />
       <canvas id="shapes-canvas" aria-hidden="true" />
-      <Nav contactHref="mailto:cbaryames24@gmail.com?subject=Landing%20page%20project" />
+      <Nav activePage="landing-pages" />
       <main>
         <LandingPagesHero />
         <LandingPagesProcess />

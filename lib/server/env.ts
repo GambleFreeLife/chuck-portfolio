@@ -16,6 +16,10 @@ export function getVideoSinglePriceId() {
   return getRequiredEnv("STRIPE_VIDEO_SINGLE_PRICE_ID");
 }
 
+export function getVideoPackPriceId() {
+  return getRequiredEnv("STRIPE_VIDEO_PACK_PRICE_ID");
+}
+
 export function getVideoRetainerPriceId() {
   return getRequiredEnv("STRIPE_VIDEO_RETAINER_PRICE_ID");
 }

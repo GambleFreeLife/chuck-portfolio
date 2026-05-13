@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
-type VideoOrderPlan = "single" | "retainer";
+type VideoOrderPlan = "single" | "pack" | "retainer";
 type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic";
 
 type VideoOrderFormProps = {
@@ -44,12 +44,26 @@ const planDetails = {
   single: {
     name: "Single Video",
     price: "$97 one-time",
-    otherPlan: "retainer",
+    alternatives: [
+      { plan: "pack", label: "3-Video Pack" },
+      { plan: "retainer", label: "Video Retainer" },
+    ],
+  },
+  pack: {
+    name: "3-Video Pack",
+    price: "$247 one-time",
+    alternatives: [
+      { plan: "single", label: "Single Video" },
+      { plan: "retainer", label: "Video Retainer" },
+    ],
   },
   retainer: {
     name: "Video Retainer",
     price: "$297/month",
-    otherPlan: "single",
+    alternatives: [
+      { plan: "single", label: "Single Video" },
+      { plan: "pack", label: "3-Video Pack" },
+    ],
   },
 } as const;
 
@@ -195,10 +209,14 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
         <h2>
           {selectedPlan.name}, {selectedPlan.price}
         </h2>
-        <p>
-          Selected plan.{" "}
-          <Link href={`/order-video?plan=${selectedPlan.otherPlan}`}>Change plan</Link>
-        </p>
+        <p>Selected plan.</p>
+        <div className="video-order-plan-links" aria-label="Change video plan">
+          {selectedPlan.alternatives.map((alternative) => (
+            <Link href={`/order-video?plan=${alternative.plan}`} key={alternative.plan}>
+              {alternative.label}
+            </Link>
+          ))}
+        </div>
       </div>
 
       {formError ? (

@@ -1,6 +1,6 @@
 import { VideoOrderForm } from "@/components/VideoOrderForm";
 
-type VideoPlan = "single" | "retainer";
+type VideoPlan = "single" | "pack" | "retainer";
 
 type OrderVideoPageProps = {
   searchParams: Promise<{
@@ -10,7 +10,11 @@ type OrderVideoPageProps = {
 };
 
 function getPlan(plan: string | undefined): VideoPlan {
-  return plan === "retainer" ? "retainer" : "single";
+  if (plan === "pack" || plan === "retainer") {
+    return plan;
+  }
+
+  return "single";
 }
 
 export default async function OrderVideoPage({ searchParams }: OrderVideoPageProps) {

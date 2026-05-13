@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { getVideoRetainerPriceId, getVideoSinglePriceId } from "@/lib/server/env";
+import { getVideoPackPriceId, getVideoRetainerPriceId, getVideoSinglePriceId } from "@/lib/server/env";
 import { getStripe } from "@/lib/server/stripe";
 import { getSupabaseAdmin } from "@/lib/server/supabase";
 
 export const runtime = "nodejs";
 
-type ProductType = "single" | "retainer";
+type ProductType = "single" | "pack" | "retainer";
 type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic";
 
 type VideoOrderPayload = {
@@ -38,7 +38,7 @@ const rateLimitMaxRequests = 6;
 const videoOrderAttempts = new Map<string, { count: number; resetAt: number }>();
 
 const stylePreferences = ["brand_intro", "service_explainer", "testimonial_cinematic"] as const;
-const productTypes = ["single", "retainer"] as const;
+const productTypes = ["single", "pack", "retainer"] as const;
 
 function jsonError(message: string, status: number, errors?: Record<string, string>) {
   return NextResponse.json({ error: message, errors }, { status });
@@ -195,7 +195,15 @@ function validateVideoOrderPayload(payload: unknown): ValidationResult {
 }
 
 function getPriceId(productType: ProductType) {
-  return productType === "retainer" ? getVideoRetainerPriceId() : getVideoSinglePriceId();
+  if (productType === "retainer") {
+    return getVideoRetainerPriceId();
+  }
+
+  if (productType === "pack") {
+    return getVideoPackPriceId();
+  }
+
+  return getVideoSinglePriceId();
 }
 
 export async function POST(request: Request) {

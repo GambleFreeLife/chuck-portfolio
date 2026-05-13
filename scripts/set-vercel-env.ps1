@@ -13,6 +13,9 @@ if (-not (Test-Path -LiteralPath ".env.local")) {
 $requiredKeys = @(
   "STRIPE_SECRET_KEY",
   "STRIPE_DEPOSIT_PRICE_ID",
+  "STRIPE_VIDEO_SINGLE_PRICE_ID",
+  "STRIPE_VIDEO_PACK_PRICE_ID",
+  "STRIPE_VIDEO_RETAINER_PRICE_ID",
   "STRIPE_WEBHOOK_SECRET",
   "SUPABASE_URL",
   "SUPABASE_SERVICE_ROLE_KEY",
@@ -37,7 +40,7 @@ foreach ($line in Get-Content -LiteralPath ".env.local") {
 
 if ($Environment -eq "production" -and ([string]$envMap["STRIPE_SECRET_KEY"]).StartsWith("sk_test_")) {
   Write-Host "Production env setup stopped because .env.local contains a Stripe test secret key."
-  Write-Host "Use live Stripe values for production, especially STRIPE_SECRET_KEY and STRIPE_DEPOSIT_PRICE_ID."
+  Write-Host "Use live Stripe values for production, especially STRIPE_SECRET_KEY and all Stripe price IDs."
   exit 1
 }
 

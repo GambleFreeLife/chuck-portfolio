@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <div className="cursor-glow" id="cursorGlow" aria-hidden="true" />
       <canvas id="shapes-canvas" aria-hidden="true" />
-      <Nav />
+      <Nav activePage="videos" />
       <main>
         <Hero />
         <VideoShowcase />

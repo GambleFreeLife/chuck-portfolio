@@ -18,6 +18,24 @@ const tiers = [
   },
   {
     category: "video",
+    title: "3-Video Pack",
+    amount: "$247",
+    suffix: null,
+    note: "Save $44 vs single pricing",
+    items: [
+      "Three 30-second videos",
+      "7-day delivery for all three",
+      "2 revision rounds per video",
+      "MP4 plus captioned versions for 3 platforms",
+      "Music and motion designed per brand",
+    ],
+    cta: "Order the pack",
+    href: "/order-video?plan=pack",
+    featured: false,
+    badge: null,
+  },
+  {
+    category: "video",
     title: "Video Retainer",
     amount: "$297",
     suffix: "/mo",
@@ -38,6 +56,7 @@ const tiers = [
     title: "Landing Page",
     amount: "$497",
     suffix: null,
+    note: null,
     items: [
       "One high-converting landing page",
       "$50 deposit holds the slot, balance after preview approval",
@@ -47,14 +66,15 @@ const tiers = [
     ],
     cta: "Build the page",
     href: "/get-started",
-    featured: false,
-    badge: null,
+    featured: true,
+    badge: "Most popular",
   },
   {
     category: "landing",
     title: "Full Site",
     amount: "$1,997",
     suffix: "+",
+    note: null,
     items: [
       "Multi-page conversion-optimized site",
       "Includes 4 launch videos",
@@ -74,13 +94,17 @@ type PricingFocus = "video" | "landing";
 const sectionCopy = {
   video: {
     label: "Pricing",
-    title: "Start with one video, then build a content engine.",
-    sub: "Order one 30-second brand video for $97, or use the retainer when you want consistent motion content every month.",
+    title: "Start with one video, a pack, or a content engine.",
+    sub: "Order one 30-second brand video for $97, choose the pack when you want more commitment, or use the retainer when you want consistent motion content every month.",
+    note: "Need more than 4 a month? Custom retainers start at $497/mo. Book a call →",
+    noteHref: "#contact",
   },
   landing: {
     label: "Pricing",
     title: "From one focused landing page to a full site.",
     sub: "Start with a $497 landing page when you need one conversion path, or use the full site tier when the project needs more scope.",
+    note: "Multi-page builds or custom scopes? Larger projects start at $2,500. Book a call →",
+    noteHref: "#contact",
   },
 } as const;
 
@@ -96,7 +120,7 @@ export function Pricing({ focus = "video" }: { focus?: PricingFocus }) {
           <h2 className="sec-title">{copy.title}</h2>
           <p className="sec-sub section-sub-center">{copy.sub}</p>
         </div>
-        <div className="price-grid">
+        <div className={`price-grid ${focus}-pricing-grid`}>
           {visibleTiers.map((tier) => (
             <div
               className={`price-card tilt-card${tier.featured ? " featured" : ""}`}
@@ -108,6 +132,7 @@ export function Pricing({ focus = "video" }: { focus?: PricingFocus }) {
                 {tier.amount}
                 {tier.suffix ? <span>{tier.suffix}</span> : null}
               </div>
+              {"note" in tier && tier.note ? <div className="price-note">{tier.note}</div> : null}
               <ul className="price-list">
                 {tier.items.map((item) => (
                   <li key={item}>{item}</li>
@@ -119,6 +144,9 @@ export function Pricing({ focus = "video" }: { focus?: PricingFocus }) {
             </div>
           ))}
         </div>
+        <p className="pricing-footnote">
+          <a href={copy.noteHref}>{copy.note}</a>
+        </p>
       </div>
     </section>
   );

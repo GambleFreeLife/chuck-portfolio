@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function LandingPagesFinalCTA() {
   return (
-    <section className="cta-section" id="start">
+    <section className="cta-section" id="contact">
       <div className="wrap">
         <div className="cta-box">
           <h2>Give your traffic somewhere clear to land.</h2>
