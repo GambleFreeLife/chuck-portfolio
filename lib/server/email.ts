@@ -70,6 +70,10 @@ function getVideoStyleLabel(stylePreference: string) {
     return "Testimonial cinematic";
   }
 
+  if (stylePreference === "recommend_one") {
+    return "Recommend one";
+  }
+
   return "Brand intro";
 }
 

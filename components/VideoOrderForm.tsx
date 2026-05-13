@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 
 type VideoOrderPlan = "single" | "pack" | "retainer";
-type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic";
+type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic" | "recommend_one";
 
 type VideoOrderFormProps = {
   plan: VideoOrderPlan;
@@ -35,35 +35,45 @@ const initialFormState: FormState = {
 const fieldNames = ["full_name", "email", "business_name", "brand_offer", "target_audience", "style_preference"] as const;
 
 const styleOptions = [
-  { value: "brand_intro", label: "Brand intro" },
-  { value: "service_explainer", label: "Service explainer" },
-  { value: "testimonial_cinematic", label: "Testimonial cinematic" },
+  { value: "brand_intro", label: "Brand Intro" },
+  { value: "service_explainer", label: "Service Explainer" },
+  { value: "testimonial_cinematic", label: "Testimonial Cinematic" },
+  { value: "recommend_one", label: "Recommend One" },
+] as const;
+
+const planOptions = [
+  {
+    plan: "single",
+    name: "Single Video",
+    price: "$97",
+    cadence: "one-time",
+  },
+  {
+    plan: "pack",
+    name: "3-Video Pack",
+    price: "$247",
+    cadence: "one-time",
+  },
+  {
+    plan: "retainer",
+    name: "Video Retainer",
+    price: "$297",
+    cadence: "per month",
+  },
 ] as const;
 
 const planDetails = {
   single: {
     name: "Single Video",
     price: "$97 one-time",
-    alternatives: [
-      { plan: "pack", label: "3-Video Pack" },
-      { plan: "retainer", label: "Video Retainer" },
-    ],
   },
   pack: {
     name: "3-Video Pack",
     price: "$247 one-time",
-    alternatives: [
-      { plan: "single", label: "Single Video" },
-      { plan: "retainer", label: "Video Retainer" },
-    ],
   },
   retainer: {
     name: "Video Retainer",
     price: "$297/month",
-    alternatives: [
-      { plan: "single", label: "Single Video" },
-      { plan: "pack", label: "3-Video Pack" },
-    ],
   },
 } as const;
 
@@ -206,14 +216,23 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
   return (
     <form className="video-order-form intake-card" onSubmit={handleSubmit} noValidate>
       <div className="video-order-plan">
+        <p className="video-order-plan-eyebrow">Selected plan</p>
         <h2>
           {selectedPlan.name}, {selectedPlan.price}
         </h2>
-        <p>Selected plan.</p>
-        <div className="video-order-plan-links" aria-label="Change video plan">
-          {selectedPlan.alternatives.map((alternative) => (
-            <Link href={`/order-video?plan=${alternative.plan}`} key={alternative.plan}>
-              {alternative.label}
+        <div className="video-plan-toggle" aria-label="Choose video plan">
+          {planOptions.map((option) => (
+            <Link
+              aria-current={option.plan === plan ? "true" : undefined}
+              className={`video-plan-option${option.plan === plan ? " is-active" : ""}`}
+              href={`/order-video?plan=${option.plan}`}
+              key={option.plan}
+            >
+              <span>{option.name}</span>
+              <strong>
+                {option.price}
+                <small>{option.cadence}</small>
+              </strong>
             </Link>
           ))}
         </div>
@@ -295,14 +314,16 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
 
       <label className="form-field">
         <span>Style preference</span>
+        <small>Pick the closest style, or choose Recommend One and I will match the format to your offer.</small>
         <select
+          className={form.style_preference ? undefined : "is-empty"}
           name="style_preference"
           value={form.style_preference}
           onChange={(event) => updateField("style_preference", event.target.value)}
           aria-invalid={Boolean(errors.style_preference)}
           required
         >
-          <option value="">Choose a style</option>
+          <option value="">Choose a Style</option>
           {styleOptions.map((option) => (
             <option value={option.value} key={option.value}>
               {option.label}

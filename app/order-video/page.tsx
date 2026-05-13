@@ -30,15 +30,13 @@ export default async function OrderVideoPage({ searchParams }: OrderVideoPagePro
         </a>
         <section className="flow-hero" aria-labelledby="order-video-title">
           <div className="sec-label">Order your video</div>
-          <h1 id="order-video-title">Tell me what to make.</h1>
+          <h1 id="order-video-title">Start your video order.</h1>
           <p>
-            Send the short brief, choose a video style, and checkout opens with the plan you picked.
+            Choose your plan, send the short brief, and checkout opens with the price already matched to your order.
           </p>
-          <div className="flow-proof" aria-label="Video order details">
-            <span>Script preview comes within 24 hours.</span>
-            <span>Your rendered preview comes within 48 hours after script approval.</span>
-            <span>Final delivery includes MP4 plus captioned versions for social platforms.</span>
-          </div>
+          <p className="flow-hero-note">
+            You get a script preview within 24 hours, then the rendered video preview arrives within 48 hours after script approval.
+          </p>
         </section>
         {wasCanceled ? (
           <div className="flow-alert" role="status">

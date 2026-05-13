@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { CSSProperties } from "react";
 
 type HeroVideoProps = {
@@ -19,6 +22,7 @@ export function HeroVideo({
   priority = false,
   aspectRatio = "4 / 5",
 }: HeroVideoProps) {
+  const [videoFailed, setVideoFailed] = useState(false);
   const frameStyle: HeroVideoStyle = {
     "--aspect-ratio": aspectRatio,
   };
@@ -30,9 +34,12 @@ export function HeroVideo({
         autoPlay
         loop
         muted
+        className={videoFailed ? "is-video-unavailable" : undefined}
+        onCanPlay={() => setVideoFailed(false)}
+        onError={() => setVideoFailed(true)}
         playsInline
         poster={poster}
-        preload={priority ? "metadata" : "none"}
+        preload={priority ? "auto" : "metadata"}
       >
         <source src={`${src}.webm`} type="video/webm" />
         <source src={`${src}.mp4`} type="video/mp4" />

@@ -6,7 +6,7 @@ import { getSupabaseAdmin } from "@/lib/server/supabase";
 export const runtime = "nodejs";
 
 type ProductType = "single" | "pack" | "retainer";
-type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic";
+type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic" | "recommend_one";
 
 type VideoOrderPayload = {
   full_name: string;
@@ -37,7 +37,7 @@ const rateLimitWindowMs = 10 * 60 * 1000;
 const rateLimitMaxRequests = 6;
 const videoOrderAttempts = new Map<string, { count: number; resetAt: number }>();
 
-const stylePreferences = ["brand_intro", "service_explainer", "testimonial_cinematic"] as const;
+const stylePreferences = ["brand_intro", "service_explainer", "testimonial_cinematic", "recommend_one"] as const;
 const productTypes = ["single", "pack", "retainer"] as const;
 
 function jsonError(message: string, status: number, errors?: Record<string, string>) {
