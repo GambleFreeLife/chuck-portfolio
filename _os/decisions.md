@@ -43,3 +43,4 @@
 2026-05-11 - Created remotion-branded-video-system skill - The Remotion video production patterns are now captured in linkedin-landing-page-video/SKILL.md so future client work and showcase variants can reference the standard without re-spec'ing.
 2026-05-11 - Rendered conversion-focused hero video - HeroConverter composition addresses the three primary buyer objections (price, speed, suspicion) through structure and demonstrates the mechanism that makes the offer real. Output at public/demo/hero-converter.*
 2026-05-11 - Wired the video order flow - /order-video page, /api/video-order route, /video-thank-you page, Stripe webhook handling for video orders, and two new email templates are live. The video CTAs no longer 404.
+2026-05-12 - Split video and landing page services into focused pages - The homepage now sells video services only, while /landing-pages carries the landing page offer, pricing, proof, and conversion positioning with shared navigation.

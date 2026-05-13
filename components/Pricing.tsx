@@ -1,5 +1,6 @@
 const tiers = [
   {
+    category: "video",
     title: "Single Video",
     amount: "$97",
     suffix: null,
@@ -16,6 +17,7 @@ const tiers = [
     badge: null,
   },
   {
+    category: "video",
     title: "Video Retainer",
     amount: "$297",
     suffix: "/mo",
@@ -32,6 +34,7 @@ const tiers = [
     badge: "Most popular",
   },
   {
+    category: "landing",
     title: "Landing Page",
     amount: "$497",
     suffix: null,
@@ -48,6 +51,7 @@ const tiers = [
     badge: null,
   },
   {
+    category: "landing",
     title: "Full Site",
     amount: "$1,997",
     suffix: "+",
@@ -65,20 +69,35 @@ const tiers = [
   },
 ] as const;
 
-export function Pricing() {
+type PricingFocus = "video" | "landing";
+
+const sectionCopy = {
+  video: {
+    label: "Pricing",
+    title: "Start with one video, then build a content engine.",
+    sub: "Order one 30-second brand video for $97, or use the retainer when you want consistent motion content every month.",
+  },
+  landing: {
+    label: "Pricing",
+    title: "From one focused landing page to a full site.",
+    sub: "Start with a $497 landing page when you need one conversion path, or use the full site tier when the project needs more scope.",
+  },
+} as const;
+
+export function Pricing({ focus = "video" }: { focus?: PricingFocus }) {
+  const visibleTiers = tiers.filter((tier) => tier.category === focus);
+  const copy = sectionCopy[focus];
+
   return (
     <section id="pricing" className="pricing-section">
       <div className="wrap">
         <div className="section-center">
-          <div className="sec-label">Pricing</div>
-          <h2 className="sec-title">From a single video to a full funnel.</h2>
-          <p className="sec-sub section-sub-center">
-            Start with a $97 video. Add the retainer when you want consistency. Add a landing page
-            when you need the clicks to convert.
-          </p>
+          <div className="sec-label">{copy.label}</div>
+          <h2 className="sec-title">{copy.title}</h2>
+          <p className="sec-sub section-sub-center">{copy.sub}</p>
         </div>
         <div className="price-grid">
-          {tiers.map((tier) => (
+          {visibleTiers.map((tier) => (
             <div
               className={`price-card tilt-card${tier.featured ? " featured" : ""}`}
               key={tier.title}

@@ -1,18 +1,18 @@
 const steps = [
   {
     number: "01",
-    label: "Video",
-    description: "Stops the scroll on LinkedIn and earns the click.",
+    label: "Script",
+    description: "Turns your offer into a tight 30-second message.",
   },
   {
     number: "02",
-    label: "Landing page",
-    description: "Captures the click into a real lead.",
+    label: "Motion render",
+    description: "Uses code to control timing, type, captions, and pacing.",
   },
   {
     number: "03",
-    label: "Email sequence",
-    description: "Nurtures the lead until they buy.",
+    label: "Social delivery",
+    description: "Gives you MP4 plus captioned versions for the platforms that matter.",
   },
 ] as const;
 
@@ -23,12 +23,11 @@ export function TheStack() {
         <div className="section-center">
           <div className="sec-label">The stack</div>
           <h2 className="sec-title">
-            Video alone does not convert. A landing page without traffic is invisible.
+            The production system is narrow on purpose.
           </h2>
           <p className="sec-sub section-sub-center">
-            Most freelancers sell pieces. I build the whole funnel because the video is wasted if
-            the page is confusing, and the page is wasted if the video does not exist to send
-            traffic.
+            I use the same repeatable build path for every video, so the work stays precise and
+            the turnaround stays fast.
           </p>
         </div>
         <ol className="stack-grid">
@@ -40,7 +39,10 @@ export function TheStack() {
             </li>
           ))}
         </ol>
-        <p className="stack-note">Email sequences coming soon, available now for retainer clients.</p>
+        <p className="stack-note">
+          Remotion, Codex, and Next.js keep the workflow repeatable instead of reinventing every
+          frame by hand.
+        </p>
       </div>
     </section>
   );

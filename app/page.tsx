@@ -1,6 +1,7 @@
 import { HomeInteractions } from "@/components/HomeInteractions";
 import { About } from "@/components/About";
 import { AntiObjectionFAQ } from "@/components/AntiObjectionFAQ";
+import { CrossServiceCTA } from "@/components/CrossServiceCTA";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -22,12 +23,19 @@ export default function HomePage() {
         <Hero />
         <VideoShowcase />
         <HowItWorks />
-        <Pricing />
+        <Pricing focus="video" />
         <TheStack />
-        <AntiObjectionFAQ />
-        <Portfolio />
-        <About />
+        <AntiObjectionFAQ focus="video" />
+        <Portfolio focus="video" />
+        <About focus="video" />
         <FinalCTA />
+        <CrossServiceCTA
+          eyebrow="Need the other half?"
+          headline="Need somewhere for video traffic to land?"
+          body="A sharp video earns the click, and a focused landing page turns that click into a real lead."
+          href="/landing-pages"
+          cta="See landing page services"
+        />
       </main>
       <StickyMobileCTA />
       <Footer />

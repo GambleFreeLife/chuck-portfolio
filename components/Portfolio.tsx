@@ -4,6 +4,7 @@ import Image from "next/image";
 
 const cases = [
   {
+    category: "landing",
     href: "https://baryames-landing.vercel.app",
     badge: "View project",
     badgeTone: "gold",
@@ -30,6 +31,7 @@ const cases = [
     tags: ["Pickup booking form", "Trust architecture", "Mobile responsive"],
   },
   {
+    category: "landing",
     href: "https://eby-dental-landing.vercel.app",
     badge: "Concept",
     badgeTone: "teal",
@@ -56,6 +58,7 @@ const cases = [
     tags: ["Appointment booking", "Google Maps", "Social proof"],
   },
   {
+    category: "video",
     href: "/order-video?plan=single",
     badge: "Meta example",
     badgeTone: "coral",
@@ -83,24 +86,39 @@ const cases = [
   },
 ] as const;
 
+type PortfolioFocus = "video" | "landing";
+
+const sectionCopy = {
+  video: {
+    label: "Portfolio",
+    title: "Video examples built with the same production system",
+    sub: "The examples below show how the motion, timing, copy, and render pipeline come together for short brand videos.",
+  },
+  landing: {
+    label: "Portfolio",
+    title: "Landing pages built around one clear conversion path",
+    sub: "These examples show how trust, offer clarity, and a direct next step turn traffic into calls, bookings, and inquiries.",
+  },
+} as const;
+
 function publicImageExists(src: string) {
   return existsSync(path.join(process.cwd(), "public", src.replace(/^\//, "")));
 }
 
-export function Portfolio() {
+export function Portfolio({ focus = "video" }: { focus?: PortfolioFocus }) {
+  const visibleCases = cases.filter((project) => project.category === focus);
+  const copy = sectionCopy[focus];
+
   return (
     <section id="work">
       <div className="wrap">
         <div className="section-center">
-          <div className="sec-label">Portfolio</div>
-          <h2 className="sec-title">Conversion-focused redesign examples</h2>
-          <p className="sec-sub section-sub-center">
-            Examples of how unclear, outdated, or unfinished business websites can be turned into
-            pages built for calls, bookings, and inquiries.
-          </p>
+          <div className="sec-label">{copy.label}</div>
+          <h2 className="sec-title">{copy.title}</h2>
+          <p className="sec-sub section-sub-center">{copy.sub}</p>
         </div>
         <div className="case-grid">
-          {cases.map((project) => (
+          {visibleCases.map((project) => (
             <a
               href={project.href}
               target={project.href.startsWith("http") ? "_blank" : undefined}

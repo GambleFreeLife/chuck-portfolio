@@ -32,8 +32,8 @@ export function HowItWorks() {
           ))}
         </ol>
         <p className="process-note">
-          $97 for one video. $297 a month for four. Landing pages start at $497 when the video
-          needs somewhere to send clicks.
+          $97 for one video. $297 a month for four. Each order starts with a short brief, then I
+          send the script before anything gets rendered.
         </p>
       </div>
     </section>

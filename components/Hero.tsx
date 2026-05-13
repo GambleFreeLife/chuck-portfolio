@@ -27,7 +27,7 @@ export function Hero() {
           <p className="hero-trust fa d4">
             Pay once at checkout. Preview in 48 hours. Full refund if I miss the deadline.
           </p>
-          <p className="hero-stack-trust fa d5">Stack: Remotion · Next.js · Codex · Vercel</p>
+          <p className="hero-stack-trust fa d5">Stack: Remotion, Next.js, Codex, Vercel</p>
         </div>
         <div className="hero-video fa d2">
           <HeroVideo

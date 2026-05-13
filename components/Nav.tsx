@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export function Nav() {
+type NavProps = {
+  contactHref?: string;
+};
+
+export function Nav({ contactHref = "mailto:cbaryames24@gmail.com?subject=Project%20inquiry" }: NavProps) {
   return (
     <nav>
       <div className="wrap">
@@ -8,14 +12,18 @@ export function Nav() {
           CB
         </Link>
         <div className="nav-links">
-          <a href="#showcase">Videos</a>
-          <a href="#work">Work</a>
-          <a href="#faq">FAQ</a>
-          <a href="#about">About</a>
-          <a href="#pricing">Pricing</a>
-          <Link href="/order-video?plan=single" className="nav-cta">
-            Order a video, $97
+          <Link href="/" className="nav-primary">
+            Videos
           </Link>
+          <Link href="/landing-pages" className="nav-primary">
+            Landing Pages
+          </Link>
+          <a href="#about" className="nav-anchor">
+            About
+          </a>
+          <a href={contactHref} className="nav-cta">
+            Contact
+          </a>
         </div>
       </div>
     </nav>
