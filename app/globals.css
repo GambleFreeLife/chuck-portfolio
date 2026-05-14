@@ -24,7 +24,7 @@ nav .wrap{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-con
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-size:13px;color:var(--t3);text-decoration:none;font-weight:400;transition:color .3s}
 .nav-links a:hover{color:var(--acc)}
-.nav-cta{padding:10px 22px;background:transparent;border:1px solid rgba(78,205,196,.3);color:var(--acc);border-radius:60px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;letter-spacing:0}
+.nav-cta{padding:10px 22px;background:transparent;border:1px solid rgba(78,205,196,.3);color:var(--surface-warm-white);border-radius:60px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;letter-spacing:0}
 .nav-cta:hover{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 .wrap{max-width:1100px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
 section{padding:100px 0}
@@ -557,11 +557,6 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
   color:var(--ink-muted);
   margin:0;
 }
-.video-order-plan a{
-  font-size:13px;
-  color:var(--accent-coral);
-  text-decoration:underline;
-}
 .video-order-plan-links{
   display:flex;
   flex-wrap:wrap;
@@ -584,8 +579,11 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
   border-radius:14px;
   background:rgba(255,255,255,.72);
   color:var(--ink-near-black);
+  cursor:pointer;
+  font-family:var(--font-outfit),'Outfit',sans-serif;
   text-decoration:none;
   transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+  text-align:left;
 }
 .video-order-plan .video-plan-option{
   color:var(--ink-near-black);
@@ -626,6 +624,9 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
 }
 .video-order-form .form-field select.is-empty{
   color:rgba(240,236,244,.5);
+}
+.style-option-note{
+  color:rgba(240,236,244,.7);
 }
 .video-order-form .flow-primary-button{
   background:var(--accent-coral);
@@ -864,10 +865,16 @@ footer{text-align:center;padding:28px 0;border-top:1px solid var(--t4);font-size
   border-color:var(--accent-coral);
   color:var(--surface-warm-white);
 }
+.nav-links .nav-cta{
+  color:var(--surface-warm-white);
+}
 .nav-cta:hover{
   background:var(--surface-warm-white);
   color:var(--ink-near-black);
   border-color:var(--surface-warm-white);
+}
+.nav-links .nav-cta:hover{
+  color:var(--ink-near-black);
 }
 section[id]{
   scroll-margin-top:92px;

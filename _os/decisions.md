@@ -46,3 +46,4 @@
 2026-05-12 - Split video and landing page services into focused pages - The homepage now sells video services only, while /landing-pages carries the landing page offer, pricing, proof, and conversion positioning with shared navigation.
 2026-05-13 - Recorded Stripe account ownership map - Charles Baryames is the Bet On Recovery Stripe account, while Chuck Baryames is the portfolio account for video and landing page services.
 2026-05-13 - Updated branded domain and reply email defaults - Metadata, thank-you pages, mailto links, and Vercel env helper now use chuckbaryames.com and chuck@chuckbaryames.com without committing secrets.
+2026-05-13 - Smoothed video checkout conversion issues - Contact CTA contrast, plan switching, lenient brief validation, and style choices now reduce friction before Stripe checkout.

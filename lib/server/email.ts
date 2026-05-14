@@ -62,6 +62,26 @@ function getVideoAmountPaid(productType: string) {
 }
 
 function getVideoStyleLabel(stylePreference: string) {
+  if (stylePreference === "launch_promo") {
+    return "Launch or promo video";
+  }
+
+  if (stylePreference === "product_demo") {
+    return "Product or service demo";
+  }
+
+  if (stylePreference === "explainer") {
+    return "Explainer or how-it-works";
+  }
+
+  if (stylePreference === "testimonial_case_study") {
+    return "Testimonial or case study";
+  }
+
+  if (stylePreference === "social_ad") {
+    return "Social ad or short promo";
+  }
+
   if (stylePreference === "service_explainer") {
     return "Service explainer";
   }

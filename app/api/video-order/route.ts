@@ -6,7 +6,13 @@ import { getSupabaseAdmin } from "@/lib/server/supabase";
 export const runtime = "nodejs";
 
 type ProductType = "single" | "pack" | "retainer";
-type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic" | "recommend_one";
+type StylePreference =
+  | "launch_promo"
+  | "product_demo"
+  | "explainer"
+  | "testimonial_case_study"
+  | "social_ad"
+  | "recommend_one";
 
 type VideoOrderPayload = {
   full_name: string;
@@ -37,7 +43,14 @@ const rateLimitWindowMs = 10 * 60 * 1000;
 const rateLimitMaxRequests = 6;
 const videoOrderAttempts = new Map<string, { count: number; resetAt: number }>();
 
-const stylePreferences = ["brand_intro", "service_explainer", "testimonial_cinematic", "recommend_one"] as const;
+const stylePreferences = [
+  "launch_promo",
+  "product_demo",
+  "explainer",
+  "testimonial_case_study",
+  "social_ad",
+  "recommend_one",
+] as const;
 const productTypes = ["single", "pack", "retainer"] as const;
 
 function jsonError(message: string, status: number, errors?: Record<string, string>) {
@@ -150,12 +163,12 @@ function validateVideoOrderPayload(payload: unknown): ValidationResult {
     errors.business_name = "Add your business name.";
   }
 
-  if (brandOffer.length < 20) {
-    errors.brand_offer = "Write at least 20 characters about what you sell.";
+  if (!brandOffer) {
+    errors.brand_offer = "Tell me what you sell.";
   }
 
-  if (targetAudience.length < 20) {
-    errors.target_audience = "Write at least 20 characters about who you want to reach.";
+  if (!targetAudience) {
+    errors.target_audience = "Add your target audience.";
   }
 
   if (!isStylePreference(stylePreference)) {

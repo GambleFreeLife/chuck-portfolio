@@ -1,11 +1,16 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
 type VideoOrderPlan = "single" | "pack" | "retainer";
-type StylePreference = "brand_intro" | "service_explainer" | "testimonial_cinematic" | "recommend_one";
+type StylePreference =
+  | "launch_promo"
+  | "product_demo"
+  | "explainer"
+  | "testimonial_case_study"
+  | "social_ad"
+  | "recommend_one";
 
 type VideoOrderFormProps = {
   plan: VideoOrderPlan;
@@ -35,10 +40,36 @@ const initialFormState: FormState = {
 const fieldNames = ["full_name", "email", "business_name", "brand_offer", "target_audience", "style_preference"] as const;
 
 const styleOptions = [
-  { value: "brand_intro", label: "Brand Intro" },
-  { value: "service_explainer", label: "Service Explainer" },
-  { value: "testimonial_cinematic", label: "Testimonial Cinematic" },
-  { value: "recommend_one", label: "Recommend One" },
+  {
+    value: "launch_promo",
+    label: "Launch or Promo Video",
+    description: "Best for announcing an offer, product, service, event, or new brand direction.",
+  },
+  {
+    value: "product_demo",
+    label: "Product or Service Demo",
+    description: "Best for showing what you sell, how it works, and why someone should care.",
+  },
+  {
+    value: "explainer",
+    label: "Explainer or How-It-Works",
+    description: "Best for simplifying a process, teaching the problem, or walking through your method.",
+  },
+  {
+    value: "testimonial_case_study",
+    label: "Testimonial or Case Study",
+    description: "Best for turning customer results, reviews, or proof into a trust-building story.",
+  },
+  {
+    value: "social_ad",
+    label: "Social Ad or Short Promo",
+    description: "Best for a direct paid or organic post built to stop the scroll and earn the click.",
+  },
+  {
+    value: "recommend_one",
+    label: "Recommend One for Me",
+    description: "Best when you know the outcome but want me to choose the strongest format.",
+  },
 ] as const;
 
 const planOptions = [
@@ -97,12 +128,12 @@ function validateForm(form: FormState) {
     errors.business_name = "Add your business name.";
   }
 
-  if (form.brand_offer.trim().length < 20) {
-    errors.brand_offer = "Write at least 20 characters about what you sell.";
+  if (!form.brand_offer.trim()) {
+    errors.brand_offer = "Tell me what you sell.";
   }
 
-  if (form.target_audience.trim().length < 20) {
-    errors.target_audience = "Write at least 20 characters about who you want to reach.";
+  if (!form.target_audience.trim()) {
+    errors.target_audience = "Add your target audience.";
   }
 
   if (!form.style_preference || !isStylePreference(form.style_preference)) {
@@ -126,10 +157,23 @@ function getResponseUrl(payload: unknown) {
 
 export function VideoOrderForm({ plan }: VideoOrderFormProps) {
   const [form, setForm] = useState<FormState>(initialFormState);
+  const [selectedPlanType, setSelectedPlanType] = useState<VideoOrderPlan>(plan);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const selectedPlan = planDetails[plan];
+  const selectedPlan = planDetails[selectedPlanType];
+  const selectedStyle = styleOptions.find((option) => option.value === form.style_preference);
+
+  const updatePlan = (nextPlan: VideoOrderPlan) => {
+    setSelectedPlanType(nextPlan);
+
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("plan", nextPlan);
+      url.searchParams.delete("canceled");
+      window.history.replaceState(null, "", url.toString());
+    }
+  };
 
   const updateField = (field: FieldName, value: string) => {
     setForm((current) => ({
@@ -192,7 +236,7 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
           business_name: form.business_name.trim(),
           brand_offer: form.brand_offer.trim(),
           target_audience: form.target_audience.trim(),
-          product_type: plan,
+          product_type: selectedPlanType,
         }),
       });
 
@@ -222,18 +266,19 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
         </h2>
         <div className="video-plan-toggle" aria-label="Choose video plan">
           {planOptions.map((option) => (
-            <Link
-              aria-current={option.plan === plan ? "true" : undefined}
-              className={`video-plan-option${option.plan === plan ? " is-active" : ""}`}
-              href={`/order-video?plan=${option.plan}`}
+            <button
+              aria-pressed={option.plan === selectedPlanType}
+              className={`video-plan-option${option.plan === selectedPlanType ? " is-active" : ""}`}
               key={option.plan}
+              onClick={() => updatePlan(option.plan)}
+              type="button"
             >
               <span>{option.name}</span>
               <strong>
                 {option.price}
                 <small>{option.cadence}</small>
               </strong>
-            </Link>
+            </button>
           ))}
         </div>
       </div>
@@ -288,7 +333,7 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
 
       <label className="form-field">
         <span>What do you sell?</span>
-        <small>2-3 sentences about what you sell and to whom</small>
+        <small>A short phrase is fine. Example: landing pages for coaches.</small>
         <textarea
           name="brand_offer"
           value={form.brand_offer}
@@ -301,7 +346,7 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
 
       <label className="form-field">
         <span>Target audience</span>
-        <small>Who is your video trying to reach?</small>
+        <small>A few words is fine. Example: local business owners.</small>
         <textarea
           name="target_audience"
           value={form.target_audience}
@@ -314,7 +359,7 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
 
       <label className="form-field">
         <span>Style preference</span>
-        <small>Pick the closest style, or choose Recommend One and I will match the format to your offer.</small>
+        <small>Companies usually use videos for launches, demos, explainers, proof, or social ads.</small>
         <select
           className={form.style_preference ? undefined : "is-empty"}
           name="style_preference"
@@ -323,13 +368,14 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
           aria-invalid={Boolean(errors.style_preference)}
           required
         >
-          <option value="">Choose a Style</option>
+          <option value="">Choose a style</option>
           {styleOptions.map((option) => (
             <option value={option.value} key={option.value}>
               {option.label}
             </option>
           ))}
         </select>
+        {selectedStyle ? <small className="style-option-note">{selectedStyle.description}</small> : null}
         {errors.style_preference ? <small className="field-error">{errors.style_preference}</small> : null}
       </label>
 
