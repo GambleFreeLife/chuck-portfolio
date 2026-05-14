@@ -18,13 +18,14 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://chuckbaryames.com"),
   title: "Chuck Baryames | Website Revenue Leak Fixes for Service Businesses",
   description:
     "I help service businesses fix outdated, unclear, or unfinished websites so more visitors call, book, request quotes, and submit forms.",
   openGraph: {
     images: [
       {
-        url: "https://chuck-portfolio.vercel.app/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Landing pages built in 48 hours. $497 flat.",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://chuck-portfolio.vercel.app/og-image.jpg"],
+    images: ["/og-image.jpg"],
   },
 };
 

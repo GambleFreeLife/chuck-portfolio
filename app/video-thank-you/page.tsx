@@ -1,5 +1,5 @@
 export default function VideoThankYouPage() {
-  const fromEmail = process.env.FROM_EMAIL ?? "cbaryames24@gmail.com";
+  const fromEmail = process.env.REPLY_TO_EMAIL ?? "chuck@chuckbaryames.com";
 
   return (
     <main className="flow-page">
@@ -18,7 +18,7 @@ export default function VideoThankYouPage() {
           </ul>
           <p>
             I will email you from {fromEmail}. Watch for it. If you do not see it within 24 hours,
-            check spam and then email cbaryames24@gmail.com.
+            check spam and then email chuck@chuckbaryames.com.
           </p>
         </section>
       </div>

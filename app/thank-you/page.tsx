@@ -1,5 +1,5 @@
 export default function ThankYouPage() {
-  const fromEmail = process.env.FROM_EMAIL ?? "cbaryames24@gmail.com";
+  const fromEmail = process.env.REPLY_TO_EMAIL ?? "chuck@chuckbaryames.com";
 
   return (
     <main className="flow-page">

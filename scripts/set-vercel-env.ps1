@@ -21,6 +21,7 @@ $requiredKeys = @(
   "SUPABASE_SERVICE_ROLE_KEY",
   "RESEND_API_KEY",
   "FROM_EMAIL",
+  "REPLY_TO_EMAIL",
   "ADMIN_EMAIL"
 )
 

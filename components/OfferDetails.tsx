@@ -78,7 +78,7 @@ export function OfferDetails() {
             <p className="fit-bridge">
               If your project is bigger than one focused landing page, the audit, sprint, and full
               website tiers below are sized for it. Or email{" "}
-              <a href="mailto:cbaryames24@gmail.com">cbaryames24@gmail.com</a> and we&apos;ll talk.
+              <a href="mailto:chuck@chuckbaryames.com">chuck@chuckbaryames.com</a> and we&apos;ll talk.
             </p>
           </div>
         </div>

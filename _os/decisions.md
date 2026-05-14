@@ -44,3 +44,5 @@
 2026-05-11 - Rendered conversion-focused hero video - HeroConverter composition addresses the three primary buyer objections (price, speed, suspicion) through structure and demonstrates the mechanism that makes the offer real. Output at public/demo/hero-converter.*
 2026-05-11 - Wired the video order flow - /order-video page, /api/video-order route, /video-thank-you page, Stripe webhook handling for video orders, and two new email templates are live. The video CTAs no longer 404.
 2026-05-12 - Split video and landing page services into focused pages - The homepage now sells video services only, while /landing-pages carries the landing page offer, pricing, proof, and conversion positioning with shared navigation.
+2026-05-13 - Recorded Stripe account ownership map - Charles Baryames is the Bet On Recovery Stripe account, while Chuck Baryames is the portfolio account for video and landing page services.
+2026-05-13 - Updated branded domain and reply email defaults - Metadata, thank-you pages, mailto links, and Vercel env helper now use chuckbaryames.com and chuck@chuckbaryames.com without committing secrets.

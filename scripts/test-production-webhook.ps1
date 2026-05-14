@@ -1,5 +1,5 @@
 param(
-  [string]$WebhookUrl = "https://chuck-portfolio.vercel.app/api/stripe/webhook"
+  [string]$WebhookUrl = "https://chuckbaryames.com/api/stripe/webhook"
 )
 
 $ErrorActionPreference = "Stop"
@@ -81,7 +81,7 @@ $supabaseServiceRoleKey = Get-RequiredValue -Map $envMap -Name "SUPABASE_SERVICE
 $adminEmail = if ($envMap.ContainsKey("ADMIN_EMAIL") -and -not [string]::IsNullOrWhiteSpace([string]$envMap["ADMIN_EMAIL"])) {
   [string]$envMap["ADMIN_EMAIL"]
 } else {
-  "cbaryames24@gmail.com"
+  "chuck@chuckbaryames.com"
 }
 
 $secureSecret = Read-Host "Paste the live Stripe webhook signing secret (whsec_...). It will not be printed" -AsSecureString

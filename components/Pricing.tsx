@@ -83,7 +83,7 @@ const tiers = [
       "SEO foundations and analytics",
     ],
     cta: "Discuss the build",
-    href: "mailto:cbaryames24@gmail.com?subject=Full%20site%20project",
+    href: "mailto:chuck@chuckbaryames.com?subject=Full%20site%20project",
     featured: false,
     badge: null,
   },

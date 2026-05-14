@@ -38,7 +38,7 @@ export default function VideoOrderClientEmail({
             </Text>
             <Hr style={divider} />
             <Text style={text}>
-              If you forgot anything, reply to this email or send it to cbaryames24@gmail.com.
+              If you forgot anything, reply to this email or send it to chuck@chuckbaryames.com.
             </Text>
             <Text style={text}>Chuck</Text>
           </Section>

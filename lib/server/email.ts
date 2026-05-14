@@ -3,7 +3,7 @@ import ClientConfirmationEmail from "@/emails/ClientConfirmationEmail";
 import VideoOrderAdminEmail from "@/emails/VideoOrderAdminEmail";
 import VideoOrderClientEmail from "@/emails/VideoOrderClientEmail";
 import type { Database } from "./database.types";
-import { getRequiredEnv } from "./env";
+import { getOptionalEnv, getRequiredEnv } from "./env";
 import { getResend } from "./resend";
 
 type IntakeRow = Database["public"]["Tables"]["intake_submissions"]["Row"];
@@ -77,6 +77,12 @@ function getVideoStyleLabel(stylePreference: string) {
   return "Brand intro";
 }
 
+function getReplyToField() {
+  const replyTo = getOptionalEnv("REPLY_TO_EMAIL");
+
+  return replyTo ? { replyTo } : {};
+}
+
 export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
   const resend = getResend();
   const from = getRequiredEnv("FROM_EMAIL");
@@ -88,6 +94,7 @@ export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
       from,
       to: adminEmail,
       subject: `New landing page deposit: ${intake.business_name}`,
+      ...getReplyToField(),
       react: AdminNewClientEmail({
         intakeId: intake.id,
         createdAt: intake.created_at,
@@ -125,6 +132,7 @@ export async function sendLandingPagePaymentEmails(intake: IntakeRow) {
       from,
       to: intake.email,
       subject: "Got your deposit. Building starts now.",
+      ...getReplyToField(),
       react: ClientConfirmationEmail({
         fullName: intake.full_name,
         businessName: intake.business_name,
@@ -156,6 +164,7 @@ export async function sendVideoOrderAdminEmail(order: VideoOrderRow) {
       from,
       to: adminEmail,
       subject: `New video order: ${order.business_name}`,
+      ...getReplyToField(),
       react: VideoOrderAdminEmail({
         videoOrderId: order.id,
         createdAt: order.created_at,
@@ -198,6 +207,7 @@ export async function sendVideoOrderClientEmail(order: VideoOrderRow) {
       from,
       to: order.email,
       subject: "Your video order is confirmed, preview in 48 hours",
+      ...getReplyToField(),
       react: VideoOrderClientEmail({
         fullName: order.full_name,
         businessName: order.business_name,

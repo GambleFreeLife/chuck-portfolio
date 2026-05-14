@@ -35,3 +35,10 @@ Do not edit `_os/voice.md`, `_os/guardrails.md`, or `_os/stack.md` unless Cha ex
 ## What to do when stuck
 
 If you cannot proceed without breaking a guardrail or making a strategy call, do not make the call yourself. Stop, summarize the situation, list the options, and wait. Cha would rather review than rework.
+
+## Stripe account map
+
+When working with Stripe, confirm the active Stripe account before creating, editing, or inspecting products, prices, payments, webhooks, or API keys.
+
+- `Charles Baryames` is the Bet On Recovery Stripe account.
+- `Chuck Baryames` is this portfolio, video services, and landing page services Stripe account.
