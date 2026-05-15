@@ -13,8 +13,6 @@ import { Pricing } from "@/components/Pricing";
 export default function LandingPagesPage() {
   return (
     <>
-      <div className="cursor-glow" id="cursorGlow" aria-hidden="true" />
-      <canvas id="shapes-canvas" aria-hidden="true" />
       <Nav activePage="landing-pages" />
       <main>
         <LandingPagesHero />

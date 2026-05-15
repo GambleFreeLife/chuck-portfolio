@@ -16,8 +16,6 @@ import { VideoShowcase } from "@/components/VideoShowcase";
 export default function HomePage() {
   return (
     <>
-      <div className="cursor-glow" id="cursorGlow" aria-hidden="true" />
-      <canvas id="shapes-canvas" aria-hidden="true" />
       <Nav activePage="videos" />
       <main>
         <Hero />
