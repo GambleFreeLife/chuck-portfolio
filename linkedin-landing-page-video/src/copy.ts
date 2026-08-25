@@ -58,6 +58,6 @@ export const SCRIPT_LINES: readonly ScriptLine[] = [
   {
     start: 27,
     end: 30,
-    text: "See examples at chuck-portfolio.vercel.app.",
+    text: "See examples at chuckbaryames.com.",
   },
 ] as const;

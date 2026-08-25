@@ -24,30 +24,30 @@ type PortfolioCase = {
 const cases: PortfolioCase[] = [
   {
     category: "landing",
-    href: "https://baryames-landing.vercel.app",
-    badge: "View project",
+    href: "https://baryamescleaners.com",
+    badge: "Live business",
     badgeTone: "gold",
-    imageSrc: "/portfolio/baryames.jpg",
-    imageAlt: "Baryames Cleaners landing page",
-    eyebrow: "Local business, dry cleaning",
-    title: "Baryames Cleaners Landing Page",
+    imageSrc: "/portfolio/baryames-proof.jpg",
+    imageAlt: "Baryames Cleaners website conversion work",
+    eyebrow: "Operating local business, 11 locations",
+    title: "Baryames Cleaners Conversion Work",
     description:
-      "A focused local-service landing page built around one high-value action: getting more pickup and delivery requests.",
+      "Ongoing website and digital-growth work for a family business that has served Greater Lansing since 1922.",
     details: [
       {
         label: "Problem",
-        text: "Too many services and locations can make the next step feel scattered.",
+        text: "A broad service mix, 11 locations, and multiple customer journeys made it easy for high-intent visitors to get lost.",
       },
       {
         label: "Fix",
-        text: "Lead with pickup and delivery, trust proof, simple steps, and a direct request form.",
+        text: "Rebuild priority service and location pages around clearer offers, local-search intent, trust proof, and stronger next actions.",
       },
       {
-        label: "Conversion path",
-        text: "Trust the business, understand the offer, schedule a free pickup.",
+        label: "Measurement",
+        text: "Pair the page work with Search Console, GA4, Tag Manager, and paid-search tracking so customer actions can be evaluated.",
       },
     ],
-    tags: ["Pickup booking form", "Trust architecture", "Mobile responsive"],
+    tags: ["WordPress", "Local SEO", "Conversion tracking"],
   },
   {
     category: "landing",

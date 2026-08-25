@@ -2,17 +2,17 @@ const steps = [
   {
     number: "01",
     label: "Script",
-    description: "Turns your offer into a tight 30-second message.",
+    description: "Turns your offer into a tight 30-second message a buyer actually finishes.",
   },
   {
     number: "02",
     label: "Motion render",
-    description: "Uses code to control timing, type, captions, and pacing.",
+    description: "Timing, type, captions, and pacing are controlled precisely, not eyeballed.",
   },
   {
     number: "03",
     label: "Social delivery",
-    description: "Gives you MP4 plus captioned versions for the platforms that matter.",
+    description: "You get MP4 plus captioned cuts sized for the platforms that matter.",
   },
 ] as const;
 
@@ -22,12 +22,10 @@ export function TheStack() {
       <div className="wrap">
         <div className="section-center">
           <div className="sec-label">The stack</div>
-          <h2 className="sec-title">
-            The production system is narrow on purpose.
-          </h2>
+          <h2 className="sec-title">The production system is narrow on purpose.</h2>
           <p className="sec-sub section-sub-center">
-            I use the same repeatable build path for every video, so the work stays precise and
-            the turnaround stays fast.
+            Every video runs the same build path, which is why the quality stays consistent and
+            the 48-hour turnaround is a promise instead of a hope.
           </p>
         </div>
         <ol className="stack-grid">
@@ -40,8 +38,8 @@ export function TheStack() {
           ))}
         </ol>
         <p className="stack-note">
-          Remotion, Codex, and Next.js keep the workflow repeatable instead of reinventing every
-          frame by hand.
+          A narrow system is why one video costs $97 instead of $2,000. You are not paying for an
+          agency&apos;s overhead, a producer, and three rounds of meetings.
         </p>
       </div>
     </section>

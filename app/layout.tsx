@@ -19,9 +19,9 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chuckbaryames.com"),
-  title: "Chuck Baryames | Website Revenue Leak Fixes for Service Businesses",
+  title: "Chuck Baryames | Websites, Local SEO, Google Ads and Brand Video for Local Businesses",
   description:
-    "I help service businesses fix outdated, unclear, or unfinished websites so more visitors call, book, request quotes, and submit forms.",
+    "I run marketing for an 11-location family business open since 1922. Websites, local SEO, Google Ads, conversion tracking, and brand video for local service businesses. Send your URL for a free teardown.",
   openGraph: {
     images: [
       {

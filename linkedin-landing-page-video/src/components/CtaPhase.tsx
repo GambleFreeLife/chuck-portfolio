@@ -87,7 +87,7 @@ export const CtaPhase: React.FC = () => {
         >
           See examples at
           <br />
-          chuck-portfolio.vercel.app
+          chuckbaryames.com
         </div>
         <div
           style={{

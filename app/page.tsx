@@ -1,39 +1,31 @@
-import { HomeInteractions } from "@/components/HomeInteractions";
 import { About } from "@/components/About";
 import { AntiObjectionFAQ } from "@/components/AntiObjectionFAQ";
-import { CrossServiceCTA } from "@/components/CrossServiceCTA";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
+import { GrowthPricing } from "@/components/GrowthPricing";
+import { GrowthProcess } from "@/components/GrowthProcess";
+import { GrowthProof } from "@/components/GrowthProof";
 import { Hero } from "@/components/Hero";
-import { HowItWorks } from "@/components/HowItWorks";
+import { HomeInteractions } from "@/components/HomeInteractions";
 import { Nav } from "@/components/Nav";
-import { Portfolio } from "@/components/Portfolio";
-import { Pricing } from "@/components/Pricing";
+import { Services } from "@/components/Services";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
-import { TheStack } from "@/components/TheStack";
 import { VideoShowcase } from "@/components/VideoShowcase";
 
 export default function HomePage() {
   return (
     <>
-      <Nav activePage="videos" />
+      <Nav />
       <main>
         <Hero />
+        <GrowthProof />
+        <Services />
+        <GrowthProcess />
+        <GrowthPricing />
         <VideoShowcase />
-        <HowItWorks />
-        <Pricing focus="video" />
-        <TheStack />
-        <AntiObjectionFAQ focus="video" />
-        <Portfolio focus="video" />
-        <About focus="video" />
+        <AntiObjectionFAQ focus="growth" />
+        <About focus="growth" />
         <FinalCTA />
-        <CrossServiceCTA
-          eyebrow="Need the other half?"
-          headline="Need somewhere for video traffic to land?"
-          body="A sharp video earns the click, and a focused landing page turns that click into a real lead."
-          href="/landing-pages"
-          cta="See landing page services"
-        />
       </main>
       <StickyMobileCTA />
       <Footer />

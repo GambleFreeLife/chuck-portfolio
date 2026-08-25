@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { CSSProperties } from "react";
 
@@ -44,7 +45,15 @@ export function HeroVideo({
         <source src={`${src}.webm`} type="video/webm" />
         <source src={`${src}.mp4`} type="video/mp4" />
       </video>
-      <img className="poster-fallback" src={poster} alt={ariaLabel} loading={priority ? "eager" : "lazy"} />
+      <Image
+        className="poster-fallback"
+        src={poster}
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="(max-width: 720px) 100vw, 360px"
+        priority={priority}
+      />
     </div>
   );
 }

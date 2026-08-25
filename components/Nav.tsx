@@ -1,37 +1,30 @@
 import Link from "next/link";
 
-type NavProps = {
-  activePage?: "videos" | "landing-pages";
-  contactHref?: string;
-};
+const auditHref =
+  "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20";
 
-export function Nav({ activePage = "videos", contactHref = "#contact" }: NavProps) {
+export function Nav() {
   return (
-    <nav>
+    <nav aria-label="Primary navigation">
       <div className="wrap">
         <Link href="/" className="nav-name" aria-label="Chuck Baryames home">
           CB
         </Link>
         <div className="nav-links">
-          <Link
-            href="/"
-            className={`nav-primary${activePage === "videos" ? " is-active" : ""}`}
-            aria-current={activePage === "videos" ? "page" : undefined}
-          >
-            Videos
+          <Link href="/#work" className="nav-primary">
+            Work
           </Link>
-          <Link
-            href="/landing-pages"
-            className={`nav-primary${activePage === "landing-pages" ? " is-active" : ""}`}
-            aria-current={activePage === "landing-pages" ? "page" : undefined}
-          >
-            Landing Pages
+          <Link href="/#services" className="nav-primary">
+            Services
           </Link>
-          <a href="#about" className="nav-anchor">
+          <Link href="/landing-pages" className="nav-primary nav-secondary-service">
+            Landing pages
+          </Link>
+          <Link href="/#about" className="nav-anchor">
             About
-          </a>
-          <a href={contactHref} className="nav-cta">
-            Contact
+          </Link>
+          <a href={auditHref} className="nav-cta">
+            Free teardown
           </a>
         </div>
       </div>

@@ -1,5 +1,7 @@
-import Link from "next/link";
-import { HeroVideo } from "@/components/HeroVideo";
+import Image from "next/image";
+
+const auditHref =
+  "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20";
 
 export function Hero() {
   return (
@@ -8,35 +10,65 @@ export function Hero() {
         <div className="hero-copy">
           <div className="hero-name fa">CHUCK BARYAMES</div>
           <h1 className="fa d1">
-            <span>Agencies charge $2,000</span>
-            <span>per brand video.</span>
-            <span>Mine start at $97.</span>
+            <span>Most local businesses</span>
+            <span>don&apos;t need more marketing.</span>
+            <span>They need the leaks fixed.</span>
           </h1>
           <p className="hero-sub fa d2">
-            Built with code, rendered frame-perfect, delivered in 48 hours. The same system I use
-            for my own LinkedIn lands client-quality video for a tenth of the price.
+            I run digital growth for Baryames Cleaners, an 11-location family business open since
+            1922. I fix websites, local SEO, Google Ads, and tracking so more of the traffic you
+            already have becomes calls and bookings.
           </p>
           <div className="hero-action fa d3">
-            <Link href="/order-video?plan=single" className="hero-cta">
-              Order one video, $97
-            </Link>
-            <Link href="/order-video?plan=retainer" className="hero-cta-retainer">
-              Start the retainer, $297/mo
-            </Link>
+            <a href={auditHref} className="hero-cta">
+              Send me your site for a free teardown
+            </a>
+            <a href="#work" className="hero-cta-ghost">
+              See proof of work
+            </a>
           </div>
           <p className="hero-trust fa d4">
-            Pay once at checkout. Preview in 48 hours. Full refund if I miss the deadline.
+            Send your URL. I&apos;ll reply with the three highest-impact things I&apos;d fix first.
+            No call required and no retainer required.
           </p>
-          <p className="hero-stack-trust fa d5">Stack: Remotion, Next.js, Codex, Vercel</p>
+          <p className="hero-stack-trust fa d5">
+            11 locations managed &middot; 7.2% search CTR example &middot; fixed-price projects
+          </p>
         </div>
-        <div className="hero-video fa d2">
-          <HeroVideo
-            src="/demo/linkedin-ad"
-            poster="/demo/poster-hero.jpg"
-            ariaLabel="Sample brand video by Chuck Baryames"
-            aspectRatio="1 / 1"
-            priority
-          />
+
+        <div className="hero-proof-shell fa d2" aria-label="Baryames Cleaners proof of work">
+          <div className="hero-proof-card">
+            <div className="hero-proof-kicker">CURRENT PROVING GROUND</div>
+            <div className="hero-proof-image-wrap">
+              <Image
+                src="/portfolio/baryames-proof.jpg"
+                alt="Baryames Cleaners landing page work"
+                width={690}
+                height={700}
+                className="hero-proof-image"
+                priority
+                sizes="(max-width: 900px) 92vw, 470px"
+              />
+            </div>
+            <div className="hero-proof-copy">
+              <strong>Baryames Cleaners</strong>
+              <span>Website, local SEO, paid search, analytics, email, and brand content.</span>
+            </div>
+            <div className="hero-proof-metrics" role="list" aria-label="Selected proof points">
+              <div role="listitem">
+                <strong>1922</strong>
+                <span>Family business since</span>
+              </div>
+              <div role="listitem">
+                <strong>11</strong>
+                <span>Locations</span>
+              </div>
+              <div role="listitem">
+                <strong>7.2%</strong>
+                <span>Search CTR example</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

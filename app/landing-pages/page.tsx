@@ -7,15 +7,17 @@ import { LandingPagesFinalCTA } from "@/components/LandingPagesFinalCTA";
 import { LandingPagesHero } from "@/components/LandingPagesHero";
 import { LandingPagesProcess } from "@/components/LandingPagesProcess";
 import { Nav } from "@/components/Nav";
+import { OfferDetails } from "@/components/OfferDetails";
 import { Portfolio } from "@/components/Portfolio";
 import { Pricing } from "@/components/Pricing";
 
 export default function LandingPagesPage() {
   return (
     <>
-      <Nav activePage="landing-pages" />
+      <Nav />
       <main>
         <LandingPagesHero />
+        <OfferDetails />
         <LandingPagesProcess />
         <Pricing focus="landing" />
         <Portfolio focus="landing" />
@@ -23,11 +25,11 @@ export default function LandingPagesPage() {
         <About focus="landing" />
         <LandingPagesFinalCTA />
         <CrossServiceCTA
-          eyebrow="Need traffic too?"
-          headline="Need video to drive traffic?"
-          body="A landing page converts better when people are already warmed up, and a short brand video gives them a reason to click."
-          href="/"
-          cta="See brand videos"
+          eyebrow="Need attention too?"
+          headline="I can build the video that sends people to the page."
+          body="A focused landing page handles the conversion. Short brand video is available when the bigger problem is getting the right people to stop and click."
+          href="/order-video?plan=single"
+          cta="See the video order"
         />
       </main>
       <Footer />
