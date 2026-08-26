@@ -48,3 +48,4 @@
 2026-05-13 - Updated branded domain and reply email defaults - Metadata, thank-you pages, mailto links, and Vercel env helper now use chuckbaryames.com and chuck@chuckbaryames.com without committing secrets.
 2026-05-13 - Smoothed video checkout conversion issues - Contact CTA contrast, plan switching, lenient brief validation, and style choices now reduce friction before Stripe checkout.
 2026-08-25 - Repositioned the homepage around local-business growth outcomes - Real Baryames proof, fixed-price entry offers, and a proof-first funnel now lead the site while video remains a secondary capability.
+2026-08-25 - Strengthened the portfolio around verifiable proof - The homepage and landing-page portfolio now lead with current Baryames website and growth work, Bet on Recovery full-stack product proof, and real Baryames brand videos while keeping the free teardown as the primary client-acquisition CTA.

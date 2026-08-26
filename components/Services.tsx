@@ -35,9 +35,9 @@ const services = [
     eyebrow: "Brand video",
     title: "Earn attention before the visitor reaches the page.",
     text: "I also build short motion-led brand videos for social and ads. It is useful when the page converts well but not enough people stop, click, or understand the offer.",
-    detail: "Single 30-second videos start at $97.",
-    cta: "Order a brand video",
-    href: "/order-video?plan=single",
+    detail: "Real Baryames campaign examples are shown below in both social and in-store formats.",
+    cta: "See the brand content",
+    href: "/#video-work",
     type: "internal",
   },
 ] as const;

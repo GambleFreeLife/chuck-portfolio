@@ -27,138 +27,110 @@ const cases: PortfolioCase[] = [
     href: "https://baryamescleaners.com",
     badge: "Live business",
     badgeTone: "gold",
-    imageSrc: "/portfolio/baryames-proof.jpg",
-    imageAlt: "Baryames Cleaners website conversion work",
+    imageSrc: "/portfolio/baryames-current-homepage.jpg",
+    imageAlt: "Current Baryames Cleaners homepage redesign preview",
     eyebrow: "Operating local business, 11 locations",
-    title: "Baryames Cleaners Conversion Work",
+    title: "Baryames Cleaners Website Redesign & Growth",
     description:
-      "Ongoing website and digital-growth work for a family business that has served Greater Lansing since 1922.",
+      "A full website redesign plus ongoing SEO, paid search, analytics, email, and conversion work for a family business serving Greater Lansing since 1922.",
     details: [
       {
-        label: "Problem",
-        text: "A broad service mix, 11 locations, and multiple customer journeys made it easy for high-intent visitors to get lost.",
+        label: "Website",
+        text: "Rebuilt the customer journey around clearer service paths, mobile usability, trust proof, and stronger next actions.",
       },
       {
-        label: "Fix",
-        text: "Rebuild priority service and location pages around clearer offers, local-search intent, trust proof, and stronger next actions.",
+        label: "Growth",
+        text: "Connected the site to local SEO, Search Console, Google Ads, GA4, Tag Manager, email, and Google Business Profile work.",
       },
       {
-        label: "Measurement",
-        text: "Pair the page work with Search Console, GA4, Tag Manager, and paid-search tracking so customer actions can be evaluated.",
+        label: "Proof",
+        text: "The live site serves 11 locations and publicly credits the website redesign and development to Chuck Baryames.",
       },
     ],
-    tags: ["WordPress", "Local SEO", "Conversion tracking"],
+    tags: ["WordPress", "Local SEO", "Google Ads", "Analytics"],
   },
   {
     category: "landing",
-    href: "https://eby-dental-landing.vercel.app",
-    badge: "Concept",
+    href: "https://betonrecovery.org",
+    badge: "Live product",
     badgeTone: "teal",
-    imageSrc: "/portfolio/eby-dental.jpg",
-    imageAlt: "Eby Dental Care concept landing page",
-    eyebrow: "Concept redesign, dental practice",
-    title: "Eby Dental Care Concept Redesign",
+    imageSrc: "/portfolio/bet-on-recovery-current.jpg",
+    imageAlt: "Bet on Recovery full-stack product preview",
+    eyebrow: "Solo-built full-stack product",
+    title: "Bet on Recovery Product Design & Development",
     description:
-      "A concept redesign showing how a healthcare service page can build trust and make appointment requests feel easier.",
+      "A live web product I designed, developed, and launched from concept to production, proving I can execute beyond a marketing mockup.",
     details: [
       {
-        label: "Problem",
-        text: "Healthcare visitors need reassurance before they book, especially if the site feels unfinished.",
+        label: "Product",
+        text: "Private assessment, user accounts, educational content, and a structured path from first visit into the app.",
       },
       {
-        label: "Fix",
-        text: "Use credentials, patient-centered copy, reviews, services, and appointment CTA above the fold.",
+        label: "Engineering",
+        text: "Built with Next.js, Supabase, Stripe, and Vercel, including subscription billing and automated email workflows.",
       },
       {
-        label: "Conversion path",
-        text: "Feel understood, trust the provider, request an appointment.",
+        label: "Content system",
+        text: "The live site now supports a large search-focused resource library alongside the core product experience.",
       },
     ],
-    tags: ["Appointment booking", "Google Maps", "Social proof"],
+    tags: ["Next.js", "Supabase", "Stripe", "Vercel"],
   },
   {
     category: "video",
     href: "/order-video?plan=single",
-    badge: "Live example",
-    badgeTone: "coral",
-    videoSrc: "/demo/linkedin-ad",
-    posterSrc: "/demo/poster-hero.jpg",
-    imageAlt: "The LinkedIn video that brought you here",
-    eyebrow: "Self-referential, video production",
-    title: "The Video That Brought You Here",
+    badge: "Real campaign",
+    badgeTone: "gold",
+    videoSrc: "/portfolio/baryames-wash-fold-horizontal",
+    posterSrc: "/portfolio/baryames-wash-fold-poster.jpg",
+    imageAlt: "Baryames Cleaners Wash and Fold in-store brand video",
+    eyebrow: "Baryames Cleaners, in-store display",
+    title: "Wash & Fold Brand Campaign",
     description:
-      "The exact production system, render pipeline, and conversion structure you would pay for if you bought a retainer.",
+      "A real 30-second Baryames campaign designed to communicate the service promise clearly on an in-store screen, even when muted.",
     details: [
       {
-        label: "Problem",
-        text: "Most freelancer ads on LinkedIn look like every other freelancer ad on LinkedIn.",
+        label: "Goal",
+        text: "Make Wash & Fold easy to understand at a glance while customers are already inside the store.",
       },
       {
-        label: "Fix",
-        text: "Build the video so the product demonstrates itself before the pitch arrives.",
+        label: "Execution",
+        text: "Readable offer hierarchy, brand-consistent motion, and a format built for horizontal digital signage.",
       },
       {
-        label: "Conversion path",
-        text: "Watch, recognize the quality, click through, order one.",
+        label: "Reuse",
+        text: "The same creative system can be adapted for social, ads, and other screen sizes without rebuilding the campaign from zero.",
       },
     ],
-    tags: ["Remotion render", "Codex-built", "48-hour turn"],
+    tags: ["Brand video", "In-store signage", "Motion design"],
   },
   {
     category: "video",
     href: "/order-video?plan=single",
-    badge: "Brand intro",
-    badgeTone: "coral",
-    videoSrc: "/demo/showcase-brand-intro",
-    posterSrc: "/demo/poster-brand-intro.jpg",
-    imageAlt: "Brand intro video for a coffee roaster launch",
-    eyebrow: "Product launch, brand video",
-    title: "Brand Intro Launch Video",
-    description:
-      "A punchy product-launch video that uses contrast, pricing, and a clear URL to turn attention into action.",
-    details: [
-      {
-        label: "Problem",
-        text: "A product launch needs to feel specific fast, or people keep scrolling.",
-      },
-      {
-        label: "Fix",
-        text: "Lead with a bold claim, show the offer details, then land on one memorable next step.",
-      },
-      {
-        label: "Conversion path",
-        text: "Notice the brand, understand the product, visit the page.",
-      },
-    ],
-    tags: ["Launch opener", "Kinetic type", "Offer reveal"],
-  },
-  {
-    category: "video",
-    href: "/order-video?plan=single",
-    badge: "Explainer",
+    badge: "Real campaign",
     badgeTone: "teal",
-    videoSrc: "/demo/showcase-service-explainer",
-    posterSrc: "/demo/poster-service-explainer.jpg",
-    imageAlt: "Service explainer video for a dental practice",
-    eyebrow: "Service business, explainer video",
-    title: "Service Explainer Video",
+    videoSrc: "/portfolio/baryames-skip-trip-vertical",
+    posterSrc: "/portfolio/baryames-skip-trip-poster.jpg",
+    imageAlt: "Baryames Cleaners Skip the Trip vertical service campaign",
+    eyebrow: "Baryames Cleaners, vertical social",
+    title: "Skip the Trip Service Campaign",
     description:
-      "A calm service-business video that makes the problem, process, and next action easy to understand.",
+      "A real vertical Baryames service story built around one customer benefit, one simple process, and one next action.",
     details: [
       {
-        label: "Problem",
-        text: "Professional services need trust before a buyer is ready to click.",
+        label: "Goal",
+        text: "Turn pickup and delivery from an abstract service into a simple, memorable convenience message.",
       },
       {
-        label: "Fix",
-        text: "Use a simple problem, a clear promise, and a three-step process that feels easy.",
+        label: "Execution",
+        text: "Mobile-first pacing, large readable type, and a benefit-led story designed to work with or without sound.",
       },
       {
         label: "Conversion path",
-        text: "Recognize the problem, trust the process, make contact.",
+        text: "Understand the convenience, see the steps, then move toward pickup and delivery signup.",
       },
     ],
-    tags: ["Service explainer", "Process visual", "Trust builder"],
+    tags: ["Vertical video", "Service marketing", "Conversion copy"],
   },
 ];
 
@@ -200,7 +172,7 @@ export function Portfolio({ focus = "video" }: { focus?: PortfolioFocus }) {
               target={project.href.startsWith("http") ? "_blank" : undefined}
               rel={project.href.startsWith("http") ? "noreferrer" : undefined}
               className="case-card tilt-card"
-              key={project.href}
+              key={project.title}
             >
               <div className="case-preview-wrap">
                 <div className="case-preview">

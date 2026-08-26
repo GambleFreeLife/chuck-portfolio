@@ -93,7 +93,7 @@ const faqs = [
     category: "landing",
     question: "Have you done this before?",
     answer:
-      "Yes. Baryames Cleaners is a real local-service business where I work on website and conversion improvements. The portfolio also includes focused landing-page and concept work so you can judge the page structure, copy, and visual execution before you hire me.",
+      "Yes. Baryames Cleaners is a real local-service business where I work on website and conversion improvements. I also built and launched Bet on Recovery as a full-stack web product, so you can inspect both real business work and a live product before you hire me.",
   },
 ] as const;
 

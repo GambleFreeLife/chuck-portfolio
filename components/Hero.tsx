@@ -32,19 +32,28 @@ export function Hero() {
             No call required and no retainer required.
           </p>
           <p className="hero-stack-trust fa d5">
-            11 locations managed &middot; 7.2% search CTR example &middot; fixed-price projects
+            Website redesign · local SEO · paid search · analytics · brand content
           </p>
         </div>
 
         <div className="hero-proof-shell fa d2" aria-label="Baryames Cleaners proof of work">
-          <div className="hero-proof-card">
-            <div className="hero-proof-kicker">CURRENT PROVING GROUND</div>
-            <div className="hero-proof-image-wrap">
+          <a
+            className="hero-proof-card hero-proof-card-link"
+            href="https://baryamescleaners.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open the live Baryames Cleaners website"
+          >
+            <div className="hero-proof-topline">
+              <div className="hero-proof-kicker">CURRENT PROVING GROUND</div>
+              <span className="hero-proof-live">LIVE SITE ↗</span>
+            </div>
+            <div className="hero-proof-image-wrap current-site-preview">
               <Image
-                src="/portfolio/baryames-proof.jpg"
-                alt="Baryames Cleaners landing page work"
-                width={690}
-                height={700}
+                src="/portfolio/baryames-current-homepage.jpg"
+                alt="Current Baryames Cleaners homepage redesign preview"
+                width={1280}
+                height={800}
                 className="hero-proof-image"
                 priority
                 sizes="(max-width: 900px) 92vw, 470px"
@@ -52,23 +61,25 @@ export function Hero() {
             </div>
             <div className="hero-proof-copy">
               <strong>Baryames Cleaners</strong>
-              <span>Website, local SEO, paid search, analytics, email, and brand content.</span>
+              <span>
+                Full website redesign plus local SEO, paid search, analytics, email, and brand content.
+              </span>
             </div>
             <div className="hero-proof-metrics" role="list" aria-label="Selected proof points">
               <div role="listitem">
-                <strong>1922</strong>
-                <span>Family business since</span>
-              </div>
-              <div role="listitem">
                 <strong>11</strong>
                 <span>Locations</span>
+              </div>
+              <div role="listitem">
+                <strong>3,000+</strong>
+                <span>Local reviews</span>
               </div>
               <div role="listitem">
                 <strong>7.2%</strong>
                 <span>Search CTR example</span>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>

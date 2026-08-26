@@ -9,7 +9,7 @@ export function HomeInteractions() {
     const tiltCards = Array.from(document.querySelectorAll<HTMLElement>(".tilt-card"));
     const revealEls = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".process-step, .showcase-card, .stack-column, .deliverable-card, .fit-card, .faq-item, .case-card, .price-card, .about-stat, .proof-system-card, .service-card, .growth-price-card",
+        ".process-step, .showcase-card, .stack-column, .deliverable-card, .fit-card, .faq-item, .case-card, .price-card, .about-stat, .proof-system-card, .service-card, .growth-price-card, .featured-case-study, .secondary-proof-project",
       ),
     );
 

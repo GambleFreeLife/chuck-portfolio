@@ -121,7 +121,7 @@ const sectionCopy = {
     label: "Pricing",
     title: "Start where the problem actually is.",
     sub: "If the site mostly works and is leaking, fix it. If the page needs to exist, build it. If the whole thing is holding you back, replace it. Every tier starts with a free teardown so you know which one you actually need.",
-    note: "Multi-page builds or custom scopes? Larger projects start at $2,500. Book a call →",
+    note: "Need a custom multi-page build or a larger scope? Email me and I will quote it before you commit. →",
     noteHref: "#contact",
   },
 } as const;
