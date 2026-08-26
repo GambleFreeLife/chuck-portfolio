@@ -1,21 +1,18 @@
 import Link from "next/link";
 
-const auditHref =
-  "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20";
-
 const offers = [
   {
     title: "3-point teardown",
     price: "$0",
     note: "Best first step",
     items: [
-      "Send me your website URL",
+      "Send your website URL",
       "I identify the three highest-impact issues I see",
       "You get a direct reply with what I would fix first",
       "No call required and no obligation to hire me",
     ],
-    cta: "Send your site",
-    href: auditHref,
+    cta: "Get the free audit",
+    href: "/#audit",
     featured: false,
   },
   {
@@ -28,8 +25,8 @@ const offers = [
       "Basic on-page SEO and local-search cleanup where relevant",
       "Before and after summary of what changed",
     ],
-    cta: "Start with the teardown",
-    href: auditHref,
+    cta: "Start with the audit",
+    href: "/#audit",
     featured: true,
   },
   {
@@ -43,7 +40,7 @@ const offers = [
       "A short handoff showing what changed and what to watch next",
     ],
     cta: "Ask if a sprint fits",
-    href: auditHref,
+    href: "/#audit",
     featured: false,
   },
 ] as const;
@@ -63,7 +60,7 @@ export function GrowthPricing() {
         <div className="growth-price-grid">
           {offers.map((offer) => (
             <article
-              className={`growth-price-card tilt-card${offer.featured ? " featured" : ""}`}
+              className={`growth-price-card${offer.featured ? " featured" : ""}`}
               key={offer.title}
             >
               <div className="growth-price-note">{offer.note}</div>
@@ -74,9 +71,9 @@ export function GrowthPricing() {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-              <a href={offer.href} className={offer.featured ? "growth-price-btn solid" : "growth-price-btn"}>
+              <Link href={offer.href} className={offer.featured ? "growth-price-btn solid" : "growth-price-btn"}>
                 {offer.cta}
-              </a>
+              </Link>
             </article>
           ))}
         </div>

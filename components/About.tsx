@@ -5,9 +5,9 @@ type AboutFocus = "growth" | "video" | "landing";
 const aboutContent = {
   growth: {
     paragraphs: [
-      "I run digital marketing work for Baryames Cleaners, my family's business. It has been open in Greater Lansing since 1922 and operates 11 locations. That is where I learned to care less about marketing jargon and more about whether people call, book, visit, and come back.",
-      "My work crosses WordPress, local SEO, Google Ads, Search Console, GA4, Tag Manager, email, landing pages, and brand content. That range matters because the problem is rarely isolated to one tool. A strong ad can still fail on a weak page, and a strong page is hard to improve if the tracking is broken.",
-      "I use AI heavily behind the scenes to research, build, test, and move faster, but I do not sell AI as the outcome. You are hiring me to find the business problem, implement the fix, and make the result easier to measure.",
+      "I learned this work inside Baryames Cleaners, my family's business. It has served Greater Lansing since 1922 and now operates 11 locations, so the standard is not whether a marketing idea sounds smart. It is whether the work helps a real customer find us, understand the service, and take the next step.",
+      "That operating context is why I work across the whole customer path instead of protecting one specialty. I can diagnose the page, the search intent, the ad, and the measurement together, then implement the smallest fix that makes sense.",
+      "I use AI heavily behind the scenes to research, build, test, and move faster, but I do not sell AI as the outcome. You are hiring me to find the business problem, do the work, and make the result easier to judge.",
     ],
     skills: [
       "WordPress",

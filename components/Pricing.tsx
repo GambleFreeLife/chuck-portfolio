@@ -65,7 +65,7 @@ const tiers = [
       "Works on the site you already have, no rebuild required",
     ],
     cta: "Start with a teardown",
-    href: "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20",
+    href: "/#audit",
     featured: false,
     badge: null,
   },
@@ -101,7 +101,7 @@ const tiers = [
       "SEO foundations and analytics",
     ],
     cta: "Discuss the build",
-    href: "mailto:chuck@chuckbaryames.com?subject=Full%20site%20project",
+    href: "/#audit",
     featured: false,
     badge: null,
   },
@@ -121,8 +121,8 @@ const sectionCopy = {
     label: "Pricing",
     title: "Start where the problem actually is.",
     sub: "If the site mostly works and is leaking, fix it. If the page needs to exist, build it. If the whole thing is holding you back, replace it. Every tier starts with a free teardown so you know which one you actually need.",
-    note: "Need a custom multi-page build or a larger scope? Email me and I will quote it before you commit. →",
-    noteHref: "#contact",
+    note: "Need a custom multi-page build or a larger scope? Start with the free audit and I will tell you what I would scope before you commit. →",
+    noteHref: "/#audit",
   },
 } as const;
 

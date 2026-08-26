@@ -14,8 +14,8 @@ export function LandingPagesFinalCTA() {
             <Link href="/get-started" className="cta-main-btn">
               Start the landing page brief
             </Link>
-            <a href="mailto:chuck@chuckbaryames.com?subject=Landing%20page%20project" className="cta-ghost-btn">
-              Ask a question first
+            <a href="/#audit" className="cta-ghost-btn">
+              Get a free site audit first
             </a>
           </div>
           <p className="cta-trust">

@@ -2,16 +2,17 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer>
+    <footer className="site-footer">
       <div className="wrap footer-inner">
-        <div>
+        <div className="footer-brand">
           <strong>Chuck Baryames</strong>
-          <span>Local business growth, websites, SEO, Google Ads, analytics, and brand video.</span>
+          <span>I find what is costing local businesses customers, then I fix it.</span>
         </div>
         <div className="footer-links">
           <Link href="/#work">Work</Link>
           <Link href="/#services">Services</Link>
           <Link href="/landing-pages">Landing pages</Link>
+          <Link href="/#audit">Free audit</Link>
           <a href="mailto:chuck@chuckbaryames.com">Email</a>
         </div>
       </div>

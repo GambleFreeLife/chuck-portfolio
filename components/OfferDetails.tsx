@@ -76,9 +76,9 @@ export function OfferDetails() {
               ))}
             </ul>
             <p className="fit-bridge">
-              If your project is bigger than one focused landing page, the audit, sprint, and full
-              website tiers below are sized for it. Or email{" "}
-              <a href="mailto:chuck@chuckbaryames.com">chuck@chuckbaryames.com</a> and we&apos;ll talk.
+              If your project is bigger than one focused landing page, start with the free website audit.
+              I will tell you what I would scope before you commit to a larger build. {" "}
+              <a href="/#audit">Send me your site →</a>
             </p>
           </div>
         </div>

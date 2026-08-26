@@ -1,12 +1,11 @@
-const auditHref =
-  "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20";
+import Link from "next/link";
 
 export function StickyMobileCTA() {
   return (
     <div className="sticky-mobile-cta" aria-hidden="false">
-      <a href={auditHref} className="sticky-mobile-cta-link">
-        Get the free teardown →
-      </a>
+      <Link href="/#audit" className="sticky-mobile-cta-link">
+        Get my free 3-point audit →
+      </Link>
     </div>
   );
 }

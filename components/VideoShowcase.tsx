@@ -1,21 +1,35 @@
-const work = [
+const campaigns = [
   {
-    src: "/portfolio/baryames-wash-fold-horizontal.mp4",
-    poster: "/portfolio/baryames-wash-fold-poster.jpg",
-    label: "Wash & Fold in-store campaign",
+    eyebrow: "WASH & FOLD · MULTI-FORMAT CAMPAIGN",
+    title: "Wash & Fold in-store campaign",
     description:
-      "A 30-second horizontal brand piece built for in-store screens, with the service promise readable even when the screen is muted.",
-    format: "16:9 · in-store display",
-    className: "",
+      "I built the message, pacing, layout, and motion around an actual Baryames service, then adapted the creative for wide in-store displays and vertical screens without forcing one crop to do both jobs.",
+    horizontal: {
+      src: "/portfolio/video/wash-fold-horizontal.mp4",
+      poster: "/portfolio/video/wash-fold-horizontal-poster.jpg",
+      label: "Wash & Fold horizontal campaign video",
+    },
+    vertical: {
+      src: "/portfolio/video/wash-fold-vertical.mp4",
+      poster: "/portfolio/video/wash-fold-vertical-poster.jpg",
+      label: "Wash & Fold vertical campaign video",
+    },
   },
   {
-    src: "/portfolio/baryames-skip-trip-vertical.mp4",
-    poster: "/portfolio/baryames-skip-trip-poster.jpg",
-    label: "Skip the Trip social campaign",
+    eyebrow: "SKIP THE TRIP · SERVICE CAMPAIGN",
+    title: "Skip the Trip social campaign",
     description:
-      "A vertical service story built around one customer benefit and one action, then adapted across Baryames marketing channels.",
-    format: "9:16 · social",
-    className: "showcase-card-vertical",
+      "This campaign centers on free pickup and delivery, with a vertical version for mobile attention and a wide version designed to stay understandable on a muted TV in a physical location.",
+    horizontal: {
+      src: "/portfolio/video/skip-trip-horizontal.mp4",
+      poster: "/portfolio/video/skip-trip-horizontal-poster.jpg",
+      label: "Skip the Trip horizontal campaign video",
+    },
+    vertical: {
+      src: "/portfolio/video/skip-trip-vertical.mp4",
+      poster: "/portfolio/video/skip-trip-vertical-poster.jpg",
+      label: "Skip the Trip vertical campaign video",
+    },
   },
 ] as const;
 
@@ -30,32 +44,40 @@ export function VideoShowcase() {
           </div>
           <div className="secondary-service-copy">
             <p className="sec-sub">
-              These are real Baryames assets, not portfolio mockups. I use the same business context
-              to write the message, design the motion, and produce content for social, ads, and store screens.
+              These are real Baryames campaign assets, not portfolio mockups. Video is supporting proof
+              that I can carry the business message through the page, the ad, social, and the store.
             </p>
             <a href="/order-video?plan=single" className="inline-service-cta">
-              See video options →
+              See standalone video options →
             </a>
           </div>
         </div>
-        <div className="showcase-grid real-work-grid">
-          {work.map((item) => (
-            <article className={`showcase-card real-work-card ${item.className}`} key={item.src}>
-              <div className="real-video-frame">
-                <video
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={item.poster}
-                  aria-label={item.label}
-                >
-                  <source src={item.src} type="video/mp4" />
-                </video>
+
+        <div className="campaign-showcase-list">
+          {campaigns.map((campaign, index) => (
+            <article className={`campaign-showcase${index % 2 === 1 ? " reverse" : ""}`} key={campaign.eyebrow}>
+              <div className="campaign-copy">
+                <div className="case-study-kicker">{campaign.eyebrow}</div>
+                <h3>{campaign.title}</h3>
+                <p>{campaign.description}</p>
+                <div className="campaign-format-row" aria-label="Formats delivered">
+                  <span>16:9 display</span>
+                  <span>9:16 vertical</span>
+                  <span>Muted-screen ready</span>
+                </div>
               </div>
-              <div className="showcase-meta">
-                <div className="video-format-label">{item.format}</div>
-                <h3>{item.label}</h3>
-                <p>{item.description}</p>
+              <div className="campaign-media-pair">
+                <div className="campaign-wide-frame">
+                  <video controls playsInline preload="none" poster={campaign.horizontal.poster} aria-label={campaign.horizontal.label}>
+                    <source src={campaign.horizontal.src} type="video/mp4" />
+                  </video>
+                </div>
+                <div className="campaign-phone-shell" aria-label="Vertical video preview">
+                  <div className="campaign-phone-speaker" aria-hidden="true" />
+                  <video controls playsInline preload="none" poster={campaign.vertical.poster} aria-label={campaign.vertical.label}>
+                    <source src={campaign.vertical.src} type="video/mp4" />
+                  </video>
+                </div>
               </div>
             </article>
           ))}

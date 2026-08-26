@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-const auditHref =
-  "mailto:chuck@chuckbaryames.com?subject=AUDIT&body=My%20website%3A%20";
-
 const services = [
   {
     eyebrow: "Website conversion",
@@ -18,9 +15,9 @@ const services = [
     title: "Make Google easier to understand and easier to act on.",
     text: "I review page targeting, Search Console, titles, metadata, internal linking, GA4, Tag Manager, and the basic local-search issues that keep good businesses invisible or unmeasured.",
     detail: "Best when you already have traffic but do not know what is working.",
-    cta: "Start with the free teardown",
-    href: auditHref,
-    type: "external",
+    cta: "Start with the free audit",
+    href: "/#audit",
+    type: "internal",
   },
   {
     eyebrow: "Google Ads",
@@ -28,14 +25,14 @@ const services = [
     text: "I clean up campaign structure, search intent, ad copy, landing-page alignment, and conversion tracking so the account is built around customer actions instead of vanity traffic.",
     detail: "Best for established local services where one new customer is worth real money.",
     cta: "Send me your current site",
-    href: auditHref,
-    type: "external",
+    href: "/#audit",
+    type: "internal",
   },
   {
     eyebrow: "Brand video",
     title: "Earn attention before the visitor reaches the page.",
-    text: "I also build short motion-led brand videos for social and ads. It is useful when the page converts well but not enough people stop, click, or understand the offer.",
-    detail: "Real Baryames campaign examples are shown below in both social and in-store formats.",
+    text: "I also build short motion-led brand videos for social, ads, and in-store screens. It is useful when the page converts well but not enough people stop, click, or understand the offer.",
+    detail: "Real Baryames campaign examples are shown below in matched horizontal and vertical formats.",
     cta: "See the brand content",
     href: "/#video-work",
     type: "internal",
@@ -57,9 +54,10 @@ export function Services() {
           </p>
         </div>
 
-        <div className="services-grid">
-          {services.map((service) => (
-            <article className="service-card tilt-card" key={service.eyebrow}>
+        <div className="services-grid problem-grid">
+          {services.map((service, index) => (
+            <article className="service-card" key={service.eyebrow}>
+              <div className="service-index">0{index + 1}</div>
               <div className="service-card-eyebrow">{service.eyebrow}</div>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
@@ -68,11 +66,7 @@ export function Services() {
                 <Link href={service.href} className="service-card-link">
                   {service.cta} <span aria-hidden="true">→</span>
                 </Link>
-              ) : (
-                <a href={service.href} className="service-card-link">
-                  {service.cta} <span aria-hidden="true">→</span>
-                </a>
-              )}
+              ) : null}
             </article>
           ))}
         </div>
