@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Outfit } from "next/font/google";
 import "./globals.css";
+import { PortfolioAnalytics } from "@/components/PortfolioAnalytics";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -45,7 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${instrumentSerif.variable}`}>{children}</body>
+      <body className={`${outfit.variable} ${instrumentSerif.variable}`}>{children}<PortfolioAnalytics /></body>
     </html>
   );
 }

@@ -49,7 +49,7 @@ const tiers = [
     cta: "Start the retainer",
     href: "/order-video?plan=retainer",
     featured: true,
-    badge: "Most popular",
+    badge: "Focused page",
   },
   {
     category: "landing",
@@ -58,11 +58,11 @@ const tiers = [
     suffix: null,
     note: "Starts with the free teardown",
     items: [
-      "The three highest-impact fixes, implemented",
-      "Page copy, calls-to-action, and mobile layout",
-      "Titles, meta descriptions, and local search basics",
+      "Up to three agreed edits on one existing page",
+      "Copy, buttons, or mobile-layout fixes",
+      "One revision round and desktop/mobile checks",
       "Before and after screenshots so you can see what changed",
-      "Works on the site you already have, no rebuild required",
+      "Website access and scope confirmed before paid work",
     ],
     cta: "Start with a teardown",
     href: "/#audit",
@@ -76,7 +76,7 @@ const tiers = [
     suffix: null,
     note: null,
     items: [
-      "One high-converting landing page",
+      "One focused, responsive landing page",
       "$50 deposit holds the slot, balance after preview approval",
       "48-hour preview delivery",
       "3 revision rounds",
@@ -85,7 +85,7 @@ const tiers = [
     cta: "Build the page",
     href: "/get-started",
     featured: true,
-    badge: "Most popular",
+    badge: "Focused page",
   },
   {
     category: "landing",

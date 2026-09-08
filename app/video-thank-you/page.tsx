@@ -2,7 +2,7 @@ export default function VideoThankYouPage() {
   const fromEmail = process.env.REPLY_TO_EMAIL ?? "chuck@chuckbaryames.com";
 
   return (
-    <main className="flow-page">
+    <main id="main-content" className="flow-page">
       <div className="flow-shell flow-shell-narrow">
         <a href="/" className="flow-back">
           CB

@@ -5,29 +5,14 @@ type AboutFocus = "growth" | "video" | "landing";
 const aboutContent = {
   growth: {
     paragraphs: [
-      "I learned this work inside Baryames Cleaners, my family's business. It has served Greater Lansing since 1922 and now operates 11 locations, so the standard is not whether a marketing idea sounds smart. It is whether the work helps a real customer find us, understand the service, and take the next step.",
-      "That operating context is why I work across the whole customer path instead of protecting one specialty. I can diagnose the page, the search intent, the ad, and the measurement together, then implement the smallest fix that makes sense.",
-      "I use AI heavily behind the scenes to research, build, test, and move faster, but I do not sell AI as the outcome. You are hiring me to find the business problem, do the work, and make the result easier to judge.",
+      "If you know the Baryames name around Lansing, you know my family's business. I handle website and marketing work for Baryames Cleaners, and I also work with Soup Spoon Cafe on its catering page and advertising.",
+      "When you hire me, I handle the copy, design, and implementation. You have one person to ask questions, review changes with, and hold accountable for the agreed work.",
+      "I start with a small, clearly defined project so you can see how I work before committing to anything larger.",
     ],
-    skills: [
-      "WordPress",
-      "Local SEO",
-      "Google Ads",
-      "GA4 / Tag Manager",
-      "Google Search Console",
-      "Landing pages",
-      "Conversion copywriting",
-      "Google Business Profile",
-      "Email marketing",
-      "Brand video",
-      "React / Next.js",
-      "Service businesses",
-    ],
+    skills: ["WordPress", "Landing pages", "Google Ads", "Local SEO", "Conversion tracking"],
     stats: [
-      { value: "1922", label: "Family business since" },
-      { value: "11", label: "Locations" },
-      { value: "7.2%", label: "Search CTR example" },
-      { value: "$299", label: "Quick Win" },
+      { value: "Lansing", label: "Local business focus" },
+      { value: "$299", label: "Website Quick Win" },
     ],
   },
   video: {

@@ -1,34 +1,10 @@
 const faqs = [
-  {
-    category: "growth",
-    question: "What do you actually do for a local business?",
-    answer:
-      "I start by finding the bottleneck. That may be a weak service page, unclear calls-to-action, poor local-search targeting, broken analytics, wasted paid-search traffic, or a gap between the ad and the landing page. I recommend the smallest useful fix first instead of forcing every business into the same package.",
-  },
-  {
-    category: "growth",
-    question: "Who am I actually hiring?",
-    answer:
-      "You are hiring me directly. I handle digital growth work for Baryames Cleaners, my family's business, open in Greater Lansing since 1922 and operating 11 locations. I work across websites, local SEO, Google Ads, analytics, email, and brand content there, so the recommendations come from operating inside a real local business rather than from a template.",
-  },
-  {
-    category: "growth",
-    question: "Do I need to get on a sales call?",
-    answer:
-      "No. Send your website URL and I will reply with the three highest-impact issues I see. If the right next step is obvious, I can quote a fixed-price project from there. We can use a call later if the scope genuinely needs one.",
-  },
-  {
-    category: "growth",
-    question: "Can you work on the website I already have?",
-    answer:
-      "Yes. The $299 Website Quick Win is specifically designed for improving an existing site instead of forcing a rebuild. I work with WordPress and can also build focused Next.js landing pages when a separate page makes more sense.",
-  },
-  {
-    category: "growth",
-    question: "How do you prove the work is helping?",
-    answer:
-      "I separate what can be measured from what cannot. I use Search Console, GA4, Tag Manager, ad-platform data, calls, forms, appointments, and other customer actions where the tracking supports it. I do not claim revenue attribution that the data cannot actually prove.",
-  },
+  { category: "growth", question: "Do I need a new website?", answer: "Often the useful first step is a small change to your existing site. The $299 Quick Win covers up to three agreed edits on one page. If your platform or the requested changes need a different approach, I will explain that before quoting." },
+  { category: "growth", question: "What happens after the free review?", answer: "You get three specific observations by email. You can use them yourself or ask for a fixed-price scope. There is no required call or ongoing contract." },
+  { category: "growth", question: "Who am I actually hiring?", answer: "Chuck Baryames. I handle the work myself, including copy, design, and implementation. Baryames Cleaners is my family's business, and I also work with Soup Spoon Cafe on catering marketing." },
+  { category: "growth", question: "Do you guarantee more customers?", answer: "No. Results depend on traffic, demand, your offer, and how inquiries are handled. I commit to the agreed work and help identify what can be measured. Where the data supports it, we compare qualified inquiries and bookings before and after the changes." },
+  { category: "growth", question: "What if my website gets very little traffic?", answer: "Then a redesign alone may not be the right next step. I will check the page for obvious obstacles and explain if reaching more relevant people should be the priority. Traffic data requires access to your analytics; a public website review cannot establish visitor counts." },
+  { category: "growth", question: "What access and extra costs should I expect?", answer: "A free review needs only your public URL. For paid work, I will specify the website access needed and confirm the scope in writing. Hosting, domains, paid tools, and new integrations are separate costs when needed. Please do not send passwords through this form." },
   {
     category: "video",
     question: "Who am I actually hiring?",

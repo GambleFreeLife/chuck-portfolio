@@ -4,10 +4,10 @@
   "description": "Chuck Baryames portfolio and productized landing page service.",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "next start",
-    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test test/intake.test.ts test/security-config.test.ts",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types --test test/intake.test.ts test/security-config.test.ts test/audit-route.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "repository": {

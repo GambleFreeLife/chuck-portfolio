@@ -50,3 +50,6 @@
 2026-08-25 - Repositioned the homepage around local-business growth outcomes - Real Baryames proof, fixed-price entry offers, and a proof-first funnel now lead the site while video remains a secondary capability.
 2026-08-25 - Strengthened the portfolio around verifiable proof - The homepage and landing-page portfolio now lead with current Baryames website and growth work, Bet on Recovery full-stack product proof, and real Baryames brand videos while keeping the free teardown as the primary client-acquisition CTA.
 2026-08-26 - Rebuilt the portfolio around authentic proof and onsite audit capture - Live Baryames and Bet on Recovery proof, paired campaign creative, and a short audit form now reduce positioning ambiguity and lead friction.
+
+2026-09-08 - Focused the portfolio on local website fixes and inspectable proof - Replaced unreliable screenshots, clarified fixed-price scope, improved audit delivery handling, and prepared optional GA4 measurement for prospect outreach.
+2026-09-08 - Added a native audit form response - Prospects can request a review even when client JavaScript does not load.
