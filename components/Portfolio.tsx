@@ -20,7 +20,7 @@ const cases: PortfolioCase[] = [
     badge: "Live business",
     badgeTone: "gold",
     eyebrow: "Operating local business, 11 locations",
-    title: "Baryames Cleaners Website Redesign & Growth",
+    title: "Baryames Cleaners website and marketing",
     description:
       "A full website redesign plus ongoing SEO, paid search, analytics, email, and conversion work for a family business serving Greater Lansing since 1922.",
     details: [
@@ -44,7 +44,7 @@ const cases: PortfolioCase[] = [
     badge: "Live product",
     badgeTone: "teal",
     eyebrow: "Solo-built full-stack product",
-    title: "Bet on Recovery Product Design & Development",
+    title: "Bet on Recovery product design and development",
     description:
       "A live web product I designed, developed, and launched from concept to production, proving I can execute beyond a marketing mockup.",
     details: [

@@ -14,7 +14,7 @@ export default function LandingPagesPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content">
         <LandingPagesHero />
         <OfferDetails />
         <LandingPagesProcess />

@@ -6,11 +6,11 @@ export function Footer() {
       <div className="wrap footer-inner">
         <div className="footer-brand">
           <strong>Chuck Baryames</strong>
-          <span>I find what is costing local businesses customers, then I fix it.</span>
+          <span>Website improvements for Greater Lansing businesses.</span>
         </div>
         <div className="footer-links">
           <Link href="/#work">Work</Link>
-          <Link href="/#services">Services</Link>
+          <Link href="/#pricing">Pricing</Link>
           <Link href="/landing-pages">Landing pages</Link>
           <Link href="/#audit">Free audit</Link>
           <a href="mailto:chuck@chuckbaryames.com">Email</a>

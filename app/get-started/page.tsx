@@ -11,7 +11,7 @@ export default async function GetStartedPage({ searchParams }: GetStartedPagePro
   const wasCanceled = params.canceled === "true";
 
   return (
-    <main className="flow-page">
+    <main id="main-content" className="flow-page">
       <div className="flow-shell">
         <a href="/" className="flow-back">
           CB

@@ -16,16 +16,16 @@ export default function HomePage() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content" className="conversion-home">
         <Hero />
         <GrowthProof />
+        <GrowthPricing />
         <Services />
         <GrowthProcess />
-        <GrowthPricing />
-        <VideoShowcase />
-        <AntiObjectionFAQ focus="growth" />
         <About focus="growth" />
+        <AntiObjectionFAQ focus="growth" />
         <FinalCTA />
+        <details className="wrap additional-work video-details"><summary>Also available: brand video, with real Baryames examples</summary><VideoShowcase /></details>
       </main>
       <StickyMobileCTA />
       <Footer />

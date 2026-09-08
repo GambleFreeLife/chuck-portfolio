@@ -12,8 +12,8 @@ const securityHeaders = [
       "img-src 'self' data: https:",
       "font-src 'self'",
       "style-src 'self' 'unsafe-inline'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://checkout.stripe.com https://api.resend.com",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://checkout.stripe.com https://api.resend.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
     ].join("; "),
   },
   {
@@ -44,6 +44,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  allowedDevOrigins: ["terminal.local"],
   async headers() {
     return [
       {

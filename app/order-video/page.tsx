@@ -23,7 +23,7 @@ export default async function OrderVideoPage({ searchParams }: OrderVideoPagePro
   const wasCanceled = params.canceled === "1" || params.canceled === "true";
 
   return (
-    <main className="flow-page">
+    <main id="main-content" className="flow-page">
       <div className="flow-shell video-order-shell">
         <a href="/" className="flow-back">
           CB
