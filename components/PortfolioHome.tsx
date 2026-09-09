@@ -98,7 +98,7 @@ export function PortfolioHome() {
         </section>
         <section className={s.aboutSection} id="about">
           <div className={`${s.container} ${s.aboutGrid}`}>
-            <div className={s.portrait}><Image src="/mypic.jpg" alt="Chuck Baryames, your designer and developer" width={768} height={768} sizes="(max-width: 760px) 80vw, 370px" /><span>Based in Lansing. Working with businesses anywhere.</span></div>
+            <div className={s.portrait}><Image src="/portfolio/chuck-portrait-enhanced.png" alt="Chuck Baryames, your designer and developer" width={768} height={768} sizes="(max-width: 760px) 80vw, 370px" /><span>Based in Lansing. Working with businesses anywhere.</span></div>
             <div className={s.aboutCopy}><p className={s.eyebrow}>A person, not a project handoff</p><h2>Hi, I’m Chuck.<br /><em>I’ll be doing the work.</em></h2><p>I handle website and marketing work for Baryames Cleaners, my family’s business. That means thinking beyond the page: what the customer needs, how the service works, and what happens after someone gets in touch.</p><p>When you hire me, you talk to the person writing the copy, designing the page, and building it. Send a question or a revision and it comes straight to me.</p><a href="#audit" className={s.textLink} data-track="audit_cta" data-location="about">Tell me about your website <span aria-hidden="true">↗</span></a></div>
           </div>
         </section>
