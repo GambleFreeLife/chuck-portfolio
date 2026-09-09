@@ -2,7 +2,8 @@ export type LeadContext = { source: string; medium: string; campaign: string; of
 const clean = (value: unknown) => typeof value === "string" && /^[a-z0-9_-]{1,80}$/i.test(value) ? value : "";
 export function normalizeLeadContext(value: unknown): LeadContext {
   const data = value && typeof value === "object" ? value as Record<string, unknown> : {};
-  return { source: clean(data.source), medium: clean(data.medium), campaign: clean(data.campaign), offer: data.offer === "quick-win" ? "quick-win" : "" };
+  const allowedOffers = ["quick-win", "page-refresh", "homepage-redesign", "website-redesign"];
+  return { source: clean(data.source), medium: clean(data.medium), campaign: clean(data.campaign), offer: typeof data.offer === "string" && allowedOffers.includes(data.offer) ? data.offer : "" };
 }
 export function getLeadContext(): LeadContext {
   if (typeof window === "undefined") return normalizeLeadContext(null);

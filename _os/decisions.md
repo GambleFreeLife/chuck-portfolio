@@ -53,3 +53,4 @@
 
 2026-09-08 - Focused the portfolio on local website fixes and inspectable proof - Replaced unreliable screenshots, clarified fixed-price scope, improved audit delivery handling, and prepared optional GA4 measurement for prospect outreach.
 2026-09-08 - Added a native audit form response - Prospects can request a review even when client JavaScript does not load.
+2026-09-09 - Redesigned the homepage around visible Baryames work and scoped custom website projects. Added $500 refresh, $1,000 homepage, and website from $2,500 offers with package context in inquiries. Preserved existing payment contracts and original dirty checkout. See REDESIGN-REVIEW.md for evidence and limits.

@@ -20,6 +20,13 @@ const initialState: FormState = {
   companyWebsite: "",
 };
 
+const offerLabels: Record<string, string> = {
+  "quick-win": "$299 Website Quick Win",
+  "page-refresh": "$500 focused refresh",
+  "homepage-redesign": "$1,000 homepage redesign",
+  "website-redesign": "website redesign, from $2,500",
+};
+
 export function AuditLeadForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -65,7 +72,7 @@ export function AuditLeadForm() {
 
       trackEvent("generate_lead", { method: "website_audit", offer: getLeadContext().offer });
       setStatus("success");
-      setMessage("Got it. I will review the site myself and reply by email with the three fixes I would prioritize.");
+      setMessage("Got it. I will review the site myself and reply by email with three observations and what I would prioritize.");
       setForm(initialState);
       started.current = false;
     } catch {
@@ -92,11 +99,11 @@ export function AuditLeadForm() {
       <noscript>You can submit this form or email chuck@chuckbaryames.com for your review.</noscript>
       <div className="audit-form-header">
         <span className="audit-form-badge">FREE · NO CALL REQUIRED</span>
-        <h3>Get your 3-point website audit.</h3>
+        <h3>Tell me about your website.</h3>
         <p>About a minute to send. I aim to reply within two business days.</p>
       </div>
 
-      {offer === "quick-win" ? <p className="offer-interest">Interested in the $299 Website Quick Win. This review is still free.</p> : null}
+      {offerLabels[offer] ? <p className="offer-interest">Interested in the {offerLabels[offer]}. This conversation is free.</p> : null}
 
       <label className="audit-field">
         <span>Name <small>Required</small></span>
@@ -141,7 +148,7 @@ export function AuditLeadForm() {
       </label>
 
       <label className="audit-field">
-        <span>What feels off? <small>Optional</small></span>
+        <span>What would you like to improve? <small>Optional</small></span>
         <textarea
           name="problem"
           maxLength={1000}
