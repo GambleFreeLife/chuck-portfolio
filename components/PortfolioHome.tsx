@@ -2,6 +2,7 @@ import Image from "next/image";
 import { AuditLeadForm } from "@/components/AuditLeadForm";
 import { HomeInteractions } from "@/components/HomeInteractions";
 import { ProjectExplorer } from "@/components/ProjectExplorer";
+import { BaryamesPreview } from "@/components/BaryamesPreview";
 import s from "./PortfolioHome.module.css";
 
 const packages = [
@@ -37,9 +38,9 @@ export function PortfolioHome() {
           <div className={s.container}>
             <div className={s.heroGrid}>
               <div className={s.heroCopy}>
-                <p className={s.eyebrow}>Independent web designer · Lansing, Michigan</p>
-                <h1>Your work is good.<br />Your website should <em>make that obvious.</em></h1>
-                <p className={s.intro}>I redesign websites for service businesses, with clear copy, thoughtful design, and an easier way for your next customer to get in touch.</p>
+                <p className={s.eyebrow}>Website redesigns for service businesses</p>
+                <h1>Make a better<br />first impression.<br /><em>Make it easier to hire you.</em></h1>
+                <p className={s.intro}>I turn outdated websites into clear, professional pages that show why you’re worth choosing and make it easy to call, book, or request a quote. Copy, design, and build, handled by me.</p>
                 <a className={s.button} href="#audit" data-track="audit_cta" data-location="hero">Let’s improve your website <span aria-hidden="true">↗</span></a>
                 <p className={s.heroNote}>Start with a free review. Get a useful answer from me.</p>
               </div>
@@ -48,10 +49,7 @@ export function PortfolioHome() {
                 <a className={s.heroComposition} href="#work" aria-label="Explore my Baryames Cleaners website redesign" data-track="proof_click" data-location="hero">
                   <div className={s.desktopPreview}>
                     <div className={s.browserBar}><span aria-hidden="true">● ● ●</span><span>baryamescleaners.com</span><span aria-hidden="true">↗</span></div>
-                    <Image src="/portfolio/baryames-verified-20260908.jpg" alt="Baryames Cleaners homepage redesign with a clear free pickup offer and a prominent signup button" width={1348} height={926} loading="eager" sizes="(max-width: 760px) 90vw, 50vw" />
-                  </div>
-                  <div className={s.phonePreview}>
-                    <Image src="/portfolio/baryames-mobile-20260909.png" alt="The same Baryames homepage on a phone" width={390} height={844} sizes="(max-width: 760px) 26vw, 175px" priority />
+                    <BaryamesPreview />
                   </div>
                   <span className={s.projectArrow} aria-hidden="true">↗</span>
                 </a>
@@ -98,7 +96,7 @@ export function PortfolioHome() {
         </section>
         <section className={s.aboutSection} id="about">
           <div className={`${s.container} ${s.aboutGrid}`}>
-            <div className={s.portrait}><Image src="/mypic.jpg" alt="Chuck Baryames, your designer and developer" width={768} height={768} sizes="(max-width: 760px) 80vw, 370px" /><span>Based in Lansing. Working with businesses anywhere.</span></div>
+            <div className={s.portrait}><Image src="/portfolio/chuck-portrait-enhanced.png" alt="Chuck Baryames, your designer and developer" width={768} height={768} sizes="(max-width: 760px) 80vw, 370px" /><span>Based in Lansing. Working with businesses anywhere.</span></div>
             <div className={s.aboutCopy}><p className={s.eyebrow}>A person, not a project handoff</p><h2>Hi, I’m Chuck.<br /><em>I’ll be doing the work.</em></h2><p>I handle website and marketing work for Baryames Cleaners, my family’s business. That means thinking beyond the page: what the customer needs, how the service works, and what happens after someone gets in touch.</p><p>When you hire me, you talk to the person writing the copy, designing the page, and building it. Send a question or a revision and it comes straight to me.</p><a href="#audit" className={s.textLink} data-track="audit_cta" data-location="about">Tell me about your website <span aria-hidden="true">↗</span></a></div>
           </div>
         </section>
