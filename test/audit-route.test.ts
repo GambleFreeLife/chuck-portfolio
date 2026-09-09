@@ -38,6 +38,16 @@ describe("Audit request delivery", () => {
   it("rejects malformed addresses and keeps invalid leads out of email", async () => { for (const website of ["localhost", "https://user:password@example.com", "javascript:alert(1)"]) { const r = routeWith([]); assert.equal((await r.submit({ ...valid, website })).status, 400); assert.equal(r.sent.length, 0); } });
   it("ignores the honeypot without sending mail", async () => { const r = routeWith([]); assert.equal((await r.submit({ ...valid, companyWebsite: "spam" })).status, 200); assert.equal(r.sent.length, 0); });
   it("validates source labels and carries offer interest to the admin", async () => { const r = routeWith([]); await r.submit({ ...valid, context: { source: "linkedin", medium: "outreach", campaign: "lansing-week1", offer: "quick-win" } }); const fields = r.sent[0].react as Record<string,unknown>; assert.equal(fields.source, "linkedin"); assert.equal(fields.offer, "quick-win"); assert.equal(fields.website, "https://example.com/"); });
+  it("delivers each redesign package selection with the inquiry", async () => {
+    for (const offer of ["page-refresh", "homepage-redesign", "website-redesign"]) {
+      const r = routeWith(["accepted", "accepted"]);
+      const result = await r.submit({ ...valid, context: { source: "email", medium: "outreach", campaign: "portfolio-launch", offer } });
+      assert.equal(result.status, 200);
+      const fields = r.sent[0].react as Record<string, unknown>;
+      assert.equal(fields.offer, offer);
+      assert.equal(fields.campaign, "portfolio-launch");
+    }
+  });
 });
 describe("Lead source hygiene", () => {
   it("drops emails, URLs and unsupported fields", () => { assert.deepEqual(normalizeLeadContext({ source: "owner@example.com", medium: "https://example.com", campaign: "safe-campaign", offer: "arbitrary", password: "example" }), { source: "", medium: "", campaign: "safe-campaign", offer: "" }); });

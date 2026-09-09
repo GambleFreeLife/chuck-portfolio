@@ -13,3 +13,4 @@ Build the productized landing page service flow for chuck-portfolio:
 ## Status
 
 Phase 2 implementation works locally. Phase 3 email notifications are being added to the Stripe webhook.
+2026-09-09: Portfolio redesign implemented and verified in an isolated checkout. Next business validation is qualified inquiries and paid deposits, not visual scores. See REDESIGN-REVIEW.md.
