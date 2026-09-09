@@ -26,17 +26,3 @@ Local browser evidence is stored in D:/Codex/Temp/portfolio-*.png and portfolio-
 Implementation: PASS. Measured conversion lift and $1,000 collected within seven days: NOT YET ACHIEVED. Measure qualified replies, inquiries, deposits, and collected revenue after outreach. With 50% deposits, two $1,000 projects would produce $1,000 upfront; this is arithmetic, not a sales forecast.
 
 Design rationale is consistent with Nielsen Norman Group's research on [visible pricing](https://www.nngroup.com/articles/show-price/) and [credibility](https://www.nngroup.com/articles/trustworthy-design/). Those sources do not establish that this particular design or price will convert.
-
-## Requested polish revision
-
-Kept the approved palette, layout, pricing, and primary CTA. Strengthened the hero around service-business owners: a better first impression and an easier path to hiring them. Balanced headline wrapping to avoid an isolated final word.
-
-Research reviewed September 9: [Oak Harbor Web Designs](https://oakharborwebdesigns.com/) names its small-business audience and service directly; [Oak Web Designs](https://www.oakwebdesigns.com/) makes the done-for-you service and working relationship explicit. These are positioning examples, not verified conversion-rate benchmarks. This headline remains a hypothesis to evaluate through qualified inquiries and paid projects.
-
-Replaced the scaled homepage screenshot with a clearly labeled condensed project preview containing native, readable text. Removed the rotated screenshot and overlapping phone treatment. Customer-review excerpts now appear immediately below the phone line; the large trust-section introduction is omitted. Howard W. and Gary & Karen Q. excerpts and five-star ratings were verified on the [live Baryames homepage](https://baryamescleaners.com/). They are cleaning-customer reviews, not endorsements of Chuck's web design. The service-page view remains an actual screenshot. The live client website was not changed.
-
-Enhanced the original 200px portrait with image generation and visually reviewed the result. Original photo retained; the restoration improves display clarity but generated detail is not recovered original camera detail.
-
-Validation: production build and typecheck passed; all 17 existing tests passed. Checked 320, 390, 768, 1024 and 1440px widths: no root overflow or broken loaded images. Preview body text remains at least 15px. Verified both case-study controls and destinations, contact anchor and existing form action. Visually reviewed desktop, mobile proof, and portrait. No new console errors appeared on the final local page loads; the browser history contains an earlier live-client-site network error. No real email or checkout transaction was sent.
-
-Implementation and requested visual changes: PASS. Conversion lift and collected revenue: not measured. Evidence: D:/Codex/Temp/portfolio-revision-*.png.

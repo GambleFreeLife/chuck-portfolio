@@ -7,5 +7,3 @@ Warm paper, deep green ink, and restrained terracotta accents. Outfit carries th
 The primary action starts a free email conversation. Package interest travels with the inquiry. Custom work is scoped in writing; $500 focused refresh, $1,000 homepage redesign, and a website redesign from $2,500. Existing standalone landing-page and video checkout contracts remain separate offers.
 
 Homepage styles live in PortfolioHome.module.css to avoid changing legacy offer pages. Use server-rendered content; keep client code limited to the existing form, attribution, and the project preview controls. Respect reduced motion and preserve a usable native form.
-
-The homepage proof uses a labeled condensed Baryames preview with native text and verified cleaning-customer review excerpts. The service-page view remains a real screenshot. Review excerpts belong to the cleaning business and must never be represented as web-design testimonials.
