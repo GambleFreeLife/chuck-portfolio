@@ -1,153 +1,44 @@
 import { NextRequest, NextResponse } from "next/server";
-import AuditConfirmationEmail from "@/emails/AuditConfirmationEmail";
-import AuditRequestWithContextEmail from "@/emails/AuditRequestWithContextEmail";
-import { getOptionalEnv, getRequiredEnv } from "@/lib/server/env";
-import { getResend } from "@/lib/server/resend";
-
+import ProjectInquiryEmail from "@/emails/ProjectInquiryEmail";
 import { normalizeLeadContext } from "@/lib/lead-context";
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const rateLimit = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 6;
-
-function normalizeWebsite(value: string) {
-  const trimmed = value.trim();
-  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
-  const parsed = new URL(withProtocol);
-
-  if ((parsed.protocol !== "http:" && parsed.protocol !== "https:") || parsed.username || parsed.password || !parsed.hostname.includes(".")) {
-    throw new Error("Unsupported protocol");
-  }
-
-  return parsed.toString();
-}
-
-function getClientIp(request: NextRequest) {
-  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-}
-
-function isRateLimited(ip: string) {
-  const now = Date.now();
-  for (const [key, value] of rateLimit) { if (value.resetAt <= now) rateLimit.delete(key); }
-  if (rateLimit.size >= 5000 && !rateLimit.has(ip)) return true;
-  const current = rateLimit.get(ip);
-
-  if (!current || current.resetAt <= now) {
-    rateLimit.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-    return false;
-  }
-
-  current.count += 1;
-  return current.count > RATE_LIMIT_MAX;
-}
-
+import { validateProjectInquiry } from "@/lib/project-inquiry";
+import { getRequiredEnv } from "@/lib/server/env";
+import { getResend } from "@/lib/server/resend";
+import { rateLimited, readLimitedJson, verifyHuman } from "@/lib/server/inquiry-protection";
+export const runtime = "nodejs";
+// Keep the endpoint, but never accept the old unverified audit payload.
 export async function POST(request: NextRequest) {
-  const nativeForm = request.headers.get("content-type")?.includes("application/x-www-form-urlencoded") ?? false;
-  function respond(body: { ok?: boolean; error?: string }, options?: { status: number }) {
-    if (!nativeForm) return NextResponse.json(body, options);
-    const heading = body.ok ? "Your website review request was received." : "Your request could not be sent.";
-    // Only fixed server messages enter this HTML response, never submitted values.
-    const detail = body.ok ? "I will review your site and reply by email. I aim to respond within two business days." : body.error;
-    return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Website review | Chuck Baryames</title><body><main><h1>${heading}</h1><p>${detail}</p><p><a href="mailto:chuck@chuckbaryames.com">Email Chuck</a></p><p><a href="/">Return to the website</a></p></main></body></html>`, { status: options?.status ?? 200, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" } });
-  }
-  if (isRateLimited(getClientIp(request))) {
-    return respond({ error: "Too many requests. Try again later." }, { status: 429 });
-  }
-
+  const respond = (body: { ok?: boolean; error?: string }, status = 200) => NextResponse.json(body, { status, headers: { "Cache-Control": "no-store" } });
+  const expected = new URL(request.url);
+  if (request.headers.get("origin") !== expected.origin || request.headers.get("sec-fetch-site") === "cross-site") return respond({ error: "Please send your inquiry from the website." }, 403);
+  if (!request.headers.get("content-type")?.includes("application/json")) return respond({ error: "Please use the project inquiry form, or email chuck@chuckbaryames.com." }, 415);
+  const ip = request.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (rateLimited(ip)) return respond({ error: "Too many attempts. Please try later or email chuck@chuckbaryames.com." }, 429);
   let payload: unknown;
-
-  try {
-    payload = nativeForm ? Object.fromEntries(await request.formData()) : await request.json();
-  } catch {
-    return respond({ error: "Invalid request." }, { status: 400 });
-  }
-
-  if (!payload || typeof payload !== "object") {
-    return respond({ error: "Invalid request." }, { status: 400 });
-  }
-
+  try { payload = await readLimitedJson(request); } catch { return respond({ error: "The request is invalid or too large." }, 400); }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return respond({ error: "Invalid request." }, 400);
   const data = payload as Record<string, unknown>;
-  const honeypot = typeof data.companyWebsite === "string" ? data.companyWebsite.trim() : "";
-
-  if (honeypot.length > 0) {
-    return respond({ ok: true });
-  }
-
-  const name = typeof data.name === "string" ? data.name.trim() : "";
-  const email = typeof data.email === "string" ? data.email.trim().toLowerCase() : "";
-  const websiteInput = typeof data.website === "string" ? data.website.trim() : "";
-  const problem = typeof data.problem === "string" ? data.problem.trim() : "";
-
-  if (name.length < 2 || name.length > 100) {
-    return respond({ error: "Enter your name." }, { status: 400 });
-  }
-
-  if (!emailPattern.test(email) || email.length > 160) {
-    return respond({ error: "Enter a valid email." }, { status: 400 });
-  }
-
-  if (websiteInput.length < 3 || websiteInput.length > 300) {
-    return respond({ error: "Enter your website." }, { status: 400 });
-  }
-
-  if (problem.length > 1000) {
-    return respond({ error: "Keep the optional note under 1,000 characters." }, { status: 400 });
-  }
-
-  let website: string;
-
+  if (typeof data.companyWebsite === "string" && data.companyWebsite.trim()) return respond({ ok: true });
+  const parsed = validateProjectInquiry(data);
+  if (!parsed.value) return respond({ error: parsed.error }, 400);
+  const token = typeof data.turnstileToken === "string" ? data.turnstileToken : "";
+  if (!token || token.length > 2048) return respond({ error: "Please complete the security check and try again." }, 400);
+  const requestId = typeof data.requestId === "string" ? data.requestId : "";
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) return respond({ error: "Please refresh the page and try again." }, 400);
   try {
-    website = normalizeWebsite(websiteInput);
-  } catch {
-    return respond({ error: "Enter a valid website address." }, { status: 400 });
-  }
-
-  try {
-    const resend = getResend();
-    const from = getRequiredEnv("FROM_EMAIL");
-    const adminEmail = getRequiredEnv("ADMIN_EMAIL");
-    const replyTo = getOptionalEnv("REPLY_TO_EMAIL");
-
-    const adminResult = await resend.emails.send({
-      from,
-      to: adminEmail,
-      replyTo: email,
-      subject: `Website audit request: ${new URL(website).hostname}`,
-      react: AuditRequestWithContextEmail({
-        name,
-        email,
-        website,
-        problem: problem || null,
-        ...normalizeLeadContext(data.context),
-      }),
-    });
-
-    if (adminResult.error) {
-      throw new Error("Admin notification failed");
-    }
-
-    // Once the admin email is accepted, a confirmation failure must not invite duplicate submissions.
-    try {
-      const confirmationResult = await resend.emails.send({
-        from,
-        to: email,
-        ...(replyTo ? { replyTo } : {}),
-        subject: "I got your website",
-        react: AuditConfirmationEmail({ name, website }),
-      });
-      if (confirmationResult.error) console.error("Audit confirmation email failed after lead delivery.");
-    } catch {
-      console.error("Audit confirmation email failed after lead delivery.");
-    }
-
+    // Missing configuration and verification outages must never bypass the check.
+    const secret = getRequiredEnv("TURNSTILE_SECRET_KEY");
+    if (!await verifyHuman(token, expected.hostname, secret)) return respond({ error: "The security check expired or failed. Please try again." }, 400);
+    const result = await getResend().emails.send({
+      from: getRequiredEnv("FROM_EMAIL"), to: getRequiredEnv("ADMIN_EMAIL"),
+      replyTo: parsed.value.email, subject: `Project inquiry: ${parsed.value.business}`,
+      react: ProjectInquiryEmail({ ...parsed.value, ...normalizeLeadContext(data.context) }),
+    }, { idempotencyKey: `project-inquiry/${requestId}` });
+    if (result.error) throw new Error("Delivery failed");
+    // Avoid sending automatic mail to an unverified submitted address.
     return respond({ ok: true });
   } catch {
-    return respond(
-      {
-        error: "I could not send the audit request right now. Email chuck@chuckbaryames.com instead.",
-      },
-      { status: 503 },
-    );
+    console.error("Project inquiry verification or delivery unavailable.");
+    return respond({ error: "I could not confirm delivery. Please email chuck@chuckbaryames.com, or try again shortly." }, 503);
   }
 }
