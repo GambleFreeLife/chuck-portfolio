@@ -54,3 +54,7 @@
 2026-09-08 - Focused the portfolio on local website fixes and inspectable proof - Replaced unreliable screenshots, clarified fixed-price scope, improved audit delivery handling, and prepared optional GA4 measurement for prospect outreach.
 2026-09-08 - Added a native audit form response - Prospects can request a review even when client JavaScript does not load.
 2026-09-09 - Redesigned the homepage around visible Baryames work and scoped custom website projects. Added $500 refresh, $1,000 homepage, and website from $2,500 offers with package context in inquiries. Preserved existing payment contracts and original dirty checkout. See REDESIGN-REVIEW.md for evidence and limits.
+
+2026-09-21 - Repositioned the portfolio around scoped website and recurring Google Ads projects and replaced the free audit funnel with qualified inquiries and mandatory server-side Turnstile verification - The user authorized pricing and form improvements to reduce spam and improve paid-client economics; legacy payment contracts and locked SEO metadata are preserved.
+
+2026-09-21 - Applied the supplied redesign patch to a feature branch after confirming GitHub write access - Keep main and production unchanged while launch verification remains outstanding.

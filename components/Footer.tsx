@@ -12,7 +12,7 @@ export function Footer() {
           <Link href="/#work">Work</Link>
           <Link href="/#pricing">Pricing</Link>
           <Link href="/landing-pages">Landing pages</Link>
-          <Link href="/#audit">Free audit</Link>
+          <Link href="/#audit">Discuss a project</Link>
           <a href="mailto:chuck@chuckbaryames.com">Email</a>
         </div>
       </div>
