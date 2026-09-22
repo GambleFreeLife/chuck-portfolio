@@ -45,7 +45,13 @@ export function AuditLeadForm() {
     } catch { setStatus("error"); setMessage("I could not confirm delivery. Your details are still here. Please retry or email me."); }
     finally { inFlight.current = false; setToken(""); setResetKey(value => value + 1); }
   }
-  if (status === "success") return <div className="audit-success" role="status" tabIndex={-1} ref={successRef}><h3>Your project is in my inbox.</h3><p>Thanks for the details. I’ll reply personally with a next step, usually within two business days.</p><button type="button" onClick={() => { submissionId.current = crypto.randomUUID(); setStatus("idle"); }}>Send another inquiry</button></div>;
+  if (status === "success") return <div className="audit-success" role="status" tabIndex={-1} ref={successRef} aria-labelledby="inquiry-success-title">
+    <span className="audit-success-mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+    <h3 id="inquiry-success-title">Inquiry sent.</h3>
+    <p>Thanks for telling me about your project. I’ll review your details and reply personally with a recommended next step.</p>
+    <p className="audit-success-next"><strong>What happens next</strong>Look for my reply in your inbox, usually within two business days.</p>
+    <button type="button" onClick={() => { submissionId.current = crypto.randomUUID(); setStatus("idle"); }}>Send another inquiry <span aria-hidden="true">↗</span></button>
+  </div>;
   return <form className="audit-form" method="post" action="/api/audit" onSubmit={handleSubmit} aria-busy={status === "submitting"}>
     <noscript>The security check needs JavaScript. Please email chuck@chuckbaryames.com about your project.</noscript>
     <div className="audit-form-header"><h3>Tell me about your project.</h3><p>A few details are all I need to start.</p></div>

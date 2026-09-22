@@ -131,10 +131,14 @@
 .formShell :global(.audit-privacy a) { text-decoration:underline; }
 .formShell :global(.audit-error) { color:#8f2b20; font-size:13px; padding:12px; border:1px solid #e3b8b0; background:#fff2ef; border-radius:4px; }
 .formShell :global(.audit-error a) { text-decoration:underline; }
-.formShell :global(.audit-success) { color:var(--ink); padding:24px 0; }
-.formShell :global(.audit-success h3) { font-size:28px; margin-bottom:14px; }
-.formShell :global(.audit-success p) { color:var(--muted); }
-.formShell :global(.audit-success button) { background:var(--ink); color:white; border:0; padding:12px 18px; border-radius:4px; margin-top:24px; cursor:pointer; }
+.formShell :global(.audit-success) { display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; min-height:0; color:var(--ink); background:transparent; border:0; border-radius:0; padding:12px 0; box-shadow:none; }
+.formShell :global(.audit-success-mark) { display:grid; place-items:center; flex-shrink:0; width:56px; height:56px; margin:0 0 24px; border:1px solid #c8dbd0; border-radius:50%; background:#e5eee7; color:#296455; }
+.formShell :global(.audit-success h3) { font-family:inherit; font-size:clamp(28px,3vw,36px); font-weight:500; line-height:1.15; letter-spacing:-.035em; color:var(--ink); margin:0 0 16px; }
+.formShell :global(.audit-success p) { font-size:15px; line-height:1.7; color:#526159; margin:0; }
+.formShell :global(.audit-success .audit-success-next) { width:100%; margin-top:24px; padding-top:24px; border-top:1px solid #dbe2dd; }
+.formShell :global(.audit-success-next strong) { display:block; color:var(--ink); font-size:13px; font-weight:600; margin-bottom:6px; }
+.formShell :global(.audit-success button) { display:inline-flex; align-items:center; gap:14px; min-height:44px; background:transparent; color:#296455; border:0; border-bottom:1px solid #a4bcb0; padding:10px 0; border-radius:0; margin-top:24px; font-size:14px; font-weight:500; cursor:pointer; }
+.formShell :global(.audit-success button:hover) { color:var(--ink); border-color:var(--ink); }
 .site .footer { padding:35px 0 22px; }
 .footer > .container { display:flex; align-items:center; justify-content:space-between; gap:25px; }
 .footer p { font-size:12px; color:var(--muted); }
