@@ -25,6 +25,16 @@ Restrained light/ink design, one primary inquiry action, visible entry price, li
 
 ## Acceptance and feedback
 
+### Reference review requested after the first preview
+
+Reviewed the actual uncommitted work in the original `chuck-portfolio` checkout, based on 62eb9e1. Those changes primarily move paid intake from Supabase to Stripe metadata and adjust webhook/email handling. They contain no uncommitted homepage layout changes. They informed the reliability review; the new direct-email inquiry path already avoids a database dependency. The checkout migration remains separate because the request was to use the work as a reference, and it would change existing payment/webhook contracts. The original dirty checkout was preserved.
+
+Also reviewed the unpublished `codex/qualified-client-redesign` at f9652bb, including its project viewer, qualification copy, and acquisition plan. Gstack headless inspected that deployed draft and the current live site. Reused and expanded the project-viewer idea into an integrated case study with homepage, service-page, and brand-video views, specific role/scope explanations, and a goal-oriented inquiry prompt. The hero adopts the draft's customer-choice framing. The lower, tightly scoped $350/$950/$1,750 ladder follows the user's current instructions rather than the older draft's higher entry price and recurring-service model.
+
+Gstack headless checked the final production build at 320, 390, 768, 1024, and 1440px. Every view's controls, headings, media, and links stayed within the viewport; a 320px button clipping issue was found and fixed. Native Tab/Enter selection worked. Real video playback decoded at 1280x720 for 30.058 seconds, with no autoplay and preload none. A deliberately missing media URL produced the error fallback; switching away and back recovered playback. The inactive video unmounts, and the text summary and goal-field help are accessible in the DOM. All 38 existing tests and the production build passed after these changes. New screenshots and check scripts remain private under `.gstack/qa/`.
+
+### Feedback plan
+
 Check desktop, tablet, narrow mobile, keyboard, pricing selection, FAQs, error recovery, CAPTCHA expiry, and accepted/blocked submissions. Verify deployed commit, production headers, and rejection of missing/invalid tokens. Email remains a no-JavaScript fallback. Security tests must verify side-effect ordering and fail-closed behavior.
 
 Immediate: delivery, rendering, challenge paths. Intermediate: accepted inquiries classified as spam/unqualified/qualified, by offer and source. Business: paid projects per eligible unique visitor by source/device, revenue and delivery hours by tier. Review October 22, 2026, or once traffic supports useful comparison. No reliable baseline denominator supplied; improvement remains unverified. Keep private evidence outside git and record aggregate outcomes only.

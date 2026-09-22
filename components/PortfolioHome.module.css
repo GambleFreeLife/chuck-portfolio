@@ -51,17 +51,6 @@
 .site .workSection { background:white; }
 .sectionHeading { display:flex; justify-content:space-between; align-items:end; gap:50px; margin-bottom:38px; }
 .sectionHeading > p { max-width:305px; color:var(--muted); font-size:16px; }
-.workGrid { display:grid; grid-template-columns:1.2fr 1fr; gap:30px; }
-.workImage { padding:26px 26px 0; background:#e7eee8; border-radius:8px; overflow:hidden; aspect-ratio:1.65; }
-.secondaryImage { background:#eeeee9; }
-.workImage img { display:block; width:100%; height:auto; box-shadow:0 10px 35px #1d29271a; border-radius:5px 5px 0 0; transition:transform .3s; }
-.workCard:hover .workImage img { transform:translateY(-5px); }
-.workDescription { display:flex; justify-content:space-between; gap:20px; padding:20px 0; }
-.workDescription > span { font-size:25px; }
-.smallLabel { font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); }
-.workDescription h3 { font-size:23px; font-weight:500; letter-spacing:-.03em; margin:7px 0; line-height:1.25; }
-.workDescription p { color:var(--muted); font-size:14px; max-width:450px; }
-.proofNote { color:var(--muted); font-size:12px; border-top:1px solid var(--line); padding-top:18px; }
 .packages { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
 .package { display:flex; flex-direction:column; border:1px solid var(--line); border-radius:9px; background:white; padding:28px; }
 .package.featured { background:var(--ink); color:#fff; border-color:var(--ink); }
@@ -129,6 +118,7 @@
 .formShell :global(.audit-field) { display:flex; flex-direction:column; gap:7px; }
 .formShell :global(.audit-field > span) { color:var(--ink); display:flex; justify-content:space-between; font-size:13px; font-weight:500; }
 .formShell :global(.audit-field small) { color:var(--muted); font-size:10px; font-weight:400; }
+.formShell :global(.audit-field > small) { font-size:12px; line-height:1.5; }
 .formShell :global(.audit-field input),.formShell :global(.audit-field textarea),.formShell :global(.audit-field select) { width:100%; min-width:0; background:white; color:var(--ink); border:1px solid #bcc9c1; border-radius:4px; padding:11px 12px; font-size:16px; line-height:1.5; }
 .formShell :global(.audit-field textarea) { resize:vertical; }
 .formShell :global(.audit-field input:focus),.formShell :global(.audit-field textarea:focus),.formShell :global(.audit-field select:focus) { background:white; color:var(--ink); border-color:var(--accent); box-shadow:0 0 0 3px #29645512; }
@@ -158,7 +148,7 @@
 @media(max-width:800px) {
   .container { padding-inline:24px; }.site section { padding:62px 0; scroll-margin-top:80px; }.header .container { height:72px; }.wordmark { font-size:23px; }.site .nav { gap:20px; }.nav > a:not(.navCta) { display:none; }.site .navCta { font-size:13px; padding:10px 14px; gap:16px; }
   .site .hero { padding:42px 0 0; }.heroGrid { grid-template-columns:1fr; gap:30px; min-height:0; }.heroCopy { padding:0; }.site .hero h1 { font-size:clamp(42px,7.8vw,62px); }.heroCopy .eyebrow { font-size:10px; margin-bottom:23px; }.intro { font-size:17px; max-width:520px; }.heroActions { gap:20px; }.heroActions > span { font-size:12px; }.signature { margin-top:25px; }.heroWork { max-width:570px; width:100%; margin-inline:auto; }.workLabel { font-size:8px; }.heroComposition { padding:20px 34px 44px 0; }.phonePreview { border-width:4px; border-radius:16px; }.heroCaption { flex-direction:row; align-items:center; font-size:13px; }.heroCaption > span { font-size:10px; }.heroBottom { grid-template-columns:1fr; gap:7px; font-size:12px; margin-top:28px; padding:21px 0; }
-  .sectionHeading { display:block; margin-bottom:29px; }.sectionHeading > p { margin-top:22px; max-width:100%; font-size:15px; }.eyebrow { font-size:10px; margin-bottom:19px; }.workGrid { grid-template-columns:1fr; gap:22px; }.workImage { padding:20px 20px 0; }.workDescription { padding:16px 0; }.workDescription h3 { font-size:23px; }.proofNote { margin-top:8px; }
+  .sectionHeading { display:block; margin-bottom:29px; }.sectionHeading > p { margin-top:22px; max-width:100%; font-size:15px; }.eyebrow { font-size:10px; margin-bottom:19px; }
   .packages { grid-template-columns:1fr; gap:18px; }.package { padding:27px; }.packageTop { font-size:9px; margin-bottom:22px; }.package h3 { font-size:28px; }.packageDetail { min-height:0; font-size:15px; margin-top:12px; }.price { font-size:54px; margin:20px 0; }.package li { font-size:15px; }.timing { font-size:12px; }.site .packageButton { font-size:14px; }.priceNotes { grid-template-columns:1fr; gap:18px; font-size:13px; }.smallProject { flex-direction:column; align-items:start; gap:10px; font-size:14px; }.smallProject a { white-space:normal; }
   .aboutGrid { grid-template-columns:1fr; gap:32px; }.portrait { max-width:260px; }.aboutCopy > p:not(.eyebrow) { font-size:16px; }.aboutCopy .eyebrow { max-width:300px; }.steps { grid-template-columns:1fr; gap:28px; }.steps h3 { margin-top:11px; }.faqLayout { grid-template-columns:1fr; gap:27px; }.questions summary { font-size:16px; }.questions details p { padding-right:10px; font-size:15px; }
   .contactGrid { grid-template-columns:1fr; gap:30px; }.contactCopy { padding-top:0; }.contactCopy > p:not(.eyebrow) { max-width:100%; }.contactCopy h2 { font-size:52px; }.formShell { padding:25px 22px; }.footer > .container { flex-direction:column; align-items:start; gap:17px; }.site .footer { padding-bottom:95px; }.footer .legal { flex-direction:row; flex-wrap:wrap; gap:8px; }.footer p { max-width:300px; }

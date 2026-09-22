@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AuditLeadForm } from "@/components/AuditLeadForm";
 import { HomeInteractions } from "@/components/HomeInteractions";
+import { ProjectExplorer } from "@/components/ProjectExplorer";
 import { services } from "@/lib/services";
 import s from "./PortfolioHome.module.css";
 
@@ -25,7 +26,7 @@ export function PortfolioHome() {
       <section className={`hero ${s.hero}`}><div className={s.container}><div className={s.heroGrid}>
         <div className={s.heroCopy}>
           <p className={s.eyebrow}><span className={s.dot} /> Independent web design & Google Ads</p>
-          <h1>A better website.<br /><em>A clearer path<br />to your next customer.</em></h1>
+          <h1>Make it easier<br />for your next customer<br /><em>to choose you.</em></h1>
           <p className={s.intro}>I help small service businesses turn what they do well into a website people understand, trust, and know how to act on.</p>
           <div className={s.heroActions}><a className={s.button} href="#pricing" data-track="services_cta" data-location="hero">Find your starting point <Arrow /></a><span>Websites from <strong>$350</strong><br />One-time project pricing</span></div>
           <div className={s.signature}><Image src="/portfolio/chuck-portrait-enhanced.png" alt="Chuck Baryames" width={48} height={48} sizes="48px" /><p>Designed and built by me, Chuck.<br /><span>Based in Michigan. Working with you directly.</span></p></div>
@@ -38,11 +39,8 @@ export function PortfolioHome() {
       </div><div className={s.heroBottom}><span>Clear scope before you pay</span><span>Desktop & mobile included</span><span>Your website, in your accounts</span></div></div></section>
 
       <section className={s.workSection} id="work"><div className={s.container}>
-        <div className={s.sectionHeading}><div><p className={s.eyebrow}>Selected work</p><h2>See what I <em>bring to the table.</em></h2></div><p>Website design, development, and marketing work for my family’s business.</p></div>
-        <div className={s.workGrid}>
-          <a className={s.workCard} href="https://baryamescleaners.com/" target="_blank" rel="noopener noreferrer" data-track="project_click" data-location="business_website"><div className={s.workImage}><Image src="/portfolio/baryames-verified-20260908.jpg" alt="Baryames Cleaners homepage" width={1348} height={926} sizes="(max-width: 800px) 90vw, 55vw" /></div><div className={s.workDescription}><div><span className={s.smallLabel}>Website design & development</span><h3>A local service, made simple.</h3><p>Clear services, visible pickup buttons, and a design that works on a phone.</p></div><Arrow /></div></a>
-          <a className={s.workCard} href="https://baryamescleaners.com/services/wash-fold/" target="_blank" rel="noopener noreferrer" data-track="project_click" data-location="service_page"><div className={`${s.workImage} ${s.secondaryImage}`}><Image src="/portfolio/baryames-wash-fold-verified-20260908.jpg" alt="Wash and Fold service page showing how laundry pickup works" width={1348} height={926} sizes="(max-width: 800px) 90vw, 40vw" /></div><div className={s.workDescription}><div><span className={s.smallLabel}>Service page & copy</span><h3>One page. One useful next step.</h3><p>The offer, how it works, and a direct path to pickup signup.</p></div><Arrow /></div></a>
-        </div><p className={s.proofNote}>My role: website design, copy, development, and ongoing marketing for Baryames Cleaners.</p>
+        <div className={s.sectionHeading}><div><p className={s.eyebrow}>Selected work</p><h2>A real business.<br /><em>A clearer customer path.</em></h2></div><p>Explore the website, a focused service page, and supporting video I made for my family’s business.</p></div>
+        <ProjectExplorer />
       </div></section>
 
       <section className={s.pricingSection} id="pricing"><div className={s.container}>

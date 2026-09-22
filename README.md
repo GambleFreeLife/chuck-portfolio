@@ -27,7 +27,7 @@ npm run build
 
 Follow [TURNSTILE-SETUP.md](TURNSTILE-SETUP.md) for widget creation, Vercel configuration, and local testing. `.env.example` lists the two new Turnstile variables only; existing email, database, and payment settings are configured separately. Keep private values in untracked local environment files or Vercel. The form needs JavaScript and a valid security check; direct email is the fallback.
 
-Current homepage events include `services_cta`, `inquiry_cta`, `proof_click`, `project_click`, `offer_click`, `email_click`, `inquiry_form_start`, and `generate_lead`. `generate_lead` records provider acceptance of an inquiry, not inbox receipt or a qualified lead. GA4 remains optional through `NEXT_PUBLIC_GA_MEASUREMENT_ID`; local data-layer events alone are not stored analytics.
+Current homepage events include `services_cta`, `inquiry_cta`, `proof_click`, `project_preview`, `project_click`, `video_play`, `offer_click`, `email_click`, `inquiry_form_start`, and `generate_lead`. `generate_lead` records provider acceptance of an inquiry, not inbox receipt or a qualified lead. GA4 remains optional through `NEXT_PUBLIC_GA_MEASUREMENT_ID`; local data-layer events alone are not stored analytics.
 
 ## Documentation
 
