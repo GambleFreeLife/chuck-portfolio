@@ -1,5 +1,7 @@
 # Portfolio conversion update
 
+Historical record for September 8, 2026. The offers, event names, confirmation emails, and native-form behavior below describe that release. Use the [current README](README.md), [September 22 release evidence](RESEARCH-AND-RELEASE-20260922.md), and [Turnstile setup](TURNSTILE-SETUP.md) for the current implementation and pending activation checks.
+
 ## Changes
 
 - Replaced on-demand third-party screenshots with locally served, verified Baryames screenshots captured September 8, 2026. Added a useful fallback link when an image fails.
