@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Turnstile } from "@/components/Turnstile";
 import type { FormEvent } from "react";
 
 type VideoOrderPlan = "single" | "pack" | "retainer";
@@ -156,6 +157,8 @@ function getResponseUrl(payload: unknown) {
 }
 
 export function VideoOrderForm({ plan }: VideoOrderFormProps) {
+  const [token, setToken] = useState("");
+  const [resetKey, setResetKey] = useState(0);
   const [form, setForm] = useState<FormState>(initialFormState);
   const [selectedPlanType, setSelectedPlanType] = useState<VideoOrderPlan>(plan);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -212,6 +215,7 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting || !token) return;
     setFormError(null);
 
     const nextErrors = validateForm(form);
@@ -237,7 +241,9 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
           brand_offer: form.brand_offer.trim(),
           target_audience: form.target_audience.trim(),
           product_type: selectedPlanType,
+          turnstileToken: token,
         }),
+        signal: AbortSignal.timeout(25000),
       });
 
       const payload: unknown = await response.json();
@@ -254,6 +260,9 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
     } catch {
       setFormError("Network hiccup. Try again and I will send you to checkout.");
       setIsSubmitting(false);
+    } finally {
+      setToken("");
+      setResetKey(value => value + 1);
     }
   };
 
@@ -379,7 +388,8 @@ export function VideoOrderForm({ plan }: VideoOrderFormProps) {
         {errors.style_preference ? <small className="field-error">{errors.style_preference}</small> : null}
       </label>
 
-      <button className="flow-primary-button" type="submit" disabled={isSubmitting}>
+      <Turnstile action="video_order" onToken={setToken} resetKey={resetKey} />
+      <button className="flow-primary-button" type="submit" disabled={isSubmitting || !token}>
         {isSubmitting ? "Redirecting to Stripe..." : "Continue to checkout"}
       </button>
     </form>

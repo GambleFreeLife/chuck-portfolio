@@ -38,6 +38,9 @@ export function LandingPagesHero() {
           <p className="hero-trust fa d5">
             You see the preview before the $447 balance is due, and three revision rounds are included.
           </p>
+          <p className="hero-trust fa d5">
+            For a simpler page using your supplied content, <Link href="/?offer=landing-page#pricing">see the $350 One-page launch</Link>.
+          </p>
         </div>
       </div>
     </section>
