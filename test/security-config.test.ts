@@ -16,6 +16,9 @@ describe("Next.js security config", () => {
     assert.equal(headerMap.get("X-Frame-Options"), "DENY");
     assert.equal(headerMap.get("Referrer-Policy"), "strict-origin-when-cross-origin");
     assert.match(headerMap.get("Content-Security-Policy") ?? "", /frame-ancestors 'none'/);
+    assert.match(headerMap.get("Content-Security-Policy") ?? "", /frame-src[^;]+https:\/\/challenges.cloudflare.com/);
+    assert.match(headerMap.get("Content-Security-Policy") ?? "", /script-src[^;]+https:\/\/challenges.cloudflare.com/);
+    assert.doesNotMatch(headerMap.get("Content-Security-Policy") ?? "", /unsafe-eval/);
     assert.match(headerMap.get("Permissions-Policy") ?? "", /camera=\(\)/);
   });
 });

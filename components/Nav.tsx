@@ -15,7 +15,7 @@ export function Nav() {
           <Link href="/#pricing" className="nav-primary">Pricing</Link>
           <Link href="/landing-pages" className="nav-primary nav-secondary-service">Landing pages</Link>
           <Link href="/#about" className="nav-anchor">About</Link>
-          <Link href="/#audit" className="nav-cta" data-track="audit_cta" data-location="navigation">Free website audit</Link>
+          <Link href="/#audit" className="nav-cta" data-track="inquiry_cta" data-location="navigation">Discuss a project</Link>
         </div>
       </div>
     </nav>

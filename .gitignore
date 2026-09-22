@@ -10,3 +10,4 @@ stripe-listen.*.log
 .stripe-listen.pid
 codebase-audit-for-claude.md
 supabase/.temp
+.gstack/

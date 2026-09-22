@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getVideoPackPriceId, getVideoRetainerPriceId, getVideoSinglePriceId } from "@/lib/server/env";
 import { getStripe } from "@/lib/server/stripe";
 import { getSupabaseAdmin } from "@/lib/server/supabase";
+import { verifyTurnstile } from "@/lib/server/turnstile";
+import { FormRequestError, readFormPayload, isFormRateLimited, getSameOrigin } from "@/lib/server/form-security";
 
 export const runtime = "nodejs";
 
@@ -39,9 +41,6 @@ type ValidationResult =
     };
 
 const maxRequestBytes = 16_000;
-const rateLimitWindowMs = 10 * 60 * 1000;
-const rateLimitMaxRequests = 6;
-const videoOrderAttempts = new Map<string, { count: number; resetAt: number }>();
 
 const stylePreferences = [
   "launch_promo",
@@ -55,45 +54,6 @@ const productTypes = ["single", "pack", "retainer"] as const;
 
 function jsonError(message: string, status: number, errors?: Record<string, string>) {
   return NextResponse.json({ error: message, errors }, { status });
-}
-
-function getSameOrigin(request: Request) {
-  const requestOrigin = new URL(request.url).origin;
-  const origin = request.headers.get("origin");
-
-  if (origin !== requestOrigin) {
-    return null;
-  }
-
-  return requestOrigin;
-}
-
-function getClientIp(request: Request) {
-  const forwardedFor = request.headers.get("x-forwarded-for");
-
-  if (forwardedFor) {
-    return forwardedFor.split(",")[0]?.trim() || "unknown";
-  }
-
-  return request.headers.get("x-real-ip") || "unknown";
-}
-
-function isRateLimited(request: Request) {
-  const clientIp = getClientIp(request);
-  const now = Date.now();
-  const current = videoOrderAttempts.get(clientIp);
-
-  if (!current || current.resetAt <= now) {
-    videoOrderAttempts.set(clientIp, {
-      count: 1,
-      resetAt: now + rateLimitWindowMs,
-    });
-    return false;
-  }
-
-  current.count += 1;
-
-  return current.count > rateLimitMaxRequests;
 }
 
 function isRequestTooLarge(request: Request) {
@@ -226,7 +186,7 @@ export async function POST(request: Request) {
     return jsonError("Request origin is not allowed.", 403);
   }
 
-  if (isRateLimited(request)) {
+  if (isFormRateLimited(request)) {
     return jsonError("Too many checkout attempts. Wait a few minutes, then try again.", 429);
   }
 
@@ -237,9 +197,9 @@ export async function POST(request: Request) {
   let payload: unknown;
 
   try {
-    payload = await request.json();
-  } catch {
-    return jsonError("Submit the form again.", 400);
+    payload = await readFormPayload(request);
+  } catch (error) {
+    return jsonError(error instanceof FormRequestError ? error.message : "Submit the form again.", error instanceof FormRequestError ? error.status : 400);
   }
 
   const validation = validateVideoOrderPayload(payload);
@@ -247,6 +207,9 @@ export async function POST(request: Request) {
   if (!validation.ok) {
     return jsonError("Add the required details, then try again.", 400, validation.errors);
   }
+
+  const verification = await verifyTurnstile((payload as Record<string, unknown>).turnstileToken, "video_order");
+  if (!verification.ok) return jsonError(verification.error, verification.status);
 
   try {
     const supabase = getSupabaseAdmin();

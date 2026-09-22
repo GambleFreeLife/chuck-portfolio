@@ -56,7 +56,7 @@ const tiers = [
     title: "Website Quick Win",
     amount: "$299",
     suffix: null,
-    note: "Starts with the free teardown",
+    note: "Scope confirmed before payment",
     items: [
       "Up to three agreed edits on one existing page",
       "Copy, buttons, or mobile-layout fixes",
@@ -64,7 +64,7 @@ const tiers = [
       "Before and after screenshots so you can see what changed",
       "Website access and scope confirmed before paid work",
     ],
-    cta: "Start with a teardown",
+    cta: "Discuss a quick fix",
     href: "/#audit",
     featured: false,
     badge: null,
@@ -94,7 +94,7 @@ const tiers = [
     suffix: "+",
     note: null,
     items: [
-      "Multi-page conversion-optimized site",
+      "A custom multi-page website with launch videos",
       "Includes 4 launch videos",
       "10-14 day delivery",
       "3 revision rounds",
@@ -120,9 +120,9 @@ const sectionCopy = {
   landing: {
     label: "Pricing",
     title: "Start where the problem actually is.",
-    sub: "If the site mostly works and is leaking, fix it. If the page needs to exist, build it. If the whole thing is holding you back, replace it. Every tier starts with a free teardown so you know which one you actually need.",
-    note: "Need a custom multi-page build or a larger scope? Start with the free audit and I will tell you what I would scope before you commit. →",
-    noteHref: "/#audit",
+    sub: "Choose a focused fix, a landing page with a 48-hour preview, or a custom website with launch videos. I confirm the scope before you commit.",
+    note: "For the $350 supplied-content page, $950 business website, and Google Ads package, see all services and pricing. →",
+    noteHref: "/#pricing",
   },
 } as const;
 

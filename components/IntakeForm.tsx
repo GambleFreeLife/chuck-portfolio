@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { Turnstile } from "@/components/Turnstile";
 import {
   deadlinePreferences,
   domainStatuses,
@@ -53,6 +54,8 @@ type ApiResponse =
     };
 
 export function IntakeForm() {
+  const [token, setToken] = useState("");
+  const [resetKey, setResetKey] = useState(0);
   const [form, setForm] = useState<IntakeFormState>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -79,6 +82,7 @@ export function IntakeForm() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting || !token) return;
     setError("");
 
     const clientValidation = validateIntakePayload(form);
@@ -98,13 +102,14 @@ export function IntakeForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(clientValidation.data),
+        body: JSON.stringify({ ...clientValidation.data, turnstileToken: token }),
+        signal: AbortSignal.timeout(25000),
       });
 
       const result = (await response.json()) as ApiResponse;
 
       if (!response.ok || !("url" in result)) {
-        setError("Something went wrong before checkout. Try again in a minute.");
+        setError("error" in result ? result.error : "Something went wrong before checkout. Try again in a minute.");
         setIsSubmitting(false);
         return;
       }
@@ -113,6 +118,9 @@ export function IntakeForm() {
     } catch {
       setError("Something went wrong before checkout. Try again in a minute.");
       setIsSubmitting(false);
+    } finally {
+      setToken("");
+      setResetKey(value => value + 1);
     }
   }
 
@@ -271,7 +279,8 @@ export function IntakeForm() {
             {error}
           </div>
         ) : null}
-        <button className="flow-primary-button" type="submit" disabled={isSubmitting}>
+        <Turnstile action="landing_intake" onToken={setToken} resetKey={resetKey} />
+        <button className="flow-primary-button" type="submit" disabled={isSubmitting || !token}>
           {isSubmitting ? "Opening checkout" : "Pay the $50 deposit and start the build"}
         </button>
         <p className="form-submit-note">

@@ -15,7 +15,7 @@ export function LandingPagesFinalCTA() {
               Start the landing page brief
             </Link>
             <a href="/#audit" className="cta-ghost-btn">
-              Get a free site audit first
+              Discuss your project first
             </a>
           </div>
           <p className="cta-trust">
