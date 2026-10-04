@@ -66,7 +66,7 @@
 .before summary { display:flex; justify-content:space-between; align-items:center; min-height:44px; font-size:12px; cursor:pointer; list-style:none; }
 .before summary::-webkit-details-marker { display:none; }
 .beforeImage { max-height:290px; overflow:auto; background:white; }
-.beforeImage img { display:block; width:100%; height:auto; margin-top:-2.3%; }
+.beforeImage img { display:block; width:100%; height:auto; }
 .before figcaption { font-size:10px; color:var(--muted); padding:8px 0; }
 .site .projectLink { display:flex; justify-content:space-between; align-items:center; gap:10px; min-height:44px; margin-top:10px; border-top:1px solid var(--line); padding-top:9px; font-size:12px; font-weight:500; }
 .campaigns { display:grid; grid-template-columns:.85fr 1.25fr .8fr; gap:28px; align-items:start; margin-top:38px; padding-top:30px; border-top:1px solid var(--line); }
