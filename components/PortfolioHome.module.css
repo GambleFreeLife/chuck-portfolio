@@ -17,7 +17,7 @@
 .site .wordmark { display:inline-flex; align-items:center; min-height:44px; font-size:25px; font-weight:600; letter-spacing:-.055em; white-space:nowrap; color:var(--ink); }
 .wordmark span { color:var(--accent); }
 .site .nav { position:static; display:flex; align-items:center; gap:20px; border:0; padding:0; background:none; backdrop-filter:none; }
-.nav > a { min-height:44px; display:flex; align-items:center; padding:8px; font-size:14px; font-weight:500; }
+.nav > a { min-width:44px; min-height:44px; display:flex; align-items:center; padding:8px; font-size:14px; font-weight:500; }
 .site .navCta,.site .button { display:inline-flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 18px; border-radius:5px; background:var(--ink); color:white; font-size:14px; font-weight:500; min-height:48px; }
 .site .navCta:hover,.site .button:hover { background:var(--accent); }
 .site .hero { padding:56px 0 0; text-align:left; background:var(--paper); }
@@ -199,6 +199,7 @@
 .mobileCta a { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; min-height:48px; border-radius:5px; color:white; background:var(--ink); font-size:14px; }
 .formShell :global(.audit-privacy a),.formShell :global(.audit-error a) { display:inline-flex; align-items:center; min-height:44px; }
 .formShell :global(.audit-field small) { text-transform:none; letter-spacing:0; font-size:11px; }
+.formShell :global(.security-note button) { min-width:44px; min-height:44px; }
 @media(max-width:1100px) {
  .container { padding-inline:28px; }.heroGrid { gap:30px; }.package { padding:21px; }.projectBody { padding:18px; }.contactGrid { gap:45px; }.campaigns { gap:20px; }.heroCopy .eyebrow { font-size:9px; }.site .nav { gap:10px; }
 }
