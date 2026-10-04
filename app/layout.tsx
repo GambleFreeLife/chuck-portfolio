@@ -20,22 +20,22 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chuckbaryames.com"),
-  title: "Chuck Baryames | Websites, Local SEO, Google Ads and Brand Video for Local Businesses",
+  title: "Chuck Baryames | Websites and Marketing for Michigan Businesses",
   description:
-    "I run marketing for an 11-location family business open since 1922. Websites, local SEO, Google Ads, conversion tracking, and brand video for local service businesses. Send your URL for a free teardown.",
+    "Websites, Google Ads, email and short video for Michigan service businesses. Get 3 free fixes for your website. Websites from $750.",
   openGraph: {
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg?v=20261004",
         width: 1200,
         height: 630,
-        alt: "Landing pages built in 48 hours. $497 flat.",
+        alt: "Chuck Baryames: Make it easier for your next customer to choose you. Get 3 free fixes for your website. Websites from $750.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.jpg?v=20261004"],
   },
 };
 

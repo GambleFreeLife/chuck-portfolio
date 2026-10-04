@@ -15,7 +15,19 @@ export function Turnstile({ action, onToken, resetKey = 0 }: { action: string; o
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
   const [compact, setCompact] = useState(false);
+  const [active, setActive] = useState(false);
   const sitekey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  useEffect(() => {
+    if (!container.current) return;
+    if (!("IntersectionObserver" in window)) { setActive(true); return; }
+    // Start near the form, so the challenge neither competes with the hero
+    // nor expires while someone is still reading the work and pricing.
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { setActive(true); observer.disconnect(); }
+    }, { rootMargin: "600px" });
+    observer.observe(container.current);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (!container.current) return;
     const observer = new ResizeObserver(entries => setCompact(entries[0].contentRect.width < 300));
@@ -39,8 +51,8 @@ export function Turnstile({ action, onToken, resetKey = 0 }: { action: string; o
 
   if (!sitekey) return <p role="status" className="security-note">The form is temporarily unavailable. Please <a href="mailto:chuck@chuckbaryames.com">email me about your project</a>.</p>;
   return <div className="security-check">
-    <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setReady(true)} onError={() => setError("The security check could not load. Please allow Cloudflare in your browser or email me.")} />
-    <div ref={container} />
+    {active && <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setReady(true)} onError={() => setError("The security check could not load. Please allow Cloudflare in your browser or email me.")} />}
+    <div ref={container} style={{ minHeight: compact ? 140 : 65 }} />
     {!ready && !error && <p role="status" className="security-note">Loading security check…</p>}
     {error && <p role="alert" className="security-note">{error} {ready && <button type="button" onClick={() => setRetry(value => value + 1)}>Retry security check</button>}</p>}
   </div>;
