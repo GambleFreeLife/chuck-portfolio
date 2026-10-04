@@ -1,6 +1,10 @@
 type EventData = { location?: string; offer?: string; method?: string; label?: string; tier?: string; video?: string; project?: string };
 const events = new Set(["generate_lead", "cta_click", "select_tier", "email_click", "video_play", "case_study_click"]);
 export const analyticsPreferenceKey = "portfolio-analytics-v1";
+// Google treats even debug_mode:false as debug traffic. Omit it on production.
+export function analyticsEnvironment(hostname: string) {
+  return ["chuckbaryames.com", "www.chuckbaryames.com"].includes(hostname) ? {} : { debug_mode: true };
+}
 declare global { interface Window { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void; portfolioAnalyticsAllowed?: boolean } }
 export function analyticsAllowed(): boolean {
   if (typeof window === "undefined") return false;

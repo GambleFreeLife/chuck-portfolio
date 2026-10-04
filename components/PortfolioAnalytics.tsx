@@ -3,7 +3,7 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { getLeadContext } from "@/lib/lead-context";
-import { analyticsAllowed } from "@/lib/analytics";
+import { analyticsAllowed, analyticsEnvironment } from "@/lib/analytics";
 // Public Google tag ID for the owner-approved Chuck Portfolio property.
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-SHJDZ2K0BS";
 const configured = /^G-[A-Z0-9]+$/.test(measurementId);
@@ -26,13 +26,12 @@ export function PortfolioAnalytics() {
     const pageUrl = window.location.origin + pathname;
     if (lastPage.current === pageUrl) return;
     lastPage.current = pageUrl;
-    const debug = !["chuckbaryames.com", "www.chuckbaryames.com"].includes(window.location.hostname);
     window.dataLayer = window.dataLayer || [];
     if (!window.gtag) {
       window.gtag = function () { window.dataLayer?.push(arguments); };
       window.gtag("js", new Date());
     }
-    window.gtag("config", measurementId, { send_page_view: false, page_location: pageUrl, page_referrer: "", allow_google_signals: false, allow_ad_personalization_signals: false, cookie_expires: 60 * 60 * 24 * 60, debug_mode: debug });
+    window.gtag("config", measurementId, { send_page_view: false, page_location: pageUrl, page_referrer: "", allow_google_signals: false, allow_ad_personalization_signals: false, cookie_expires: 60 * 60 * 24 * 60, ...analyticsEnvironment(window.location.hostname) });
     const context = getLeadContext();
     const knownCampaigns: Record<string, [string, string]> = { profile: ["linkedin", "social"], cold_email: ["email", "outreach"], site_credit: ["baryamescleaners", "referral"] };
     const expected = knownCampaigns[context.campaign];

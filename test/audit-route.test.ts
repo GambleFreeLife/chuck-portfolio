@@ -109,6 +109,13 @@ describe("Lead context privacy", () => {
 });
 
 describe("Optional event measurement", () => {
+  it("keeps production visits out of Google's developer-traffic exclusion", () => {
+    const analytics = moduleFrom("../lib/analytics.ts");
+    const environment = analytics.analyticsEnvironment as (hostname:string)=>Record<string,unknown>;
+    for (const host of ["chuckbaryames.com","www.chuckbaryames.com"]) assert.equal("debug_mode" in environment(host), false);
+    assert.equal(environment("preview.vercel.app").debug_mode,true);
+    assert.equal(environment("127.0.0.1").debug_mode,true);
+  });
   it("sends each approved event once and excludes personal values and arbitrary fields", () => {
     const calls: unknown[][] = [];
     const analytics = moduleFrom("../lib/analytics.ts", {}, { window: {portfolioAnalyticsAllowed:true,gtag:(...args:unknown[])=>calls.push(args)} });
