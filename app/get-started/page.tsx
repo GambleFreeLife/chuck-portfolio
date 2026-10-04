@@ -1,4 +1,6 @@
 import { IntakeForm } from "@/components/IntakeForm";
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Existing landing page agreement | Chuck Baryames", robots: { index: false, follow: false } };
 
 type GetStartedPageProps = {
   searchParams: Promise<{
@@ -17,10 +19,11 @@ export default async function GetStartedPage({ searchParams }: GetStartedPagePro
           CB
         </a>
         <section className="flow-hero" aria-labelledby="get-started-title">
-          <div className="sec-label">Start your landing page</div>
-          <h1 id="get-started-title">Tell me what to build.</h1>
+          <div className="sec-label">Existing agreements only</div>
+          <h1 id="get-started-title">Your agreed landing page brief.</h1>
+          <p>This form is for a previously agreed $497 landing page with a $50 deposit. Use it only if those are the terms in your written scope. <a href="/?offer=landing-page#pricing">See current services and prices</a> for a new project.</p>
           <p>
-            Fill out the build brief, pay the $50 deposit, and I will start the 48-hour preview.
+            Your existing agreement stays in place: complete the brief and $50 deposit to start its 48-hour preview.
           </p>
           <div className="flow-proof" aria-label="Service details">
             <span>The $50 deposit holds your build slot.</span>

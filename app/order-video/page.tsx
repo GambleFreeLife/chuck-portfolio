@@ -1,4 +1,6 @@
 import { VideoOrderForm } from "@/components/VideoOrderForm";
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Existing video agreement | Chuck Baryames", robots: { index: false, follow: false } };
 
 type VideoPlan = "single" | "pack" | "retainer";
 
@@ -29,8 +31,9 @@ export default async function OrderVideoPage({ searchParams }: OrderVideoPagePro
           CB
         </a>
         <section className="flow-hero video-order-hero" aria-labelledby="order-video-title">
-          <div className="sec-label">Order your video</div>
-          <h1 id="order-video-title">Start your video order.</h1>
+          <div className="sec-label">Existing agreements only</div>
+          <h1 id="order-video-title">Your agreed video brief.</h1>
+          <p>This form preserves previously agreed video plans and prices. Use it only when Chuck has sent you a written scope for one of the plans below. <a href="/?offer=brand-video#pricing">See current video services</a> for a new project.</p>
           <p>
             Choose your plan, send the short brief, and checkout opens with the price already matched to your order.
           </p>

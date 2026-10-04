@@ -23,9 +23,11 @@ export async function POST(request: Request) {
   const email = typeof data.email === "string" ? data.email.trim().toLowerCase() : "";
   const websiteInput = typeof data.website === "string" ? data.website.trim() : "";
   const problem = typeof data.problem === "string" ? data.problem.trim() : "";
+  const context = normalizeLeadContext(data.context ?? { offer: data.offer });
   if (name.length < 2 || name.length > 100 || /[\r\n]/.test(name)) return respond({ error: "Enter your name." }, 400);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 160) return respond({ error: "Enter a valid email." }, 400);
-  if (problem.length < 10 || problem.length > 2000) return respond({ error: "Tell me a little about your project in 10 to 2,000 characters." }, 400);
+  if (problem.length > 2000) return respond({ error: "Keep your message to 2,000 characters or fewer." }, 400);
+  if (context.offer === "free-review" && !websiteInput) return respond({ error: "Add your website URL so I can review it, or choose a project service." }, 400);
   let website = "";
   if (websiteInput) {
     try {
@@ -37,8 +39,7 @@ export async function POST(request: Request) {
   }
   const verification = await verifyTurnstile(data.turnstileToken ?? data["cf-turnstile-response"], "project_inquiry");
   if (!verification.ok) return respond({ error: verification.error }, verification.status);
-  const context = normalizeLeadContext(data.context ?? { offer: data.offer });
-  const service = serviceLabels[context.offer] || (context.offer === "focused-help" ? "Focused refresh / Google Ads review" : "Help choosing a service");
+  const service = serviceLabels[context.offer] || "Help choosing a service";
   const submissionId = typeof data.submissionId === "string" && /^[a-f0-9-]{36}$/i.test(data.submissionId) ? data.submissionId : undefined;
   try {
     const result = await getResend().emails.send({ from: getRequiredEnv("FROM_EMAIL"), to: getRequiredEnv("ADMIN_EMAIL"), replyTo: email, subject: `Portfolio project: ${service}`, react: ProjectInquiryEmail({ name, email, website, problem, service, context }) }, submissionId ? { idempotencyKey: `project-inquiry/${submissionId}` } : undefined);

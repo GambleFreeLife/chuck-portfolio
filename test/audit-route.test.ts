@@ -49,7 +49,7 @@ describe("Protected project inquiry", () => {
   });
   it("accepts a new business with no website", async () => { const r = routeWith(); assert.equal((await r.submit({ ...valid, website: "" })).status, 200); });
   it("preserves all new service selections and source labels", async () => {
-    for (const offer of ["landing-page", "business-website", "website-ads", "focused-help"]) {
+    for (const offer of Object.keys(serviceLabels)) {
       const r = routeWith(); assert.equal((await r.submit({ ...valid, context: { offer, source: "linkedin", campaign: "launch" } })).status, 200);
       const fields = r.sent[0].message.react as { service: string; context: { offer: string; source: string } };
       assert.equal(fields.context.offer, offer); assert.equal(fields.context.source, "linkedin"); assert.ok(fields.service.length > 0);
@@ -91,13 +91,41 @@ describe("Protected project inquiry", () => {
   it("does not report success if delivery fails", async () => { for (const options of [{ emailError: true }, { emailThrows: true }]) { const r = routeWith(options); const response = await r.submit(valid); assert.equal(response.status, 503); assert.equal((await response.json()).ok, undefined); } });
   it("ignores a filled honeypot without side effects", async () => { const r = routeWith(); assert.equal((await r.submit({ ...valid, companyWebsite: "spam" })).status, 200); assert.equal(r.sent.length, 0); assert.equal(r.checks(), 0); });
   it("rejects unsafe or malformed website values", async () => { for (const website of ["localhost", "https://user:password@example.com", "javascript:alert(1)"]) { const r = routeWith(); assert.equal((await r.submit({ ...valid, website })).status, 400); assert.equal(r.sent.length, 0); } });
-  it("validates required message and email before verification", async () => { for (const field of [{ problem: "" }, { email: "invalid" }, { name: "A\r\nB" }]) { const r = routeWith(); assert.equal((await r.submit({ ...valid, ...field })).status, 400); assert.equal(r.checks(), 0); } });
+  it("accepts a free review without a message", async () => { const r = routeWith(); assert.equal((await r.submit({ ...valid, problem: "", context: { offer: "free-review" } })).status, 200); assert.equal(r.sent.length, 1); });
+  it("requires a website for free reviews before verification", async () => { const r = routeWith(); assert.equal((await r.submit({ ...valid, website: "", context: { offer: "free-review" } })).status, 400); assert.equal(r.sent.length, 0); assert.equal(r.checks(), 0); });
+  it("validates message length and email before verification", async () => { for (const field of [{ problem: "x".repeat(2001) }, { email: "invalid" }, { name: "A\r\nB" }]) { const r = routeWith(); assert.equal((await r.submit({ ...valid, ...field })).status, 400); assert.equal(r.checks(), 0); } });
   it("enforces a per-instance attempt cap", async () => { const r = routeWith(); for (let i = 0; i < 6; i++) await r.submit({}); assert.equal((await r.submit(valid)).status, 429); assert.equal(r.sent.length, 0); });
   it("requires CAPTCHA for native POSTs too", async () => { const r = routeWith(); const response = await r.submit({ ...valid, turnstileToken: "", email: "owner@example.com" }, {}, true); assert.equal(response.status, 400); assert.match(await response.text(), /security check/); assert.equal(r.sent.length, 0); });
   it("accepts a native request with a valid CAPTCHA field", async () => { const r = routeWith(); const { turnstileToken, ...form } = valid; const response = await r.submit({ ...form, "cf-turnstile-response": turnstileToken }, {}, true); assert.equal(response.status, 200); assert.match(await response.text(), /inquiry was received/); });
 });
 describe("Lead context privacy", () => {
   it("rejects personal information and arbitrary fields", () => { assert.deepEqual(normalizeLeadContext({ source: "owner@example.com", medium: "https://example.com", campaign: "safe", offer: "arbitrary", password: "x" }), { source: "", medium: "", campaign: "safe", offer: "" }); });
+  it("retains source attribution without carrying a stale service into browser-back navigation", () => {
+    let saved = JSON.stringify({source:"linkedin",medium:"social",campaign:"profile",offer:"business-website"});
+    const context = moduleFrom("../lib/lead-context.ts", {}, { window: {location:{search:""}}, sessionStorage: {getItem:()=>saved,setItem:(_key:string,value:string)=>{saved=value;}} });
+    const result = (context.getLeadContext as () => {offer:string;source:string})();
+    assert.equal(result.offer, ""); assert.equal(result.source, "linkedin");
+  });
+});
+
+describe("Optional event measurement", () => {
+  it("sends each approved event once and excludes personal values and arbitrary fields", () => {
+    const calls: unknown[][] = [];
+    const analytics = moduleFrom("../lib/analytics.ts", {}, { window: {portfolioAnalyticsAllowed:true,gtag:(...args:unknown[])=>calls.push(args)} });
+    const track = analytics.trackEvent as (name:string,data:unknown)=>void;
+    track("cta_click", {label:"Get 3 free fixes for your website",location:"hero",email:"owner@example.com",offer:"https://private.example"});
+    track("arbitrary_event", {location:"hero"});
+    assert.equal(calls.length, 1); assert.equal(calls[0][0], "event"); assert.equal(calls[0][1], "cta_click");
+    assert.equal(JSON.stringify(calls[0][2]), JSON.stringify({location:"hero",label:"Get 3 free fixes for your website"}));
+  });
+  it("honors opt-out, GPC, Do Not Track and unavailable storage", () => {
+    for (const [navigator, preference, expected] of [[{},null,true],[{},"off",false],[{globalPrivacyControl:true},"on",false],[{doNotTrack:"1"},"on",false]] as const) {
+      const analytics = moduleFrom("../lib/analytics.ts", {}, {window:{},navigator,localStorage:{getItem:()=>preference}});
+      assert.equal((analytics.analyticsAllowed as ()=>boolean)(), expected);
+    }
+    const blocked = moduleFrom("../lib/analytics.ts", {}, {window:{},navigator:{},localStorage:{getItem:()=>{throw new Error("blocked");}}});
+    assert.equal((blocked.analyticsAllowed as ()=>boolean)(), false);
+  });
 });
 
 describe("Legacy checkout CAPTCHA gates", () => {

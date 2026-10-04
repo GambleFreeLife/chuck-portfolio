@@ -1,22 +1,32 @@
+// Update only when an outside website client's qualifying deposit is accepted.
+export const foundingPlacesAvailable = 3;
+export const primaryCta = "Get 3 free fixes for your website";
 export const services = [
   {
-    id: "landing-page", title: "One-page launch", price: "$350", label: "One offer. One clear next step.",
-    description: "A focused landing page for a service, offer, or new business.",
-    items: ["One page, up to 5 sections", "Your supplied copy and images, polished", "Mobile layout and one contact form", "Page title, description, and launch setup", "One revision round"],
-    timing: "First preview in 3 business days", cta: "Start with one page", featured: false,
+    id: "landing-page", title: "Landing Page", price: "$750", foundingPrice: "$550",
+    label: "One offer. One clear next step.",
+    description: "One page built to turn ad, email, or social traffic into calls and inquiries.",
+    items: ["1 page, up to 6 sections; copy from your intake", "Mobile and desktop layouts", "Spam-protected form and/or click-to-call", "GA4: successful forms and phone-link clicks", "Title, description and social preview image", "1 revision round"],
+    timing: "First preview in 3 business days", cta: "Start with Landing Page", featured: false,
   },
   {
-    id: "business-website", title: "Business website", price: "$950", label: "Room to tell the whole story.",
+    id: "business-website", title: "Business Website", price: "$1,950", foundingPrice: "$1,450",
+    label: "Best fit for most local service businesses",
     description: "A complete website that makes your services easy to understand.",
-    items: ["Up to 5 pages with a consistent design", "Copy drafted from your business details", "Mobile layouts and a protected inquiry form", "Basic on-page SEO and inquiry tracking", "Two revision rounds and a handoff"],
-    timing: "First preview in 7 business days", cta: "Plan my website", featured: true,
+    items: ["Up to 5 pages with a consistent design", "Copy from your business details", "Mobile layouts and spam-protected form", "On-page SEO and LocalBusiness schema", "GA4: successful forms, phone and email clicks", "2 revision rounds and a handoff"],
+    timing: "First preview in 7 business days", cta: "Start with Business Website", featured: true,
   },
   {
-    id: "website-ads", title: "Website + ads launch", price: "$1,750", label: "A website and a way to reach people.",
-    description: "Connect your website to a focused Google Search campaign.",
-    items: ["Everything in Business website", "One Google Search campaign, up to 3 ad groups", "Keyword research, ad copy, and tracking", "One campaign review after 30 days", "Optional 15–30 second brand video, one format"],
-    timing: "First website preview in 10 business days", cta: "Plan my launch", featured: false,
+    id: "website-ads", title: "Website + Google Ads Launch", price: "$3,250", foundingPrice: "$2,450",
+    label: "Ready for paid traffic",
+    description: "A website and a focused Search campaign built together.",
+    items: ["Everything in Business Website", "1 Search campaign, up to 3 ad groups", "Keyword research, ad copy and negatives", "Google Ads conversions linked to GA4", "15-30 sec brand video from your assets: 1 format, 1 revision, no filming", "30-day review with written recommendations"],
+    timing: "First website preview in 10 business days", cta: "Start with Website + Google Ads Launch", featured: false,
   },
 ] as const;
-
-export const serviceLabels: Record<string, string> = Object.fromEntries(services.map(service => [service.id, `${service.title} (${service.price})`]));
+export const serviceLabels: Record<string, string> = {
+  "free-review": "3 free website fixes",
+  ...Object.fromEntries(services.map(service => [service.id, service.title])),
+  "ads-management": "Google Ads management", "email-campaigns": "Email campaigns",
+  "short-video": "Short-form video", "brand-video": "One-off brand video", "focused-help": "Focused fixes",
+};
