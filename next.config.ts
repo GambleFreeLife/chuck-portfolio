@@ -13,7 +13,7 @@ const securityHeaders = [
       "font-src 'self'",
       "style-src 'self' 'unsafe-inline'",
       `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://challenges.cloudflare.com`,
-      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://checkout.stripe.com https://api.resend.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
+      "connect-src 'self' https://*.supabase.co https://api.stripe.com https://checkout.stripe.com https://api.resend.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.google.com/g/collect",
     ].join("; "),
   },
   {
