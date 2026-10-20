@@ -1,0 +1,39 @@
+.gauges { --good:#0cce6b; --fair:#ffa400; --poor:#ff4e42; --line:rgba(255,255,255,.1); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.gauge { margin:0; padding:26px 18px 22px; border:1px solid rgba(255,255,255,.1); border-radius:14px; background:#15221e; display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; min-width:0; }
+.ring { position:relative; width:118px; height:118px; }
+.ring svg { width:100%; height:100%; transform:rotate(-90deg); }
+.track { fill:none; stroke:rgba(255,255,255,.08); stroke-width:8; }
+.arc { fill:none; stroke-width:8; stroke-linecap:round; stroke:currentColor; }
+.ringValue { position:absolute; inset:0; display:grid; place-items:center; font-size:38px; font-weight:500; letter-spacing:-.04em; }
+.good { color:#0cce6b; } .fair { color:#ffa400; } .poor { color:#ff4e42; }
+.gauge figcaption { display:flex; flex-direction:column; gap:3px; }
+.gauge figcaption strong { font-size:16px; font-weight:600; color:#fff; }
+.gauge figcaption span { font-size:13px; color:#9fb3a8; }
+.gauge figcaption b { font-weight:600; }
+.note { margin-top:16px; font-size:12px; line-height:1.55; color:#93a79c; max-width:820px; }
+.note a { color:#8fd3b6; border-bottom:1px solid rgba(143,211,182,.4); white-space:nowrap; }
+.checks { margin-top:56px; }
+.checks :is(h2,h3) { margin-bottom:18px; font-size:24px; line-height:1.25; font-weight:500; letter-spacing:-.025em; color:#fff; }
+.checks table { width:100%; border-collapse:collapse; font-size:15px; }
+.checks th,.checks td { text-align:left; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.1); vertical-align:top; }
+.checks thead th { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#93a79c; border-bottom-color:rgba(255,255,255,.2); }
+.checks tbody th { font-weight:500; color:#fff; width:28%; }
+.oldCell { color:#d3b1ab; }
+.oldCell::before { content:"× "; color:#ff4e42; font-weight:700; }
+.newCell { color:#e9f6ef; }
+.newCell::before { content:"✓ "; color:#0cce6b; font-weight:700; }
+@media (max-width:1100px) { .gauges { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:800px) {
+  .checks table,.checks tbody,.checks tr,.checks th,.checks td { display:block; width:auto; }
+  .checks thead { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .checks tr { padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+  .checks th,.checks td { padding:2px 0; border:0; }
+  .checks tbody th { width:auto; margin-bottom:4px; }
+}
+@media (max-width:540px) {
+  .gauges { gap:10px; }
+  .gauge { padding:18px 10px 16px; gap:10px; }
+  .ring { width:92px; height:92px; }
+  .ringValue { font-size:30px; }
+  .gauge figcaption strong { font-size:14px; }
+}

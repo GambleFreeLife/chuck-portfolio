@@ -1,16 +1,16 @@
 import Image from "next/image";
+import { ArtPicture } from "@/components/ArtPicture";
 import { AuditLeadForm } from "@/components/AuditLeadForm";
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { HomeInteractions } from "@/components/HomeInteractions";
 import { PortfolioVideos } from "@/components/PortfolioVideos";
+import { SoupSpoonProof } from "@/components/SoupSpoonProof";
 import { services, foundingPlacesAvailable, primaryCta } from "@/lib/services";
+import { soupSpoon, soupSpoonShots as shot, soupSpoonSpeedIndex, soupSpoonHeadlineStats } from "@/lib/soup-spoon";
 import s from "./PortfolioHome.module.css";
 
 const asset = "/portfolio/20261004";
-const projects = [
-  { id: "baryames", name: "Baryames Cleaners", role: "Family business", type: "Website, Google Ads, email and video", url: "https://baryamescleaners.com/", problem: "Customers need to find the right service and know how to book, sign up, or get in touch.", work: "I redesigned and developed the website. I also handle its tailoring Google Ads, iContact email campaigns, and video.", result: "Tailoring appointments, pickup signup, and service information now have direct links to act.", before: "baryames-before.webp", beforeLabel: "Homepage opening, before the October 3 update", beforeWidth: 1200, beforeHeight: 805 },
-  { id: "recovery", name: "Bet on Recovery", role: "My own project", type: "Design, copy and development", url: "https://betonrecovery.org/", problem: "Explain the purpose of a recovery project and make its resources easy to explore.", work: "I designed, wrote, and built the site.", result: "A live website that brings the project’s purpose and resources together.", before: "", beforeLabel: "", beforeWidth: 0, beforeHeight: 0 },
-  { id: "soup-spoon", name: "Soup Spoon Cafe", role: "Catering page and campaign", type: "Website and Google Ads · Lansing", url: "https://soupspooncafe.com/catering-special-events/", problem: "Catering visitors need menu details and a clear way to ask about their event.", work: "I rebuilt the catering page with a quote form and built the Google Ads catering campaign, which I run.", result: "Visitors can review catering options and send an event request from the page.", before: "soup-spoon-before.webp", beforeLabel: "Archived catering page, before the September 5 rebuild", beforeWidth: 720, beforeHeight: 4195 },
-] as const;
+
 const questions = [
   { q: "What do I get with the free website review?", a: "Three specific things I’d fix on your website, sent by email within 2 business days. It’s a short review, with no obligation to hire me and no required call. The fixes are recommendations; implementation is separate." },
   { q: "Will a new website guarantee more customers?", a: "No one can promise that from a redesign alone. Your offer, traffic, reputation, and follow-up all matter. I can make the next step clearer and set up tracking so we can see what happens." },
@@ -22,63 +22,159 @@ const questions = [
   { q: "Is ad spend included?", a: "No. You pay Google directly from your own account. The launch package covers setup and a 30-day review. Ongoing campaign management is the separate monthly service." },
   { q: "Do you film the videos?", a: "These packages use photos and footage you supply and have permission to use. I handle the edit, on-screen text, and captions. Filming is not included." },
 ];
+
 function Arrow() { return <span aria-hidden="true">↗</span>; }
-function ReviewLink({ location, className }: { location: string; className?: string }) {
-  return <a className={className} href="?offer=free-review#audit" data-track="cta_click" data-label={primaryCta} data-location={location} data-offer="free-review">{primaryCta}<Arrow /></a>;
+function ReviewLink({ location, className, short }: { location: string; className?: string; short?: string }) {
+  return <a className={className} href="?offer=free-review#audit" data-track="cta_click" data-label={primaryCta} data-location={location} data-offer="free-review">
+    {short ? <><span className={s.longLabel}>{primaryCta}</span><span className={s.shortLabel}>{short}</span></> : primaryCta}<Arrow />
+  </a>;
 }
+
 export function PortfolioHome() {
   return <div className={s.site}>
     <a className={s.skip} href="#main-content">Skip to content</a>
     <header className={s.header}><div className={s.container}>
       <a href="/" className={s.wordmark} aria-label="Chuck Baryames home">chuck baryames<span>.</span></a>
-      <nav className={s.nav} aria-label="Primary navigation"><a href="#work">Work</a><a href="#pricing">Pricing</a><ReviewLink location="navigation" className={s.navCta} /></nav>
+      <nav className={s.nav} aria-label="Primary navigation">
+        <a href="#soup-spoon" className={s.navLink}>Before and after</a>
+        <a href="#work" className={s.navLink}>Work</a>
+        <a href="#pricing" className={s.navLink}>Pricing</a>
+        <ReviewLink location="navigation" className={s.navCta} short="3 free fixes" />
+      </nav>
     </div></header>
+
     <main id="main-content">
-      <section className={`hero ${s.hero}`}><div className={s.container}><div className={s.heroGrid}>
-        <div className={s.heroCopy}>
-          <p className={s.eyebrow}><span className={s.dot} /> Websites and marketing for Michigan service businesses</p>
-          <h1>Make it easier for your next customer <em>to choose you.</em></h1>
-          <p className={s.intro}>I build websites and run Google Ads, email campaigns, and short video for local service businesses in Michigan.</p>
-          <p className={s.trust}>I run marketing for my family’s 11-location business, open since 1922.</p>
-          <div className={s.heroActions}><ReviewLink location="hero" className={s.button} /><a className={s.textLink} href="#pricing">See pricing <span aria-hidden="true">↓</span></a></div>
-          <p className={s.heroNote}>Send your URL. I’ll reply with three things I’d fix. No call required.</p>
-          <p className={s.startPrice}>Websites from <strong>$750.</strong></p>
+      <section className={`hero ${s.hero}`}><div className={s.container}>
+        <div className={s.heroGrid}>
+          <div className={`${s.heroCopy} ${s.heroTop}`}>
+            <p className={s.badge}><span className={s.pulse} aria-hidden="true" />New: {soupSpoon.name}, live since Oct 19</p>
+            <h1>Your website should bring in customers. <em>Here’s what that looks like.</em></h1>
+            <p className={s.intro}>I redesigned {soupSpoon.name}’s whole website in {soupSpoon.place}. Drag the line to compare the old site with the new one.</p>
+          </div>
+          <figure className={s.heroShow}>
+            <div className={s.browser}>
+              <div className={s.browserBar}><span className={s.lights} aria-hidden="true"><i /><i /><i /></span><span className={s.address}>soupspooncafe.com</span></div>
+              <BeforeAfterSlider
+                className={s.heroSlider}
+                label="Compare the old and new Soup Spoon Cafe homepage"
+                beforeLabel="Before"
+                afterLabel="After"
+                before={<ArtPicture wide={shot.desktopBefore} narrow={shot.phoneBefore} alt="The old Soup Spoon Cafe homepage: a logo over a food photo and one button" eager wideSizes="(max-width: 1100px) 92vw, 760px" narrowSizes="(max-width: 700px) 86vw, 360px" />}
+                after={<ArtPicture wide={shot.desktopAfter} narrow={shot.phoneAfter} alt="The new Soup Spoon Cafe homepage with Order online, Reserve a table, Call and Get directions up front" eager priority wideSizes="(max-width: 1100px) 92vw, 760px" narrowSizes="(max-width: 700px) 86vw, 360px" />}
+              />
+            </div>
+            <figcaption className={s.heroCaption}><span><strong>{soupSpoon.name}</strong> homepage. Before: Oct 16, 2026. After: live now.</span><a href={soupSpoon.url} target="_blank" rel="noopener noreferrer" data-track="case_study_click" data-project="soup-spoon" data-location="hero_caption">Visit the live site <Arrow /></a></figcaption>
+          </figure>
+          <div className={`${s.heroCopy} ${s.heroBottom}`}>
+            <div className={s.heroActions}>
+              <ReviewLink location="hero" className={s.button} />
+              <a className={s.ghostButton} href={soupSpoon.caseStudy} data-track="case_study_click" data-project="soup-spoon" data-location="hero">See the full project <span aria-hidden="true">→</span></a>
+            </div>
+            <p className={s.heroNote}>Send your URL and I’ll email three things I’d fix within 2 business days. No call required.</p>
+            <p className={s.trust}><strong>Websites from $750.</strong> You work directly with me, and I run marketing for my family’s 11-location business, open since 1922.</p>
+          </div>
         </div>
-        <div className={s.heroWork}>
-          <div className={s.workLabel}><span>Real work. A local business.</span><span>01 / Baryames</span></div>
-          <a className={s.heroComposition} href="#work" aria-label="baryamescleaners.com: see the project">
-            <div className={s.desktopPreview}><div className={s.browserBar}><span aria-hidden="true">● ● ●</span><span>baryamescleaners.com</span><Arrow /></div><Image src={asset + "/baryames-desktop.webp"} alt="Baryames homepage with tailoring appointments and free pickup navigation" width={1200} height={833} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 86vw, 48vw" /></div>
-            <div className={s.phonePreview}><Image src={asset + "/baryames-mobile.webp"} alt="The Baryames homepage on a phone" width={390} height={844} loading="eager" fetchPriority="high" sizes="(max-width: 800px) 24vw, 150px" /></div>
-          </a>
-          <div className={s.heroCaption}><strong>Baryames Cleaners</strong><span>Website, copy and development</span></div>
+        <dl className={s.statStrip}>{soupSpoonHeadlineStats.map(stat => <div key={stat.label}><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}</dl>
+      </div></section>
+
+      <section className={s.phoneSection} id="soup-spoon"><div className={s.container}>
+        <div className={s.sectionHeading}>
+          <div><p className={s.eyebrow}><span className={s.dot} />The Soup Spoon project</p><h2>What a hungry customer sees first, <em>before and after.</em></h2></div>
+          <p>Most restaurant visits start on a phone. The old homepage gave people one button, but the new one puts the four things they came for on the first screen.</p>
         </div>
-      </div><div className={s.heroBottom}><span>Clear scope before you pay</span><span>Work directly with Chuck</span><span>Your website, in your accounts</span></div></div></section>
+        <div className={s.phoneCompare}>
+          <figure className={s.phoneCard}>
+            <span className={`${s.sideTag} ${s.sideBefore}`}>Before</span>
+            <div className={s.phoneFrame}><Image src={shot.phoneBefore.src} width={shot.phoneBefore.width} height={shot.phoneBefore.height} alt={shot.phoneBefore.alt} sizes="(max-width: 700px) 44vw, 300px" /></div>
+            <figcaption><p>On the old site, a visitor got:</p><ul className={s.minus}><li>one button, which opened a reservations page with no menu,</li><li>a phone link that didn’t dial,</li><li>and a menu on a separate website, with no way to order.</li></ul></figcaption>
+          </figure>
+          <figure className={s.phoneCard}>
+            <span className={`${s.sideTag} ${s.sideAfter}`}>After</span>
+            <div className={s.phoneFrame}><Image src={shot.phoneAfter.src} width={shot.phoneAfter.width} height={shot.phoneAfter.height} alt={shot.phoneAfter.alt} sizes="(max-width: 700px) 44vw, 300px" /></div>
+            <figcaption><p>On the new site, they get:</p><ul className={s.plus}><li>Order online, Reserve a table, Call and Get directions on the first screen,</li><li>a bar that keeps Order, Reserve and Call in reach while they scroll,</li><li>and the menu on the restaurant’s own site, which the staff update themselves.</li></ul></figcaption>
+          </figure>
+        </div>
+      </div></section>
+
+      <section className={s.scoreSection} id="results"><div className={s.container}>
+        <div className={s.sectionHeading}>
+          <div><p className={s.eyebrow}><span className={s.dot} />Measured, not guessed</p><h2>Google scored the old site and the new one. <em>Here’s the difference.</em></h2></div>
+          <p>These are Google’s own website checks, so anyone can rerun them. The page also fills in on a phone in {soupSpoonSpeedIndex.after.replace(" s", " seconds")}, down from {soupSpoonSpeedIndex.before.replace(" s", "")}.</p>
+        </div>
+        <SoupSpoonProof />
+      </div></section>
+
+      <section className={s.jobSection}><div className={s.container}>
+        <div className={s.sectionHeading}>
+          <div><p className={s.eyebrow}><span className={s.dot} />More than a new look</p><h2>The redesign came with the parts <em>that bring in business.</em></h2></div>
+          <p>A good-looking homepage is the start. For Soup Spoon, I also built the pages and campaign that turn interest into orders and catering requests.</p>
+        </div>
+        <div className={s.jobGrid}>
+          <article className={s.jobCard}>
+            <div className={s.jobVisual}><div className={s.miniPhones}><Image src={shot.cateringAfter.src} width={shot.cateringAfter.width} height={shot.cateringAfter.height} alt={shot.cateringAfter.alt} sizes="160px" /><Image src={shot.quoteForm.src} width={shot.quoteForm.width} height={shot.quoteForm.height} alt={shot.quoteForm.alt} sizes="160px" /></div></div>
+            <h3>A catering page that asks for the order</h3>
+            <p>Prices sit up front, and a short quote form needs only a name and email, so a catering search turns into a request instead of a voicemail.</p>
+          </article>
+          <article className={s.jobCard}>
+            <div className={s.jobVisual}>
+              <div className={s.ad} role="img" aria-label="Example Soup Spoon catering search ad">
+                <p className={s.adTop}><b>Sponsored</b><span>soupspooncafe.com/catering</span></p>
+                <p className={s.adTitle}>Boxed Lunches From $13 | Get a Free Catering Quote</p>
+                <p className={s.adText}>No order minimum. Pickup, delivery &amp; setup, or full service. Boxed lunches from $13.</p>
+              </div>
+            </div>
+            <h3>A Google Ads campaign that finds the customers</h3>
+            <p>I built and run the catering campaign that sends Lansing searchers to that page, and it tracks quote requests and phone taps so the ad money can be judged.</p>
+          </article>
+          <article className={s.jobCard}>
+            <div className={s.jobVisual}><Image className={s.jobShot} src={shot.menuAfter.src} width={shot.menuAfter.width} height={shot.menuAfter.height} alt={shot.menuAfter.alt} sizes="(max-width: 800px) 90vw, 400px" /></div>
+            <h3>A menu the staff change themselves</h3>
+            <p>The menu moved onto the restaurant’s own site. The staff update dishes and prices and print menus on their own, without calling anyone.</p>
+          </article>
+        </div>
+        <a className={s.caseLink} href={soupSpoon.caseStudy} data-track="case_study_click" data-project="soup-spoon" data-location="job_section">Read the full Soup Spoon case study <span aria-hidden="true">→</span></a>
+      </div></section>
 
       <section className={s.workSection} id="work"><div className={s.container}>
-        <div className={s.sectionHeading}><div><p className={s.eyebrow}>Selected work</p><h2>Work you can <em>look through.</em></h2></div><p>See the pages, campaigns, and videos I’ve made, with my role in each project.</p></div>
-        <div className={s.projectGrid}>{projects.map(project => <article className={s.project} key={project.id}>
-          <div className={s.projectImages}><Image src={`${asset}/${project.id}-desktop.webp`} alt={`${project.name} desktop website, October 4, 2026`} width={1200} height={833} sizes="(max-width: 800px) 85vw, 31vw" /><Image className={s.projectPhone} src={`${asset}/${project.id}-mobile.webp`} alt={`${project.name} mobile website`} width={390} height={844} sizes="(max-width: 800px) 22vw, 100px" /></div>
-          <div className={s.projectBody}><p className={s.role}>{project.role}</p><h3>{project.name}</h3><p className={s.projectType}>{project.type}</p>
-            <dl><dt>The problem</dt><dd>{project.problem}</dd><dt>What I did</dt><dd>{project.work}</dd><dt>{project.id === "recovery" ? "The result" : "What changed"}</dt><dd>{project.result}</dd></dl>
-            {project.id === "soup-spoon" && <p className={s.scopeNote}>My work covers the catering page and campaign. The overall website was built by another provider.</p>}
-            {project.before && <details className={s.before}><summary>See the before view <span aria-hidden="true">+</span></summary><figure><div className={s.beforeImage}><Image src={asset + "/" + project.before} alt={project.beforeLabel} width={project.beforeWidth} height={project.beforeHeight} sizes="(max-width: 800px) 80vw, 350px" /></div><figcaption>{project.beforeLabel}. Compare with the current view above. This shows a visual change, not measured sales results.</figcaption></figure></details>}
-            <a className={s.projectLink} href={project.url} target="_blank" rel="noopener noreferrer" data-track="case_study_click" data-project={project.id} data-location="work">Explore {project.id === "soup-spoon" ? "the catering page" : project.id === "recovery" ? "Bet on Recovery" : "the Baryames website"}<Arrow /></a>
-          </div>
-        </article>)}</div>
-        <div className={s.campaigns} id="campaigns">
-          <div><p className={s.eyebrow}>Supporting work</p><h3>Campaign examples</h3><p>Google Ads for Soup Spoon catering and Baryames tailoring, plus a Baryames iContact email.</p></div>
-          <div className={s.adExamples}>
-            <figure><figcaption>Soup Spoon · Catering Search campaign</figcaption><strong>Lansing catering</strong><p>General Lansing Catering and Corporate &amp; Office campaign groups.</p></figure>
-            <figure><figcaption>Baryames · Tailoring Search campaign</figcaption><strong>Tailor Near Me · Book Online · Alterations in Lansing</strong><p>Examples of campaign copy, with a clear route to the service.</p></figure>
-          </div>
-          <figure className={s.emailExample}><a href={asset + "/email.webp"} target="_blank" rel="noopener noreferrer" aria-label="Open the full Baryames email sample"><Image src={asset + "/email.webp"} alt="Baryames sweater season email design and copy work sample" width={750} height={854} sizes="(max-width: 800px) 45vw, 260px" /></a><figcaption>Baryames iContact email · September 2026. <a href={asset + "/email.webp"} target="_blank" rel="noopener noreferrer">Open full sample <Arrow /></a></figcaption></figure>
+        <div className={s.sectionHeading}>
+          <div><p className={s.eyebrow}><span className={s.dot} />More work</p><h2>Before Soup Spoon, <em>my own family’s business.</em></h2></div>
+          <p>I redesigned the website for Baryames Cleaners and run its marketing, and I built Bet on Recovery from scratch.</p>
+        </div>
+        <div className={s.workGrid}>
+          <article className={s.workCard}>
+            <BeforeAfterSlider
+              className={s.workSlider}
+              intro={false}
+              label="Compare the Baryames Cleaners homepage before and after the October 3 update"
+              beforeLabel="Before"
+              afterLabel="After"
+              before={<Image src={asset + "/baryames-before.webp"} width={1200} height={805} alt="The Baryames Cleaners homepage before the October 3 update" sizes="(max-width: 800px) 90vw, 620px" />}
+              after={<Image src={asset + "/baryames-desktop.webp"} width={1200} height={833} alt="The Baryames Cleaners homepage now, with tailoring appointments and free pickup up front" sizes="(max-width: 800px) 90vw, 620px" />}
+            />
+            <div className={s.workBody}>
+              <p className={s.role}>Family business · 11 locations</p>
+              <h3>Baryames Cleaners</h3>
+              <p>I redesigned and built the website, and I run its tailoring Google Ads, iContact email campaigns and video. Tailoring appointments, pickup signup and service details now each have a direct link.</p>
+              <a className={s.projectLink} href="https://baryamescleaners.com/" target="_blank" rel="noopener noreferrer" data-track="case_study_click" data-project="baryames" data-location="work">Explore the Baryames website <Arrow /></a>
+            </div>
+          </article>
+          <article className={s.workCard}>
+            <div className={s.workImage}><Image src={asset + "/recovery-desktop.webp"} width={1200} height={833} alt="The Bet on Recovery website on a computer" sizes="(max-width: 800px) 90vw, 620px" /></div>
+            <div className={s.workBody}>
+              <p className={s.role}>My own project</p>
+              <h3>Bet on Recovery</h3>
+              <p>I designed, wrote and built the site, so the project’s purpose and resources sit together in one place.</p>
+              <a className={s.projectLink} href="https://betonrecovery.org/" target="_blank" rel="noopener noreferrer" data-track="case_study_click" data-project="recovery" data-location="work">Explore Bet on Recovery <Arrow /></a>
+            </div>
+          </article>
         </div>
         <PortfolioVideos />
       </div></section>
 
       <section className={s.pricingSection} id="pricing"><div className={s.container}>
-        <div className={s.sectionHeading}><div><p className={s.eyebrow}>Services and pricing</p><h2>A clear scope <em>before you pay.</em></h2></div><p>Choose the starting point that fits your business. I’ll confirm the details in writing before a deposit.</p></div>
+        <div className={s.sectionHeading}><div><p className={s.eyebrow}><span className={s.dot} />Services and pricing</p><h2>A clear scope <em>before you pay.</em></h2></div><p>Choose the starting point that fits your business. I’ll confirm the details in writing before a deposit.</p></div>
         <div className={s.packages}>{services.map((service,index) => <article className={`${s.package} ${service.featured ? s.featured : ""}`} key={service.id}>
+          {service.featured && <p className={s.popular}>Most popular</p>}
           <p className={s.packageTop}><span>0{index + 1}</span><span>{service.label}</span></p>
           <h3>{service.title}</h3><p className={s.packageDetail}>{service.description}</p>
           <p className={s.price}>{service.price}<span>one time</span></p>
@@ -100,12 +196,24 @@ export function PortfolioHome() {
 
       <section className={s.aboutSection} id="about"><div className={s.container}><div className={s.aboutIntro}>
         <Image src="/portfolio/chuck-portrait-enhanced.png" alt="Chuck Baryames" width={140} height={140} sizes="(max-width: 600px) 88px, 140px" />
-        <div><p className={s.eyebrow}>About and how it works</p><h2>You’ll work <em>directly with me.</em></h2><p>I’m Chuck, based in Lansing, Michigan. I handle the design, writing, and build, and you’ll talk to the person doing the work. I use modern tools, including AI, and review what ships.</p></div>
+        <div><p className={s.eyebrow}><span className={s.dot} />About and how it works</p><h2>You’ll work <em>directly with me.</em></h2><p>I’m Chuck, based in Lansing, Michigan. I handle the design, writing, and build, and you’ll talk to the person doing the work. I use modern tools, including AI, and review what ships.</p></div>
       </div><ol className={s.steps}><li><span>01</span><h3>Send your website or project.</h3><p>For the free review, send your URL and I’ll reply with three things I’d fix. If you’re starting fresh, tell me what you need.</p></li><li><span>02</span><h3>Agree on the scope.</h3><p>For paid work, you’ll get the deliverables, price, and timing in writing before a deposit.</p></li><li><span>03</span><h3>Review, approve, and launch.</h3><p>You’ll see a preview, use your included revision rounds, and approve the work before it goes live.</p></li></ol></div></section>
-      <section className={s.faqSection} id="faq"><div className={`${s.container} ${s.faqLayout}`}><div><p className={s.eyebrow}>A few useful details</p><h2>Before we <em>get started.</em></h2></div><div className={s.questions}>{questions.map(item => <details key={item.q}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></div></section>
-      <section className={s.contactSection} id="audit"><div className={`${s.container} ${s.contactGrid}`}><div className={s.contactCopy}><p className={s.eyebrow}>A useful place to start</p><h2 id="contact-title" tabIndex={-1}>{primaryCta}</h2><p>Send your URL for a short review, or choose a service to tell me about a project.</p><a href="mailto:chuck@chuckbaryames.com" className={s.contactEmail} data-track="email_click" data-location="contact">chuck@chuckbaryames.com <Arrow /></a></div><div className={s.formShell}><AuditLeadForm /></div></div></section>
+
+      <section className={s.faqSection} id="faq"><div className={`${s.container} ${s.faqLayout}`}><div><p className={s.eyebrow}><span className={s.dot} />A few useful details</p><h2>Before we <em>get started.</em></h2></div><div className={s.questions}>{questions.map(item => <details key={item.q}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div></div></section>
+
+      <section className={s.contactSection} id="audit"><div className={`${s.container} ${s.contactGrid}`}>
+        <div className={s.contactCopy}>
+          <p className={s.eyebrow}><span className={s.dot} />A useful place to start</p>
+          <h2 id="contact-title" tabIndex={-1}>{primaryCta}</h2>
+          <p>Send your URL for a short review, or choose a service to tell me about a project. I’ll look at your site the way I looked at Soup Spoon’s.</p>
+          <ul className={s.contactPoints}><li>Three specific fixes, by email</li><li>Within 2 business days</li><li>No call and no obligation</li></ul>
+          <a href="mailto:chuck@chuckbaryames.com" className={s.contactEmail} data-track="email_click" data-location="contact">chuck@chuckbaryames.com <Arrow /></a>
+        </div>
+        <div className={s.formShell}><AuditLeadForm /></div>
+      </div></section>
     </main>
-    <footer className={s.footer}><div className={s.container}><div><a href="/" className={s.wordmark}>chuck baryames<span>.</span></a><p>Websites and marketing · Lansing, Michigan</p></div><div className={s.footerLinks}><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="/privacy">Privacy Policy</a><a href="mailto:chuck@chuckbaryames.com" data-track="email_click" data-location="footer">Email Chuck</a></div><p>© 2026 Chuck Baryames</p></div></footer>
+
+    <footer className={s.footer}><div className={s.container}><div><a href="/" className={s.wordmark}>chuck baryames<span>.</span></a><p>Websites and marketing · Lansing, Michigan</p></div><div className={s.footerLinks}><a href="#soup-spoon">Before and after</a><a href={soupSpoon.caseStudy}>Soup Spoon case study</a><a href="#pricing">Pricing</a><a href="/privacy">Privacy Policy</a><a href="mailto:chuck@chuckbaryames.com" data-track="email_click" data-location="footer">Email Chuck</a></div><p>© 2026 Chuck Baryames</p></div></footer>
     <div className={`sticky-mobile-cta ${s.mobileCta}`}><ReviewLink location="mobile_sticky" /></div>
     <HomeInteractions />
   </div>;

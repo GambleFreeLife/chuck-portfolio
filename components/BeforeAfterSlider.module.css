@@ -1,0 +1,19 @@
+.root { position:relative; overflow:hidden; touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:ew-resize; background:#0f1715; isolation:isolate; }
+.layer { position:absolute; inset:0; }
+.layer :is(img,picture) { display:block; width:100%; height:100%; }
+.layer img { object-fit:cover; object-position:top center; pointer-events:none; -webkit-user-drag:none; }
+/* The old screenshot is cut off with two opposite transforms instead of clip-path, so moving the divider never repaints the images. */
+.before { z-index:1; overflow:hidden; transform:translateX(calc(var(--pos) - 100%)); will-change:transform; }
+.beforeInner { position:absolute; inset:0; transform:translateX(calc(100% - var(--pos))); will-change:transform; }
+/* The divider moves with a transform, not left, so the intro sweep and dragging never count as layout shift. */
+.handle { position:absolute; inset:0; z-index:3; pointer-events:none; transform:translateX(var(--pos)); will-change:transform; }
+.handle::before { content:""; position:absolute; top:0; bottom:0; left:-1px; width:2px; background:#fff; box-shadow:0 0 0 1px rgba(0,0,0,.18), 0 0 18px rgba(0,0,0,.35); }
+.knob { position:absolute; top:50%; left:0; width:48px; height:48px; transform:translate(-50%,-50%); display:grid; place-items:center; border-radius:50%; background:#fff; color:#14201d; box-shadow:0 6px 22px rgba(0,0,0,.35), 0 0 0 4px rgba(255,255,255,.28); }
+.tag { position:absolute; top:14px; z-index:2; padding:6px 11px; border-radius:999px; font-size:11px; line-height:1.2; font-weight:600; letter-spacing:.07em; text-transform:uppercase; pointer-events:none; transition:opacity .2s ease; }
+.tagBefore { left:14px; background:rgba(17,17,17,.78); color:#fff; }
+.tagAfter { right:14px; background:#1f7a55; color:#fff; }
+.hidden { opacity:0; }
+.range { position:absolute; left:50%; top:50%; width:1px; height:1px; margin:-1px; padding:0; border:0; overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; }
+.root:has(.range:focus-visible) .knob { outline:3px solid #8fd3b6; outline-offset:3px; }
+@media (max-width:600px) { .knob { width:42px; height:42px; } .tag { top:10px; font-size:10px; padding:5px 9px; } .tagBefore { left:10px; } .tagAfter { right:10px; } }
+@media (prefers-reduced-motion:reduce) { .tag { transition:none; } }
